@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Galstena",
+    "company": "Bitner",
+    "volume": 300,
+    "type_of_volume":"syrup, ml",
+    "price":"300 UAH",
+    "symptoms":"pancreatitis, diseases of the liver and biliary tract",
+    "side_effects":"empty",
+    "contraindications":"empty",
+    "overdose":"empty",
+    "storage_conditions":">30C",
+    "mode_of_application": "oral",
+    "properties":"hepatoprotective, choleretic and holekinetiki",
+    "image":"galstena"
+  },
+  {
+    "name": "Memoria",
+    "company": "Bitner",
+    "volume": 45,
+    "type_of_volume":"pills",
+    "price":"300 UAH",
+    "symptoms":"pancreatitis, diseases of the liver and biliary tract",
+    "side_effects":"empty",
+    "contraindications":"empty",
+    "overdose":"empty",
+    "storage_conditions":">20C",
+    "mode_of_application": "oral",
+    "properties":"hepatoprotective, choleretic and holekinetiki",
+    "image":"galstena"
+  },
+  {
+    "name": "Aflubin",
+    "company": "Bitner",
+    "volume": 200,
+    "type_of_volume":"syrup, ml",
+    "price":"300 UAH",
+    "symptoms":"pancreatitis, diseases of the liver and biliary tract",
+    "side_effects":"empty",
+    "contraindications":"empty",
+    "overdose":"empty",
+    "storage_conditions":">30C",
+    "mode_of_application": "oral",
+    "properties":"hepatoprotective, choleretic and holekinetiki",
+    "image":"galstena"
+  },
+  {
+    "name": "Bitner",
+    "company": "Bitner",
+    "volume": 400,
+    "type_of_volume":"syrup, ml",
+    "price":"300 UAH",
+    "symptoms":"pancreatitis, diseases of the liver and biliary tract",
+    "side_effects":"empty",
+    "contraindications":"empty",
+    "overdose":"empty",
+    "storage_conditions":">30C",
+    "mode_of_application": "oral",
+    "properties":"hepatoprotective, choleretic and holekinetiki",
+    "image":"galstena"
+  }
+]
