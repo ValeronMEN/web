@@ -82,3 +82,13 @@ a:hover {
  #rights {
    text-align: center;
  }
+
+
+ .successContent {
+   font-size: 25px;
+   margin-left: 5px;
+   padding: 7px;
+ }
+.successContent a {
+  font-size: 20px;
+}

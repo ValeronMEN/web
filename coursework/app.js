@@ -8,21 +8,16 @@ var mongoose = require('mongoose');
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
+mongoose.connect('mongodb://localhost/medicine');
+var db = mongoose.connection;
+Drug = require("./routes/models/drug");
+
 var index = require('./routes/index');
 var api = require('./routes/api');
 
 var app = express();
 
 console.log("OK, we're alive now");
-//database
-/*
-mongoose.connect('mongodb://localhost:27017/drugs');
-var db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function callback () {
-    console.log("Connected!")
-});
-*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
