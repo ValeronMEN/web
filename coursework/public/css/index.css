@@ -183,3 +183,44 @@ div#bottomside {
   float:left;
   clear: both;
 }
+
+/*register*/
+div.regContent {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  background: #FFF;
+  height: 550px;
+  border: solid 1px black;
+}
+div#regInsideContent {
+  padding-top: 8px;
+  width: 25%;
+  height: 100%;
+  text-align: right;
+}
+.regField {
+  padding: 7px;
+}
+#sexLabel {
+  margin-left: 15px;
+}
+#submitButt {
+  margin-left: 15px;
+}
+
+div.successContent {
+   font-size: 25px;
+   margin-left: 5px;
+   padding: 7px;
+ }
+div.successContent a {
+  font-size: 20px;
+}
+
+
+div.alert-danger {
+  margin-left: 20px;
+  color: red;
+  margin-top: 5px;
+}

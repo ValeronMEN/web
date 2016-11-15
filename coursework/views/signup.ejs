@@ -1,9 +1,9 @@
 <!doctype html>
 <html>
 <head>
-  <link rel="stylesheet" href="../css/signup.css">
+  <link rel="stylesheet" href="../css/index.css">
   <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
-  <title>Sign Up</title>
+  <title>Register</title>
 </head>
 <body>
   <div class="home">
@@ -22,15 +22,15 @@
     </div>
     <div class="loginForm">
       <a class="loginLink" href="forgotpassword">Forgot account?</a>
-      <a class="loginLink" href="signup">Registration</a>
+      <a class="loginLink" href="users/register">Registration</a>
       <input type="submit" value="Sign In">
     </div>
     </form>
   </div>
   </div>
-  <div class="content">
+  <div class="regContent">
     <form method="post" accept-charset="UTF-8">
-      <div id="insideContent">
+      <div id="regInsideContent">
       <div class="regField">
         <label>First name:</label>
         <input type="text" name="firstname">
@@ -44,12 +44,16 @@
         <input type="text" name="email">
       </div>
       <div class="regField">
-        <label>Password:</label>
-        <input type="text" name="regPassword1">
+        <label>Username:</label>
+        <input type="text" name="username">
       </div>
       <div class="regField">
-        <label>Repeat password:</label>
-        <input type="text" name="regPassword2">
+        <label>Password:</label>
+        <input type="text" name="password">
+      </div>
+      <div class="regField">
+        <label>Confirm password:</label>
+        <input type="text" name="confirmPassword">
       </div>
         </div>
       <div class="regField">
@@ -61,6 +65,27 @@
         <input id="submitButt" type="submit" value="Sign Me Up!">
       </div>
     </form>
+    <p>
+    </p>
+
+    <% if(typeof errors != 'undefined'){ %>
+    <% errors.forEach(function(elements){ %>
+    <div class="alert alert-danger"><%= elements.msg %></div>
+    <%}); %>
+    <%} %>
+
+    <div class="row">
+      <% if(typeof success_msg != 'undefined'){ %>
+        <div class="alert alert-success"><%= success_msg %></div>
+      <%} %>
+      <% if(typeof error_msg != 'undefined'){ %>
+        <div class="alert alert-success"><%= error_msg %></div>
+      <%} %>
+      <% if(typeof error != 'undefined'){ %>
+        <div class="alert alert-success"><%= error %></div>
+      <%} %>
+    </div>
+
   </div>
   <div id="bottomOfSite">
     <p id="rights">(c) 2016 Vapteka, all rights reserved</p>

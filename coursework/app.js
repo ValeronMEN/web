@@ -7,14 +7,19 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport       = require('passport');
 var LocalStrategy  = require('passport-local').Strategy;
+var expressValidator = require("express-validator");
+var flash = require("connect-flash");
+var mongo = require("mongodb");
+var session = require("express-session");
 
 mongoose.connect('mongodb://localhost/medicine');
 var db = mongoose.connection;
-Drug = require("./routes/models/drug");
-User = require("./routes/models/user");
+Drug = require("./models/drug");
+User = require("./models/user");
 
 var index = require('./routes/index');
 var api = require('./routes/api');
+var users = require('./routes/users');
 
 var app = express();
 
@@ -24,6 +29,47 @@ console.log("OK, we're alive now");
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+/*
+app.engine("handlebars", exphbs({defaultLayout:'layout'}));
+app.set("view engine", 'handlebars');
+*/
+
+//passport data
+app.use(session({
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+app.use(flash());
+
+app.use(function (req, res, next){
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+})
+
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -32,6 +78,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', api);
+app.use('/users', users);
 app.use('/', index);
 
 // catch 404 and forward to error handler

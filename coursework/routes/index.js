@@ -29,26 +29,14 @@ router.get('/about', function(req, res, next) {
   res.render('about');
 });
 
+/*
 router.post('/', function(req, res) {
     var login = req.body.login;
     var password = req.body.password;
     console.log("User sent: login: "+login+"; password: "+password);
     res.render('index');
 });
-
-router.post('/signup', function(req, res) {
-    var firstname = req.body.firstname;
-    var lastname = req.body.lastname;
-    var email = req.body.email;
-    var regPassword1 = req.body.regPassword1;
-    var regPassword2 = req.body.regPassword2;
-    var sex = req.body.sex;
-    console.log("User sent: firstname: "+firstname+"; lastname: "+lastname+"; email: "+email+"; password1: "+regPassword1+"; password2: "+regPassword2+"; sex: "+sex);
-    if(regPassword1!==regPassword2){
-      //error
-    }
-    res.render('success');
-});
+*/
 
 router.get('/:_id', function(req, res, next) {
   Drug.getDrugById(req.params._id, function(err, drug){
