@@ -13,128 +13,116 @@ a:hover {
   color: #3A3;
 }
 
-
-
-.home {
+div.home {
   width: 100%;
   border: solid 1px black;
   height: 150px;
   overflow: hidden;
 }
- #pharmacyName {
+div#pharmacyName {
   width: 80%;
   background: #3A3;
   float: left;
   height: 150px;
- }
- #logInField {
+}
+div#logInField {
   width: 20%;
   background: #008000;
   float: left;
   height: 150px;
   text-align: right;
- }
- .loginLink {
+}
+a.loginLink {
    color: black;
- }
- .loginLink:hover {
+}
+a.loginLink:hover {
    color: #3A3;
- }
- .loginForm {
+}
+div.loginForm {
    margin-right: 20px;
    margin-top: 20px;
- }
+}
 
-
-
-
- .content {
+div.content {
    width: 80%;
    margin-left: 10%;
    margin-right: 10%;
- }
- #advertisement {
+}
+div#advertisement {
   background: #FFF;
   width: 100%;
   border: solid 1px black;
   float: left;
   height: 100px;
   clear: both;
- }
+}
 
-
- .toolbar {
+div.toolbar {
    background-color: #FFF;
    width: 100%;
    float: left;
    clear: both;
    border: solid 1px black;
    height: 40px;
- }
- #search {
+}
+div#search {
    width: 33%;
    float: left;
    height: 40px;
    clear: both;
    margin-left: 10px;
    margin-top: 10px;
- }
- #contacts {
+}
+div#contacts {
    width: 33%;
    float: left;
    height: 40px;
    background-color: #FEF;
- }
- #contactsId {
+}
+div#contactsId {
    margin-left: 10px;
    margin-top: 5px;
- }
+}
 
- #basket {
+div#basket {
    width: 33%;
    float: left;
    height: 40px;
- }
- #basketId {
+}
+div#basketId {
    width: 50%;
    height: 20px;
    margin-top: 5px;
    margin-left: 10px;
- }
- .basketImg {
+}
+img.basketImg {
    float: left;
- }
+}
 
-
-
-
- #categories {
+div#categories {
    background: #FFF;
    width: 100%;
    border: solid 1px black;
    float: left;
    clear: both;
- }
- #categoriesField {
+}
+div#categoriesField {
    margin-bottom: 5px;
- }
- .categoriesButtons {
+}
+button.categoriesButtons {
    margin-top: 5px;
    margin-left: 5px;
- }
+}
 
-
-
-
- #products {
+div#products {
    width: 100%;
    background: #FEF;
    border: solid 1px black;
    float: left;
    clear: both;
    min-height: 400px;
- }
-.product {
+}
+div.product {
   width: 16.53%;
   height: 210px;
   float: left;
@@ -142,25 +130,56 @@ a:hover {
   text-align: center;
   overflow: hidden;
 }
-.imgLink {
+img.imgLink {
   border: solid 1px #008000;
   margin-top: 4px;
   margin-left: 4px;
+  width: 85%;
+  height: 85%;
+  overflow: hidden;
 }
-.productLink {
+a.productLink {
   color: black;
 }
-.productLink:hover {
+a.productLink:hover {
   color: #3A3;
 }
 
-
-#bottomOfSite{
+div#bottomOfSite{
   border: solid 1px black;
   float: left;
   width: 100%;
   background-color: #008000;
 }
-#rights {
+p#rights {
   text-align: center;
+}
+
+/* cuurnet drug */
+div#currentDrug {
+  width: 100%;
+  min-height: 800px;
+  background-color: white;
+}
+div#currentDrug img {
+  border: solid 1px #008000;
+  float:left;
+  width: 300px;
+  height: 300px;
+}
+div#upperside {
+  padding-top: 20px;
+  padding-left: 20px;
+}
+div#rightside {
+  float:left;
+}
+div#rightside label {
+  margin-left: 10px;
+  font-size: 30px;
+}
+div#bottomside {
+  margin-left: 20px;
+  float:left;
+  clear: both;
 }

@@ -54,7 +54,7 @@
 </form></div></div>
   <div id="products">
     <% for (let i = 0; i < arr.length; i++) {  %>
-      <div class="product"><a href="http://google.ua" class="productLink"><img class="imgLink" alt="<%= arr[i].name %>" src="<%=arr[i].image%>" width="85%" lenght="85%"><%= arr[i].name %></a></div>
+      <div class="product"><a href="<%= arr[i].link %>" class="productLink"><img class="imgLink" alt="<%= arr[i].name %>" src="<%=arr[i].image%>" width="85%" lenght="85%"><%= arr[i].name %></a></div>
     <%}%>
   </div>
 </div>
