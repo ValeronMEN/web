@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
       arr.push({
         "name": myDrug.name,
         "image": '../pics/' + myDrug.image + '.jpg',
-        "link": "/"+myDrug._id
+        "link": "/drugs/"+myDrug._id
       });
     };
     console.log(arr);
@@ -21,42 +21,8 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/signup', function(req, res, next) {
-  res.render('signup');
-});
-
 router.get('/about', function(req, res, next) {
   res.render('about');
-});
-
-/*
-router.post('/', function(req, res) {
-    var login = req.body.login;
-    var password = req.body.password;
-    console.log("User sent: login: "+login+"; password: "+password);
-    res.render('index');
-});
-*/
-
-router.get('/:_id', function(req, res, next) {
-  Drug.getDrugById(req.params._id, function(err, drug){
-    if (err){
-      throw err;
-    }
-    res.render('drug', { name: drug.name,
-    company: drug.company,
-    volume: drug.volume,
-    type_of_volume: drug.type_of_volume,
-    price: drug.price,
-    symptoms: drug.symptoms,
-    side_effects: drug.side_effects,
-    contraindications: drug.contraindications,
-    overdose: drug.overdose,
-    storage_conditions: drug.storage_conditions,
-    mode_of_application: drug.mode_of_application,
-    properties: drug.properties,
-    image: '../pics/' + drug.image + '.jpg'});
-  });
 });
 
 module.exports = router;

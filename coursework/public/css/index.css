@@ -30,17 +30,52 @@ div#logInField {
   background: #008000;
   float: left;
   height: 150px;
-  text-align: right;
 }
-a.loginLink {
-   color: black;
+div#logInField img{
+  float: left;
 }
-a.loginLink:hover {
-   color: #3A3;
+/* log reg buttons */
+a#loginLink div {
+  border: 1px solid black;
+  padding: 5px;
+  text-align: center;
+  width: 140px;
+  background-color: #32CD32;
+  float: left;
 }
-div.loginForm {
-   margin-right: 20px;
-   margin-top: 20px;
+a#loginLink {
+  text-decoration: none;
+  color: #3A3;
+}
+a#loginLink :hover {
+  color: black;
+  box-shadow: black 0 0 1px 0px;
+  background: linear-gradient(to top, #00FA9A 0%, #98FB98 100%);
+}
+/* profile and log in fields*/
+#logregField {
+  height: 50%;
+  margin-left: 25%;
+  margin-top: 20px;
+}
+#logregField div {
+  margin-top: 16px;
+}
+#profileField {
+  height: 50%;
+  margin-left: 12%;
+  margin-top: 30px;
+}
+#profileField label {
+  margin-left: 5px;
+  cursor: pointer;
+}
+#profileField div {
+  margin-top: 16px;
+  margin-left: 5px;
+}
+#profileField a {
+  text-decoration: none;
 }
 
 div.content {
@@ -223,4 +258,14 @@ div.alert-danger {
   margin-left: 20px;
   color: red;
   margin-top: 5px;
+}
+
+/* users */
+div.userContent {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  background: #FFF;
+  height: 550px;
+  border: solid 1px black;
 }

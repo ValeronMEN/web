@@ -20,6 +20,7 @@ User = require("./models/user");
 var index = require('./routes/index');
 var api = require('./routes/api');
 var users = require('./routes/users');
+var drugs = require('./routes/drugs');
 
 var app = express();
 
@@ -32,7 +33,7 @@ app.set('view engine', 'ejs');
 
 //passport data
 app.use(session({
-  secret: 'secret',
+  secret: 'everyoneknowimvaleron',
   saveUninitialized: true,
   resave: true
 }));
@@ -76,6 +77,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', api);
 app.use('/users', users);
+app.use('/drugs', drugs);
 app.use('/', index);
 
 // catch 404 and forward to error handler

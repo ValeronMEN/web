@@ -11,22 +11,19 @@
       <a href="/"><img class="baseImg" alt='pharmacyName' src="../pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
     </div>
     <div id="logInField">
-      <form form method="get" accept-charset="UTF-8">
-    <div class="loginForm">
-      <label>Login:</label>
-      <input type="text" name="login" class="login">
+      <% if(null == user) {%>
+        <div id="logregField">
+          <a href="/users/login" id="loginLink"><div>Log in</div></a>
+          <a href="/users/register" id="loginLink"><div>Register</div></a>
+        </div>
+      <%}else {%>
+        <div id="profileField">
+          <a href="/users/<%= user._id %>"><label><%= user.firstname %> <%= user.lastname %></label></a>
+          <a href="/users/<%= user._id %>"><img class="profileImg" alt='profileImg' src="../pics/profile.png" width="66px" lenght="66px"></a>
+          <a href="/users/logout" id="loginLink"><div>Log out</div></a>
+        </div>
+      <%} %>
     </div>
-    <div class="loginForm">
-      <label>Password:</label>
-      <input type="text" name="password" class="password">
-    </div>
-    <div class="loginForm">
-      <a class="loginLink" href="forgotpassword">Forgot account?</a>
-      <a class="loginLink" href="users/register">Registration</a>
-      <input type="submit" value="Sign In">
-    </div>
-    </form>
-  </div>
   </div>
   <div class="regContent">
     <form method="post" accept-charset="UTF-8">
@@ -49,11 +46,11 @@
       </div>
       <div class="regField">
         <label>Password:</label>
-        <input type="text" name="password">
+        <input type="password" name="password">
       </div>
       <div class="regField">
         <label>Confirm password:</label>
-        <input type="text" name="confirmPassword">
+        <input type="password" name="confirmPassword">
       </div>
         </div>
       <div class="regField">
@@ -73,18 +70,6 @@
     <div class="alert alert-danger"><%= elements.msg %></div>
     <%}); %>
     <%} %>
-
-    <div class="row">
-      <% if(typeof success_msg != 'undefined'){ %>
-        <div class="alert alert-success"><%= success_msg %></div>
-      <%} %>
-      <% if(typeof error_msg != 'undefined'){ %>
-        <div class="alert alert-success"><%= error_msg %></div>
-      <%} %>
-      <% if(typeof error != 'undefined'){ %>
-        <div class="alert alert-success"><%= error %></div>
-      <%} %>
-    </div>
 
   </div>
   <div id="bottomOfSite">

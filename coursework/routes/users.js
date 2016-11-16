@@ -19,7 +19,9 @@ router.post('/register', function(req, res) {
     var password = req.body.password;
     var confirmPassword = req.body.confirmPassword;
     var sex = req.body.sex;
-    console.log("User sent: firstname: "+firstname+"; lastname: "+lastname+"; email: "+email+"; username: "+username+"; password1: "+password+"; password2: "+confirmPassword+"; sex: "+sex);
+    //console.log("User sent: firstname: "+firstname+"; lastname: "+lastname+"; email: "+email+"; username: "+username+"; password1: "+password+"; password2: "+confirmPassword+"; sex: "+sex);
+
+    var admin = false;
 
     //validation
     req.checkBody('firstname', 'First name is required').notEmpty();
@@ -40,7 +42,8 @@ router.post('/register', function(req, res) {
         lastname: lastname,
         email: email,
         password: password,
-        sex: sex
+        sex: sex,
+        admin: admin
       });
 
       User.createUser(newUser, function(err, user){
@@ -91,9 +94,27 @@ router.post('/login',
 
 router.get('/logout', function(req, res){
   req.logout();
-  console.log("OK, somebody unconnected");
-  req.flash('success_msg', "Ypu are logged out");
-  res.redirect('/users/login');
+  //req.flash('success_msg', "You are logged out");
+  res.redirect('/');
 });
+
+router.get('/:_id', ensureAuthenticated, function(req, res, next) {
+  User.getUserById(req.params._id, function(err, user){
+    if (err){
+      throw err;
+    }
+    res.render('user', { firstname: user.firstname });
+  });
+});
+
+function ensureAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  else{
+    req.flash('error_msg', 'You are not logged in');
+    res.redirect('/users/login');
+  }
+}
 
 module.exports = router;
