@@ -74,6 +74,8 @@ router.post('/register', function(req, res){
   });
 });
 
+
+//passport functions (start)
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.getUserByUsername(username, function(err, user){
@@ -102,6 +104,7 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
+//passport functions (end)
 
 router.post('/login',
   passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login', failureFlash: true}),
@@ -112,7 +115,6 @@ router.post('/login',
 
 router.get('/logout', function(req, res){
   req.logout();
-  //req.flash('success_msg', "You are logged out");
   res.redirect('/');
 });
 
