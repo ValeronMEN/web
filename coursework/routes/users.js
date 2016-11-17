@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var passport       = require('passport');
 var LocalStrategy  = require('passport-local').Strategy;
+var multer  = require('multer');
+var avatars = multer({ dest: 'public/pics/avatars/' })
 
 router.get('/register', function(req, res, next) {
   res.render('signup');
@@ -98,13 +100,12 @@ router.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-router.get('/:_id', ensureAuthenticated, function(req, res, next) {
-  User.getUserById(req.params._id, function(err, user){
-    if (err){
-      throw err;
-    }
-    res.render('user', { firstname: user.firstname });
-  });
+router.get('/profile', ensureAuthenticated, function(req, res, next) {
+    res.render('user');
+});
+
+router.post('/profile', ensureAuthenticated, avatars.single('avatar'), function (req, res, next) {
+    res.redirect('/users/profile');
 });
 
 function ensureAuthenticated(req, res, next){
