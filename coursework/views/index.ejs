@@ -21,7 +21,7 @@
     <%}else {%>
       <div id="profileField">
         <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
-        <a href="/users/<%= user._id %>"><img class="profileImg" alt='profileImg' src="../pics/profile.png" width="66px" lenght="66px"></a>
+        <a href="/users/profile"><img class="profileImg" alt='profileImg' src="../pics/profile.png" width="66px" lenght="66px"></a>
         <a href="/users/logout" id="loginLink"><div>Log out</div></a>
       </div>
     <%} %>

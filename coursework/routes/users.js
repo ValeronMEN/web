@@ -6,14 +6,24 @@ var multer  = require('multer');
 var avatars = multer({ dest: 'public/pics/avatars/' })
 
 router.get('/register', function(req, res, next) {
-  res.render('signup');
+  if (null == req.user){
+    res.render('signup');
+  }
+  else{
+    res.redirect("/");
+  }
 });
 
-router.get('/login', function(req, res, next) {
-  res.render('login');
+router.get('/login', function(req, res, next){
+  if (null == req.user){
+    res.render('login');
+  }
+  else{
+    res.redirect("/");
+  }
 });
 
-router.post('/register', function(req, res) {
+router.post('/register', function(req, res){
     var firstname = req.body.firstname;
     var lastname = req.body.lastname;
     var email = req.body.email;
@@ -22,10 +32,8 @@ router.post('/register', function(req, res) {
     var confirmPassword = req.body.confirmPassword;
     var sex = req.body.sex;
     //console.log("User sent: firstname: "+firstname+"; lastname: "+lastname+"; email: "+email+"; username: "+username+"; password1: "+password+"; password2: "+confirmPassword+"; sex: "+sex);
-
     var admin = false;
 
-    //validation
     req.checkBody('firstname', 'First name is required').notEmpty();
     req.checkBody('lastname', 'Last name is required').notEmpty();
     req.checkBody('email', 'Email is required').isEmail();
@@ -33,29 +41,37 @@ router.post('/register', function(req, res) {
     req.checkBody('password', 'Password is required').notEmpty();
     req.checkBody('confirmPassword', 'Passwords do not match').equals(req.body.password);
 
-    var errors = req.validationErrors();
+    User.getUserByUsername(username, function(err, user){
+      if (null == user){
+        //console.log("Error");
+        var errors = req.validationErrors();
 
-    if(errors){
-      res.render('signup', {errors: errors});
+        if(errors){
+          res.render('signup', {errors: errors});
+        }else{
+          var newUser = new User({
+            username: username,
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            sex: sex,
+            admin: admin
+          });
+
+          User.createUser(newUser, function(err, user){
+            if(err) throw err;
+            console.log(user);
+          });
+
+          req.flash('success_msg', 'You are registred and now can log in');
+          res.redirect('login');
+      }
     }else{
-      var newUser = new User({
-        username: username,
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        password: password,
-        sex: sex,
-        admin: admin
-      });
-
-      User.createUser(newUser, function(err, user){
-        if(err) throw err;
-        console.log(user);
-      });
-
-      req.flash('success_msg', 'You are registred and now can log in');
-      res.redirect('login');
+      //console.log("Not Error");
+      res.redirect('register');
     };
+  });
 });
 
 passport.use(new LocalStrategy(

@@ -3,7 +3,7 @@
  <head>
   <link rel="stylesheet" href="../css/index.css">
   <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
-  <title>vApteka</title>
+  <title>Administration</title>
  </head>
  <body>
    <div class="home">
@@ -21,14 +21,7 @@
    <!-- Special part start -->
    <div class="userContent">
      <div id="currentUser">
-       <p><%= user.firstname %> <%= user.lastname %></p>
-       <form enctype="multipart/form-data" method="post">
-          <p>Choose .jpeg file to change avatar<br><input type="file" name="avatar" accept="image/jpeg"><br>
-          <input type="submit" value="Submit"></p>
-       </form>
-       <% if(user.admin == true){%>
-         <a href="/admins">Administration</a>
-       <%}%>
+       <p><%= user.firstname %> <%= user.lastname %><br>Administration</p>
      </div>
    </div>
    <!-- Special part ends -->

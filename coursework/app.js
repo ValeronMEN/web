@@ -17,6 +17,7 @@ var db = mongoose.connection;
 Drug = require("./models/drug");
 User = require("./models/user");
 
+var admins = require('./routes/admins');
 var index = require('./routes/index');
 var api = require('./routes/api');
 var users = require('./routes/users');
@@ -75,6 +76,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/admins', admins);
 app.use('/api', api);
 app.use('/users', users);
 app.use('/drugs', drugs);
