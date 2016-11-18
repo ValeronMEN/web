@@ -2,8 +2,19 @@ var express = require('express');
 var router = express.Router();
 var passport       = require('passport');
 var LocalStrategy  = require('passport-local').Strategy;
+var path = require('path');
 var multer  = require('multer');
-var avatars = multer({ dest: 'public/pics/avatars/' })
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/pics/avatars/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+  }
+});
+
+var avatar = multer({ storage: storage });
 
 router.get('/register', function(req, res, next) {
   if (null == req.user){
@@ -33,6 +44,7 @@ router.post('/register', function(req, res){
     var sex = req.body.sex;
     //console.log("User sent: firstname: "+firstname+"; lastname: "+lastname+"; email: "+email+"; username: "+username+"; password1: "+password+"; password2: "+confirmPassword+"; sex: "+sex);
     var admin = false;
+    var avatar = "default.png";
 
     req.checkBody('firstname', 'First name is required').notEmpty();
     req.checkBody('lastname', 'Last name is required').notEmpty();
@@ -56,7 +68,8 @@ router.post('/register', function(req, res){
             email: email,
             password: password,
             sex: sex,
-            admin: admin
+            admin: admin,
+            avatar: avatar
           });
 
           User.createUser(newUser, function(err, user){
@@ -69,6 +82,7 @@ router.post('/register', function(req, res){
       }
     }else{
       //console.log("Not Error");
+      req.flash('error_msg', "Username is busy");
       res.redirect('register');
     };
   });
@@ -122,8 +136,17 @@ router.get('/profile', ensureAuthenticated, function(req, res, next) {
     res.render('user');
 });
 
-router.post('/profile', ensureAuthenticated, avatars.single('avatar'), function (req, res, next) {
-    res.redirect('/users/profile');
+router.post('/profile', ensureAuthenticated, avatar.single('avatar'), function (req, res, next) {
+  User.getUserById(req.user.id, function(err, myuser) {
+    if (err) throw err;
+    myuser.avatar = req.file.filename;
+    //console.log(myuser.avatar);
+    User.updateUser(req.user.id, myuser, {}, function(err, mynewuser){
+      if(err) throw err;
+      //console.log(mynewuser.avatar);
+      res.redirect('/users/profile');
+    });
+  });
 });
 
 function ensureAuthenticated(req, res, next){

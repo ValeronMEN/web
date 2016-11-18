@@ -11,6 +11,20 @@ router.get('/', ensureAuthenticated, function(req, res, next) {
   }
 });
 
+router.get('/users', ensureAuthenticated, function(req, res, next) {
+  if(req.user.admin == true){
+    User.getUsers(function(err, users){
+      if (err){
+        throw err;
+      }
+      console.log(users);
+      res.render('adminusers', {arr: users});
+    });
+  }else{
+    res.redirect("/");
+  }
+});
+
 function ensureAuthenticated(req, res, next){
   if(req.isAuthenticated()){
     return next();

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <title>Administration</title>
+ </head>
+ <body>
+   <div class="home">
+     <div id="pharmacyName">
+       <a href="/"><img class="baseImg" alt='pharmacyName' src="../pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+     </div>
+     <div id="logInField">
+       <div id="profileField">
+         <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
+         <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="../pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+         <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
+       </div>
+     </div>
+   </div>
+   <!-- Special part start -->
+   <div class="userContent">
+     <div id="currentUser">
+       <p>There are users:</p>
+       <% for (let i = 0; i < arr.length; i++) {  %>
+         <div class="users"><a href="/"><%= arr[i].firstname %> <%= arr[i].lastname %></a><p>Username: <%= arr[i].username %><br>E-mail: <%= arr[i].email %><br>Sex: <%= arr[i].sex %></p>
+           <%if(arr[i].admin == true){%>
+             <p id="admin">This user is admin</p>
+           <%}else{%>
+             <p id="notadmin">This user isn't admin</p>
+           <%}%>
+         </div>
+         <p> </p>
+       <%}%>
+     </div>
+   </div>
+   <!-- Special part ends -->
+   <div id="bottomOfSite">
+     <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+   </div>
+</body>
+</html>

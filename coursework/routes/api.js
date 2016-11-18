@@ -19,7 +19,7 @@ router.get('/drugs', function(req, res) {
 router.get('/drugs/:_id', function(req, res) {
   Drug.getDrugById(req.params._id, function(err, drug){
     if (err){
-      throw err;
+      res.render('error');
     }
     res.json(drug);
   });

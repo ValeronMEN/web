@@ -8,7 +8,8 @@ var userSchema = new mongoose.Schema( {
   email: { type: String },
   password: { type: String },
   sex: { type: String },
-  admin: { type: Boolean }
+  admin: { type: Boolean },
+  avatar: { type: String }
 }, {
     versionKey: false // You should be aware of the outcome after set to false
 });
@@ -41,7 +42,8 @@ module.exports.updateUser = function(id, user, options, callback){
     email: user.email,
     password: user.password,
     sex: user.sex,
-    admin: user.admin
+    admin: user.admin,
+    avatar: user.avatar
   };
   User.findOneAndUpdate(query, update, options, callback);
 };

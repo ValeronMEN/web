@@ -63,19 +63,26 @@ a#loginLink :hover {
 }
 #profileField {
   height: 50%;
-  margin-left: 12%;
-  margin-top: 30px;
+  margin-left: 13%;
+  margin-top: 40px;
 }
 #profileField label {
   margin-left: 5px;
   cursor: pointer;
 }
-#profileField div {
+div#logoutF {
   margin-top: 16px;
   margin-left: 5px;
 }
 #profileField a {
   text-decoration: none;
+}
+div#avatarImg {
+  overflow: hidden;
+  height: 66px;
+  width: 66px;
+  float: left;
+  border: solid 1px black;
 }
 
 div.content {
@@ -188,33 +195,4 @@ div#bottomOfSite{
 }
 p#rights {
   text-align: center;
-}
-
-/* current drug */
-div#currentDrug {
-  width: 100%;
-  min-height: 800px;
-  background-color: white;
-}
-div#currentDrug img {
-  border: solid 1px #008000;
-  float:left;
-  width: 300px;
-  height: 300px;
-}
-div#upperside {
-  padding-top: 20px;
-  padding-left: 20px;
-}
-div#rightside {
-  float:left;
-}
-div#rightside label {
-  margin-left: 10px;
-  font-size: 30px;
-}
-div#bottomside {
-  margin-left: 20px;
-  float:left;
-  clear: both;
 }

@@ -4,9 +4,21 @@ div.userContent {
   margin-left: 10%;
   margin-right: 10%;
   background: #FFF;
-  height: 550px;
+  min-height: 550px;
   border: solid 1px black;
 }
 div#currentUser {
   margin-left: 20px;
+  margin-right: 20px;
+}
+
+/* admin/users */
+div.users {
+  border: solid 1px green;
+}
+p#notadmin {
+  color: #3A3;
+}
+p#admin {
+  color: red;
 }

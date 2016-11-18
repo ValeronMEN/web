@@ -10,3 +10,13 @@ div.userContent {
 div#currentUser {
   margin-left: 20px;
 }
+
+p#userinfo {
+
+}
+div#userimage {
+  height: 200px;
+  width: 200px;
+  overflow: hidden;
+  border: solid 1px #3A3;
+}

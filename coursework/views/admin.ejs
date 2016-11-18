@@ -12,17 +12,17 @@
        <a href="/"><img class="baseImg" alt='pharmacyName' src="../pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
      </div>
      <div id="logInField">
-         <div id="profileField">
-           <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
-           <a href="/users/profile"><img class="profileImg" alt='profileImg' src="../pics/profile.png" width="66px" lenght="66px"></a>
-           <a href="/users/logout" id="loginLink"><div>Log out</div></a>
-         </div>
+       <div id="profileField">
+         <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
+         <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="../pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+         <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
+       </div>
      </div>
    </div>
    <!-- Special part start -->
    <div class="userContent">
      <div id="currentUser">
-       <p><%= user.firstname %> <%= user.lastname %><br>Administration</p>
+       <p><%= user.firstname %> <%= user.lastname %><br>Administration<br><a href="/admins/users">To edit users</a></p>
      </div>
    </div>
    <!-- Special part ends -->
