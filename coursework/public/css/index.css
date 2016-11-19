@@ -8,6 +8,7 @@ body {
 }
 a {
   color: black;
+  text-decoration: none;
 }
 a:hover {
   color: #3A3;
@@ -49,6 +50,8 @@ a#loginLink {
 }
 a#loginLink :hover {
   color: black;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
   box-shadow: black 0 0 2px 0px;
   background: linear-gradient(to top, #00FA9A 0%, #98FB98 100%);
 }
@@ -71,7 +74,7 @@ a#loginLink :hover {
   cursor: pointer;
 }
 div#logoutF {
-  margin-top: 16px;
+  margin-top: 19px;
   margin-left: 5px;
 }
 #profileField a {

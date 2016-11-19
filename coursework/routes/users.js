@@ -4,6 +4,9 @@ var passport       = require('passport');
 var LocalStrategy  = require('passport-local').Strategy;
 var path = require('path');
 var multer  = require('multer');
+var bcrypt = require('bcryptjs');
+
+var file_functions = require('../modules/files');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -42,7 +45,7 @@ router.post('/register', function(req, res){
     var password = req.body.password;
     var confirmPassword = req.body.confirmPassword;
     var sex = req.body.sex;
-    //console.log("User sent: firstname: "+firstname+"; lastname: "+lastname+"; email: "+email+"; username: "+username+"; password1: "+password+"; password2: "+confirmPassword+"; sex: "+sex);
+
     var admin = false;
     var avatar = "default.png";
 
@@ -55,7 +58,6 @@ router.post('/register', function(req, res){
 
     User.getUserByUsername(username, function(err, user){
       if (null == user){
-        //console.log("Error");
         var errors = req.validationErrors();
 
         if(errors){
@@ -81,15 +83,12 @@ router.post('/register', function(req, res){
           res.redirect('login');
       }
     }else{
-      //console.log("Not Error");
       req.flash('error_msg', "Username is busy");
       res.redirect('register');
     };
   });
 });
 
-
-//passport functions (start)
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.getUserByUsername(username, function(err, user){
@@ -118,13 +117,11 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
-//passport functions (end)
 
 router.post('/login',
   passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login', failureFlash: true}),
   function(req, res) {
     res.redirect('/');
-    console.log("OK, somebody was connected");
 });
 
 router.get('/logout', function(req, res){
@@ -132,21 +129,82 @@ router.get('/logout', function(req, res){
   res.redirect('/');
 });
 
+router.post('/profile/changepassword', ensureAuthenticated, function(req, res){
+  if ('' !== req.body.oldPassword && '' !== req.body.newPassword && '' !== req.body.newConfirmPassword){
+    User.comparePassword(req.body.oldPassword, req.user.password, function(err, isMatch){
+        if(err) {
+          throw err;
+        }
+        if(isMatch){
+          req.checkBody('newConfirmPassword').equals(req.body.newPassword);
+          var errors = req.validationErrors();
+          if(errors){
+            req.flash('error_msg', "New passwords don't match or absent");
+            res.redirect('/users/profile');
+          }else{
+            User.getUserById(req.user._id, function(err, updateUser){
+              if (err) throw err;
+              updateUser.password = req.body.newPassword;
+              bcrypt.genSalt(10, function(err, salt) {
+                bcrypt.hash(updateUser.password, salt, function(err, hash) {
+                    updateUser.password = hash;
+                    updateUser.save();
+                    req.flash('success_msg', "Password has changed");
+                    res.redirect('/users/profile');
+                });
+              });
+            });
+          }
+        }else{
+          req.flash('error_msg', "Old and new passwords do not match");
+          res.redirect('/users/profile');
+        }
+    });
+  }else{
+    req.flash('error_msg', "One or several fields are required");
+    res.redirect('/users/profile');
+  }
+});
+
 router.get('/profile', ensureAuthenticated, function(req, res, next) {
     res.render('user');
 });
 
-router.post('/profile', ensureAuthenticated, avatar.single('avatar'), function (req, res, next) {
-  User.getUserById(req.user.id, function(err, myuser) {
+router.post('/profile/removeavatar', ensureAuthenticated, function (req, res, next) {
+  User.getUserById(req.user._id, function(err, myuser) {
     if (err) throw err;
-    myuser.avatar = req.file.filename;
-    //console.log(myuser.avatar);
-    User.updateUser(req.user.id, myuser, {}, function(err, mynewuser){
+    var old_avatar = myuser.avatar;
+    myuser.avatar = "default.png";
+    User.updateUser(req.user._id, myuser, {}, function(err, mynewuser){
       if(err) throw err;
-      //console.log(mynewuser.avatar);
+      if (old_avatar != "default.png"){
+        var old_path = "./public/pics/avatars/" + old_avatar;
+        file_functions.deleteFile(old_path);
+      }
       res.redirect('/users/profile');
     });
   });
+});
+
+router.post('/profile', ensureAuthenticated, avatar.single('avatar'), function (req, res, next) {
+  if (null == req.file){
+    res.redirect('/users/profile');
+  }
+  else{
+    User.getUserById(req.user.id, function(err, myuser) {
+      if (err) throw err;
+      var old_avatar = myuser.avatar;
+      myuser.avatar = req.file.filename;
+      User.updateUser(req.user.id, myuser, {}, function(err, mynewuser){
+        if(err) throw err;
+        if (old_avatar != "default.png"){
+          var old_path = "./public/pics/avatars/" + old_avatar;
+          file_functions.deleteFile(old_path);
+        }
+        res.redirect('/users/profile');
+      });
+    });
+  }
 });
 
 function ensureAuthenticated(req, res, next){

@@ -16,9 +16,31 @@ div#currentUser {
 div.users {
   border: solid 1px green;
 }
+div.users div {
+  height: 120px;
+  width: 120px;
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+div.users img {
+  height: 100%;
+  width: 100%;
+}
+div#editUserInfo {
+  width: 30%;
+  margin-left: 10px;
+}
 p#notadmin {
   color: #3A3;
 }
 p#admin {
   color: red;
+}
+
+div#isAdmin {
+  margin-left: 10px;
+  float: right;
 }

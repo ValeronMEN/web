@@ -22,16 +22,46 @@
    <!-- Special part start -->
    <div class="userContent">
      <div id="currentUser">
-       <p>First name: <%= user.firstname %><br>Last name: <%= user.lastname %></p>
        <div id="userimage"><img class="avatarImg" alt='avatar' src="../pics/avatars/<%= user.avatar %>" width="200px" lenght="200px"></div>
-       <p id="userinfo">Username: <%= user.username %><br>E-mail: <%= user.email %><br>Sex: <%= user.sex %></p>
-       <form enctype="multipart/form-data" method="post">
-          <p>Choose .jpeg file to change avatar<br><input type="file" name="avatar" accept="image/jpeg"><br>
-          <input type="submit" value="Submit"></p>
-       </form>
+       <div id="divInfo">
+         <p><b>First name</b>: <%= user.firstname %><br><b>Last name</b>: <%= user.lastname %><br><b>Username</b>: <%= user.username %><br><b>E-mail</b>: <%= user.email %><br><b>Sex</b>: <%= user.sex %></p>
+
+         <form action="profile/removeavatar" method="post">
+            <p>Click to remove avatar<br><input class="greenInput" type="submit" value="Remove avatar"></p>
+         </form>
+
+         <form enctype="multipart/form-data" method="post">
+            <p>Choose .jpeg file to change avatar<br><input type="file" name="avatar" accept="image/jpeg"><br>
+            <input class="greenInput" type="submit" value="Submit"></p>
+         </form>
+       </div>
+
+       <div id="changePasswordFields">
+         <form action="profile/changepassword" method="post" accept-charset="UTF-8">
+           <label>Old password:</label><br>
+           <input class="passFields" type="password" name="oldPassword"><br>
+           <label>New password:</label><br>
+           <input class="passFields" type="password" name="newPassword"><br>
+           <label>Confirm new password:</label><br>
+           <input class="passFields" type="password" name="newConfirmPassword"><br>
+           <input class="greenInput" type="submit" value="Change password"><br>
+         </form>
+       </div>
+
+       <div class="row">
+         <% if(success_msg != '') {%>
+             <div class="alert alert-success"><%=success_msg%></div>
+         <%} %>
+         <% if(error_msg != '') {%>
+             <div class="alert alert-danger"><%=error_msg%></div>
+         <%} %>
+       </div>
+
        <% if(user.admin == true){%>
+         <br>
          <a href="/admins">Administration</a>
        <%}%>
+
      </div>
    </div>
    <!-- Special part ends -->

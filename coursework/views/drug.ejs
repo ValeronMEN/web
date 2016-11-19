@@ -30,28 +30,26 @@
 <div class="content">
   <div id="currentDrug">
     <div id="upperside">
-   <img class="currentImg" alt='<%= name %>' src="<%= image %>" width="300px" lenght="300px">
-   <div id="rightside">
-     <label><%= name %></label>
-     <br>
-     <label><%= price %></label>
-   </div>
- </div>
-   <div id="bottomside">
-     <p>Name: <%= name %><br>
-     Company: <%= company %><br>
-     Volume: <%= volume %><br>
-     Type of volume: <%= type_of_volume %><br>
-     Price: <%= price %><br>
-     Symptoms: <%= symptoms %><br>
-     Side effects: <%= side_effects %><br>
-     Contraindications: <%= contraindications %><br>
-     Overdose: <%= overdose %><br>
-     Storage conditions: <%= storage_conditions %><br>
-     Mode of application: <%= mode_of_application %><br>
-     Properties: <%= properties %></p>
-     <button>Add to Basket</button>
-   </div>
+      <img class="currentImg" alt='<%= name %>' src="<%= image %>" width="300px" lenght="300px">
+    </div>
+    <div id="rightsideDrug">
+      <label id="drugName"><%= name %></label><br>
+      <label id="drugBasicInfo">Company: <%= company %><br>
+      Volume: <%= volume %><br>
+      Type of volume: <%= type_of_volume %><br>
+      Price: <%= price %></label>
+      <br><br>
+    </div>
+    <div id="buttonsideDrug"><button class="button" style="vertical-align:middle"><span>Add to Basket </span></button></div>
+    <div id="bottomsideDrug">
+      <h4>Symptoms:</h4><label class="drugNotBasicInfo"><%= symptoms %></label>
+      <h4>Side effects:</h4><label class="drugNotBasicInfo"> <%= side_effects %></label>
+      <h4>Contraindications:</h4><label class="drugNotBasicInfo"><%= contraindications %></label>
+      <h4>Overdose:</h4><label class="drugNotBasicInfo"><%= overdose %></label>
+      <h4>Storage conditions:</h4><label class="drugNotBasicInfo"><%= storage_conditions %></label>
+      <h4>Mode of application:</h4><label class="drugNotBasicInfo"><%= mode_of_application %></label>
+      <h4>Properties:</h4><label class="drugNotBasicInfo"><%= properties %></label>
+    </div>
  </div>
 </div>
 <!-- Special part ends -->

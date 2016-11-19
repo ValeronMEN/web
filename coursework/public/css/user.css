@@ -4,19 +4,44 @@ div.userContent {
   margin-left: 10%;
   margin-right: 10%;
   background: #FFF;
-  height: 550px;
+  min-height: 550px;
   border: solid 1px black;
 }
 div#currentUser {
   margin-left: 20px;
-}
-
-p#userinfo {
-
 }
 div#userimage {
   height: 200px;
   width: 200px;
   overflow: hidden;
   border: solid 1px #3A3;
+  display: inline-block;
+}
+div#divInfo {
+  margin-left: 30px;
+  display: inline-block;
+}
+div.alert-danger {
+  color: red;
+  margin-top: 5px;
+}
+div.alert-success {
+  color: #3A3;
+  margin-top: 5px;
+}
+input.passFields {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+input.passFields:hover {
+  background-color: #90EE90;
+}
+input.greenInput {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    color: #3A3;
+}
+input.greenInput:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
 }

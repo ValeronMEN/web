@@ -11,7 +11,7 @@ var userSchema = new mongoose.Schema( {
   admin: { type: Boolean },
   avatar: { type: String }
 }, {
-    versionKey: false // You should be aware of the outcome after set to false
+    versionKey: false
 });
 
 var User = module.exports = mongoose.model("User", userSchema);
@@ -22,7 +22,7 @@ module.exports.createUser = function(newUser, callback){
         newUser.password = hash;
         newUser.save(callback);
     });
-});
+  });
 };
 
 module.exports.getUsers = function(callback, limit){
@@ -48,7 +48,7 @@ module.exports.updateUser = function(id, user, options, callback){
   User.findOneAndUpdate(query, update, options, callback);
 };
 
-module.exports.deleteDrug = function(id, callback){
+module.exports.deleteUser = function(id, callback){
   var query = {_id: id};
   User.remove(query, callback);
 };

@@ -26,7 +26,6 @@ var drugs = require('./routes/drugs');
 var app = express();
 
 console.log("OK, we're alive now");
-//process.env.NODE_ENV = 'production'; // to hide error message
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

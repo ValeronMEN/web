@@ -15,7 +15,7 @@ var drugSchema = new mongoose.Schema( {
     properties: { type: String, default: "unknown" },
     image: { type: String, default: "unknown" }
 }, {
-    versionKey: false // You should be aware of the outcome after set to false
+    versionKey: false
 });
 
 var Drug = module.exports = mongoose.model("Drug", drugSchema);
