@@ -12,7 +12,7 @@
     "storage_conditions":">30C",
     "mode_of_application": "oral",
     "properties":"hepatoprotective, choleretic and holekinetiki",
-    "image":"galstena"
+    "image":"galstena.jpg"
   },
   {
     "name": "Memoria",
@@ -27,7 +27,7 @@
     "storage_conditions":">20C",
     "mode_of_application": "oral",
     "properties":"hepatoprotective, choleretic and holekinetiki",
-    "image":"galstena"
+    "image":"galstena.jpg"
   },
   {
     "name": "Aflubin",
@@ -42,7 +42,7 @@
     "storage_conditions":">30C",
     "mode_of_application": "oral",
     "properties":"hepatoprotective, choleretic and holekinetiki",
-    "image":"galstena"
+    "image":"galstena.jpg"
   },
   {
     "name": "Bitner",
@@ -57,6 +57,6 @@
     "storage_conditions":">30C",
     "mode_of_application": "oral",
     "properties":"hepatoprotective, choleretic and holekinetiki",
-    "image":"galstena"
+    "image":"galstena.jpg"
   }
 ]

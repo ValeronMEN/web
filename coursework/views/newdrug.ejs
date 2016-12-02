@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/newdrug.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <title>vApteka</title>
+</head>
+<body>
+  <div class="home">
+    <div id="pharmacyName">
+      <a href="/"><img class="baseImg" alt='pharmacyName' src="../pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+    </div>
+    <div id="logInField">
+      <div id="profileField">
+        <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
+        <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="../pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+        <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
+      </div>
+    </div>
+  </div>
+  <div class="regContent">
+    <form enctype="multipart/form-data" method="post"> <!-- enctype="multipart/form-data" enctype="application/x-www-form-urlencoded" -->
+      <!--<input type="file" name="image" accept="image/jpeg">
+      <input id="submitButt" type="submit" value="Add new drug">
+    </form>-->
+      <div id="newDrugInsideContent1">
+        <div class="regField">
+          <label>Name:</label>
+          <input type="text" name="name">
+        </div>
+        <div class="regField">
+          <label>Company:</label>
+          <input type="text" name="company">
+        </div>
+        <div class="regField">
+          <label>Volume:</label>
+          <input type="text" name="volume">
+        </div>
+        <div class="regField">
+          <label>Type of volume:</label>
+          <input type="text" name="type_of_volume">
+        </div>
+        <div class="regField">
+          <label>Price:</label>
+          <input type="text" name="price">
+        </div>
+      </div>
+      <div id="newDrugComments1">
+        <label>Name: name of drug. For example "Memoria"</label>
+        <br>
+        <label>Company. For example "Bitner"</label>
+        <br>
+        <label>Volume. For example "45"</label>
+        <br>
+        <label>Type of volume. For example "pills" or "ml, syrop"</label>
+        <br>
+        <label>Price. For example "300 UAH" or "2 USD"</label>
+      </div>
+      <div id="newDrugInsideContent2">
+        <div class="regField">
+          <label>Symptoms:</label>
+          <textarea name="symptoms" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Side effects:</label>
+          <textarea name="side_effects" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Contraindications:</label>
+          <textarea name="contraindications" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Overdose:</label>
+          <textarea name="overdose" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Storage conditions:</label>
+          <textarea name="storage_conditions" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Mode of application:</label>
+          <textarea name="mode_of_application" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Properties:</label>
+          <textarea name="properties" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Choose .jpeg image:</label>
+          <input type="file" name="image" accept="image/jpeg">
+        </div>
+        <div class="regField">
+          <input id="submitButt" type="submit" value="Add new drug">
+        </div>
+      </div>
+    </form>
+  <div id="newDrugComments2">
+    <% if(typeof errors != 'undefined'){ %>
+    <% errors.forEach(function(elements){ %>
+    <div class="alert alert-danger"><%= elements.msg %></div>
+    <%}); %>
+    <%} %>
+
+    <% if(error_msg != '') {%>
+    <div class="alert alert-danger"><%= error_msg %></div>
+    <%} %>
+  </div>
+</div>
+<div id="bottomOfSite">
+  <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+</div>
+</body>
+</html>

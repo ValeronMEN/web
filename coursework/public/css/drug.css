@@ -4,6 +4,7 @@ div#currentDrug {
   width: 100%;
   min-height: 1000px;
   background-color: white;
+  border: solid 1px black;
 }
 div#upperside img {
   border: solid 3px #008000;

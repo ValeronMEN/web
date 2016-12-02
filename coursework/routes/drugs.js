@@ -24,4 +24,23 @@ router.get('/:_id', function(req, res, next) {
   });
 });
 
+router.get('/', function(req, res, next) {
+  var arr = []; // array of my drugs
+  Drug.getDrugs(function(err, drugs){
+    if (err){
+      throw err;
+    }
+    for (let i = 0; i < drugs.length; i++){
+      let myDrug = drugs[i];
+      arr.push({
+        "name": myDrug.name,
+        "image": '../pics/' + myDrug.image + '.jpg',
+        "link": "/drugs/"+myDrug._id
+      });
+    };
+    console.log(arr);
+    res.render('drugs', { arr: arr });
+  });
+});
+
 module.exports = router;
