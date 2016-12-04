@@ -2,14 +2,15 @@
 <html>
  <head>
   <link rel="stylesheet" href="/css/index.css">
-  <link rel="stylesheet" href="/css/drugs.css">
+  <link rel="stylesheet" href="/css/search.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
   <title>vApteka</title>
  </head>
  <body>
 <div class="home">
   <div id="pharmacyName">
-    <a href="/"><img class="baseImg" alt='pharmacyName' src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+    <a href="/"><img class="baseImg" alt="pharmacyName" src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
   </div>
   <div id="logInField">
     <% if(null == user) {%>
@@ -25,8 +26,9 @@
       </div>
     <%} %>
   </div>
+  </form>
 </div>
-<!-- Special part start -->
+</div>
 <div class="content">
   <div id="backIndex">
     <a href="/"><p><-- Go Back</p></a>
@@ -43,19 +45,7 @@
       </div>
     <%}%>
   </div>
-  <div id="pagesField">
-    <div>
-      <% for (let i = 1; i <= pages; i++) {  %>
-        <% if(i == page) {%>
-          <a id="uniquePage" href="/drugs/<%= i %>"><%= i %></a>
-        <%}else {%>
-          <a href="/drugs/<%= i %>"><%= i %></a>
-        <%}%>
-      <%}%>
-    </div>
-  </div>
 </div>
-<!-- Special part ends -->
 <div id="bottomOfSite">
   <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
 </div>

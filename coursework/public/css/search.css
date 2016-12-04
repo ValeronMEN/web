@@ -1,0 +1,11 @@
+div#products {
+  min-height: 800px;
+}
+div#backIndex {
+  background: #FFF;
+  width: 100%;
+  border: solid 1px black;
+  float: left;
+  height: 50px;
+  clear: both;
+}

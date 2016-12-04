@@ -13,7 +13,7 @@ var drugSchema = new mongoose.Schema( {
     storage_conditions: { type: String, default: "unknown" },
     mode_of_application: { type: String, default: "unknown" },
     properties: { type: String, default: "unknown" },
-    image: { type: String, default: "unknown" }
+    image: { type: String  }
 }, {
     versionKey: false
 });

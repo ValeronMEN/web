@@ -22,6 +22,7 @@ var index = require('./routes/index');
 var api = require('./routes/api');
 var users = require('./routes/users');
 var drugs = require('./routes/drugs');
+var search = require('./routes/search');
 
 var app = express();
 
@@ -75,6 +76,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/search', search);
 app.use('/admins', admins);
 app.use('/api', api);
 app.use('/users', users);

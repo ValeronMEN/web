@@ -101,7 +101,7 @@ passport.use(new LocalStrategy(
           if(err) throw err;
           if(isMatch){
             return done(null, user);
-          } else{
+          }else{
             return done(null, false, {message: 'Invalid password'});
           }
       });
@@ -132,7 +132,7 @@ router.get('/logout', function(req, res){
 router.post('/profile/changepassword', ensureAuthenticated, function(req, res){
   if ('' !== req.body.oldPassword && '' !== req.body.newPassword && '' !== req.body.newConfirmPassword){
     User.comparePassword(req.body.oldPassword, req.user.password, function(err, isMatch){
-        if(err) {
+        if(err){
           throw err;
         }
         if(isMatch){

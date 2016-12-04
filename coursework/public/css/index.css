@@ -116,33 +116,41 @@ div#search {
    float: left;
    height: 40px;
    clear: both;
-   margin-left: 10px;
-   margin-top: 10px;
+   margin-left: 4px;
+   margin-top: 4px;
 }
+div#drugs {
+   width: 33%;
+   float: left;
+   height: 40px;
+   background-color: #00FF00;
+}
+div#drugsId {
+   margin-left: 10px;
+   margin-top: 5px;
+   text-align: center;
+}
+div#drugsId a {
+  font-size: 20px;
+}
+label#productName{
+  cursor: pointer;
+  font-size: 20px;
+}
+label.productInfo{
+  cursor: pointer;
+}
+
 div#contacts {
    width: 33%;
    float: left;
    height: 40px;
-   background-color: #FEF;
 }
 div#contactsId {
-   margin-left: 10px;
-   margin-top: 5px;
-}
-
-div#basket {
-   width: 33%;
-   float: left;
-   height: 40px;
-}
-div#basketId {
    width: 50%;
    height: 20px;
    margin-top: 5px;
    margin-left: 10px;
-}
-img.basketImg {
-   float: left;
 }
 
 div#categories {
@@ -154,6 +162,7 @@ div#categories {
 }
 div#categoriesField {
    margin-bottom: 5px;
+   text-align: center;
 }
 button.categoriesButtons {
    margin-top: 5px;
@@ -162,16 +171,18 @@ button.categoriesButtons {
 
 div#products {
    width: 100%;
-   background: #FEF;
+   background: #F5FFFA;
    border: solid 1px black;
    float: left;
    clear: both;
    min-height: 400px;
+   text-align: center;
+   padding-top: 2px;
 }
 div.product {
-  width: 16.53%;
-  height: 210px;
-  float: left;
+  width: 19.6%;
+  height: 275px;
+  display: inline-block;
   border: solid 1px #008000;
   text-align: center;
   overflow: hidden;
@@ -181,7 +192,7 @@ img.imgLink {
   margin-top: 4px;
   margin-left: 4px;
   width: 85%;
-  height: 85%;
+  height: 74%;
   overflow: hidden;
 }
 a.productLink {
@@ -199,4 +210,40 @@ div#bottomOfSite{
 }
 p#rights {
   text-align: center;
+}
+
+.search {
+  width: 99%;
+  position: relative;
+}
+.search input {
+  border: none;
+}
+.search .input {
+  width: 100%;
+  padding: 8px 37px 9px 15px;
+  -moz-box-sizing: border-box; /* чтобы ширина поля ввода (100%) включала в себя внутренние отступы */
+  box-sizing: border-box;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1), inset 0 1px 2px rgba(0,0,0,0.3);
+  background: #F5FFFA;
+  font: 13px Tahoma, Arial, sans-serif;
+  outline: none;
+}
+.search .input:focus {
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2), inset 0 1px 2px rgba(0,0,0,0.4);
+  background: #00FA9A;
+  color: black;
+}
+.search .submit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 37px;
+  height: 100%;
+  cursor: pointer;
+  background: url(../pics/search.png) 50% no-repeat;
+  opacity: 0.5; /* prozrachnost */
+}
+.search .submit:hover {
+  opacity: 0.8;
 }

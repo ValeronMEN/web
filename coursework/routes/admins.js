@@ -1,9 +1,23 @@
 var express = require('express');
 var router = express.Router();
+var multer = require('multer');
+var path = require('path');
+var fs = require('fs');
 var passport       = require('passport');
 var LocalStrategy  = require('passport-local').Strategy;
 
 var file_functions = require('../modules/files');
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/pics/drugs/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+  }
+});
+
+var image = multer({ storage: storage });
 
 router.get('/', ensureAuthenticated, function(req, res, next) {
   if(req.user.admin == true){
@@ -35,57 +49,79 @@ router.get('/newdrug', ensureAuthenticated, function(req, res, next) {
   }
 });
 
-router.post('/newdrug', ensureAuthenticated, function(req, res, next) {
+router.post('/newdrug', ensureAuthenticated, image.single('image'), function(req, res, next) {
   if(req.user.admin == true){
-    console.log(req.body);
-    var name = req.body.name;
-    var company = req.body.company;
-    var volume = req.body.volume;
-    var type_of_volume = req.body.type_of_volume;
-    var price = req.body.price;
-
-    var symptoms = req.body.symptoms;
-    var side_effects = req.body.side_effects;
-    var contraindications = req.body.contraindications;
-    var overdose = req.body.overdose;
-    var storage_conditions = req.body.storage_conditions;
-    var mode_of_application = req.body.mode_of_application;
-    var properties = req.body.properties;
-
-    //var file = req.body.image;
-
-    /*
-    if (req.file == null){
-      console.log("File is null");
-    }
-    if (req.files == null){
-      console.log("Files is null");
-    }
-    console.log(req.body.file);
-    console.log(req.body.image);
-    */
-
-    req.checkBody('name', 'Name is required').notEmpty();
-    req.checkBody('company', 'Company is required').notEmpty();
-    req.checkBody('volume', 'Volume is required').notEmpty();
-    req.checkBody('type_of_volume', 'Type of volume is required').notEmpty();
-    req.checkBody('price', 'Price is required').notEmpty();
-
-    req.checkBody('symptoms', 'Symptoms is required').notEmpty();
-    req.checkBody('side_effects', 'Side effects is required').notEmpty();
-    req.checkBody('contraindications', 'Contraindications is required').notEmpty();
-    req.checkBody('overdose', 'Overdose is required').notEmpty();
-    req.checkBody('storage_conditions', 'Storage conditions is required').notEmpty();
-    req.checkBody('mode_of_application', 'Mode of application is required').notEmpty();
-    req.checkBody('properties', 'Properties is required').notEmpty();
-
-    req.checkFiles('image', 'Image is required').notEmpty();
-
-    var errors = req.validationErrors();
-    if(errors){
-      res.render('newdrug', {errors: errors});
+    if (null == req.file){
+      req.flash('error_msg', 'Image is required');
+      res.redirect('/admins/newdrug');
     }else{
-      res.render('newdrug');
+      var name = req.body.name;
+      var company = req.body.company;
+      var volume = req.body.volume;
+      var type_of_volume = req.body.type_of_volume;
+      var price = req.body.price;
+      var symptoms = req.body.symptoms;
+      var side_effects = req.body.side_effects;
+      var contraindications = req.body.contraindications;
+      var overdose = req.body.overdose;
+      var storage_conditions = req.body.storage_conditions;
+      var mode_of_application = req.body.mode_of_application;
+      var properties = req.body.properties;
+      var image = req.file.filename;
+
+      req.checkBody('name', 'Name is required').notEmpty();
+      req.checkBody('company', 'Company is required').notEmpty();
+      req.checkBody('volume', "Volume is required or isn't a number").notEmpty().isInt();
+      req.checkBody('type_of_volume', 'Type of volume is required').notEmpty();
+      req.checkBody('price', 'Price is required').notEmpty();
+      req.checkBody('symptoms', 'Symptoms is required').notEmpty();
+      req.checkBody('side_effects', 'Side effects is required').notEmpty();
+      req.checkBody('contraindications', 'Contraindications is required').notEmpty();
+      req.checkBody('overdose', 'Overdose is required').notEmpty();
+      req.checkBody('storage_conditions', 'Storage conditions is required').notEmpty();
+      req.checkBody('mode_of_application', 'Mode of application is required').notEmpty();
+      req.checkBody('properties', 'Properties is required').notEmpty();
+
+      var errors = req.validationErrors();
+      if(errors){
+        if (null != req.file.filename){
+          var old_path = "./public/pics/drugs/" + req.file.filename;
+          file_functions.deleteFile(old_path);
+        }
+        res.render('newdrug', {errors: errors});
+      }else{
+        //symptoms = symptoms.replace(/\r\n|\r|\n/g,"<br>");
+        //side_effects = side_effects.replace(/\r\n|\r|\n/g,"<br>");
+        //contraindications = contraindications.replace(/\r\n|\r|\n/g,"<br>");
+        //mode_of_application = mode_of_application.replace(/\r\n|\r|\n/g,"<br>");
+        //overdose = overdose.replace(/\r\n|\r|\n/g,"<br>");
+        //storage_conditions = storage_conditions.replace(/\r\n|\r|\n/g,"<br>");
+        //properties = properties.replace(/\r\n|\r|\n/g,"<br>");
+
+        var newDrug = new Drug({
+            name: name,
+            company: company,
+            volume: volume,
+            type_of_volume: type_of_volume,
+            price: price,
+            symptoms: symptoms,
+            side_effects: side_effects,
+            contraindications: contraindications,
+            overdose: overdose,
+            storage_conditions: storage_conditions,
+            mode_of_application: mode_of_application,
+            properties: properties,
+            image: image
+        });
+
+        Drug.addDrug(newDrug, function(err, drug){
+          if(err) throw err;
+          console.log(drug);
+        });
+
+        req.flash('success_msg', 'Success!');
+        res.redirect('newdrug');
+      }
     }
   }else{
     res.redirect("/");

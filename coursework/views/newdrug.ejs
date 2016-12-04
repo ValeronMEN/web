@@ -20,10 +20,7 @@
     </div>
   </div>
   <div class="regContent">
-    <form enctype="multipart/form-data" method="post"> <!-- enctype="multipart/form-data" enctype="application/x-www-form-urlencoded" -->
-      <!--<input type="file" name="image" accept="image/jpeg">
-      <input id="submitButt" type="submit" value="Add new drug">
-    </form>-->
+    <form enctype="multipart/form-data" method="post">
       <div id="newDrugInsideContent1">
         <div class="regField">
           <label>Name:</label>
@@ -104,6 +101,9 @@
 
     <% if(error_msg != '') {%>
     <div class="alert alert-danger"><%= error_msg %></div>
+    <%} %>
+    <% if(success_msg != '') {%>
+    <div class="alert alert-success"><%= success_msg %></div>
     <%} %>
   </div>
 </div>
