@@ -11,6 +11,12 @@
   <div id="pharmacyName">
     <a href="/"><img class="baseImg" alt='pharmacyName' src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
   </div>
+  <div id="basket">
+    <a href="/basket">
+      <div id="basketBackground"></div>
+      <div id="basketName"><label>Basket</label></div>
+    </a>
+  </div>
   <div id="logInField">
     <% if(null == user) {%>
       <div id="logregField">
@@ -29,7 +35,7 @@
 <!-- Special part start -->
 <div class="content">
   <div id="backIndex">
-    <a href="/"><p><-- Go Back</p></a>
+    <a href="/"><p><<< Go Back</p></a>
   </div>
   <div id="products">
     <% for (let i = 0; i < arr.length; i++) {  %>
@@ -37,8 +43,8 @@
         <a href="<%= arr[i].link %>" class="productLink">
           <img class="imgLink" alt="<%= arr[i].name %>" src="<%= arr[i].image %>">
           <br><label id="productName"><%= arr[i].name %></label>
-          <br><label class="productInfo">type: <%= arr[i].volume %> <%= arr[i].type %></label>
-          <br><label>price: <%= arr[i].price %></label>
+          <br><label class="productInfo">type: <%= arr[i].volumemass %> <%= arr[i].unit %>, <%= arr[i].type %></label>
+          <br><label>price: <%= arr[i].price %> UAH</label>
         </a>
       </div>
     <%}%>

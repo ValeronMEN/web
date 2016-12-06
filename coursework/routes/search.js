@@ -1,68 +1,90 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/:query', function(req, res, next){
-  var queryArr = [];
-  var drugsArr = [];
-  queryArr = req.params.query.split(" ");
-  console.log("Query array: "+queryArr);
-  Drug.getDrugs(function(err, drugs){
-    if (err){
-      throw err;
-    }
-    for (let i = 0; i < drugs.length; i++){
-      let myDrug = drugs[i];
-      for (let j=0; j<queryArr.length; j++){
-        if (queryArr[j].localeCompare(myDrug.name)==0){
-          //console.log(myDrug);
-          drugsArr.push({
-            "name": myDrug.name,
-            "image": "/pics/drugs/" + myDrug.image,
-            "link": "/drugs/drug/"+myDrug._id,
-            "type": myDrug.type_of_volume,
-            "price": myDrug.price,
-            "volume": myDrug.volume,
-            "spec": "name"
-          });
-          break;
-        }
-        else if(queryArr[j].localeCompare(myDrug.company)==0){
-          //console.log(myDrug);
-          drugsArr.push({
-            "name": myDrug.name,
-            "image": "/pics/drugs/" + myDrug.image,
-            "link": "/drugs/drug/"+myDrug._id,
-            "type": myDrug.type_of_volume,
-            "price": myDrug.price,
-            "volume": myDrug.volume,
-            "spec": "company"
-          });
-          break;
-        }
-        else{
-          var str = myDrug.symptoms+" "+myDrug.properties;
-          var target = queryArr[j]; // цель поиска
+router.get('/', function(req, res, next){
+  if (null != req.query.q){
+    var path = "/search/"+encodeURIComponent(req.query.q);
+    res.redirect(path);
+  }
+  else{
+    res.render('search', {
+      arrN: [],
+      arrC: [],
+      arrS: [],
+      query: null
+    });
+  }
+});
 
-          var pos = 0;
+router.get('/:query', function(req, res, next){
+  var query = req.params.query;
+  if (query.length > 2){
+    var drugsNamesArr = [];
+    var drugsCompaniesArr = [];
+    var drugsSymppropArr = [];
+    var tenTimes = 0;
+    Drug.getDrugs(function(err, drugs){
+      if (err){
+        throw err;
+      }
+      for (let i = 0; i < drugs.length; i++){
+        let myDrug = drugs[i];
+        if (query.localeCompare(myDrug.name) == 0 && drugsNamesArr.length < 5){
+          drugsNamesArr.push({
+            "name": myDrug.name,
+            "image": "/pics/drugs/" + myDrug.image,
+            "link": "/drugs/drug/"+myDrug._id,
+            "type": myDrug.type,
+            "unit": myDrug.unit,
+            "price": myDrug.price,
+            "volumemass": myDrug.volumemass
+          });
+          break;
+        }else if(query.localeCompare(myDrug.company) == 0 && drugsCompaniesArr.length < 5){
+          drugsCompaniesArr.push({
+            "name": myDrug.name,
+            "image": "/pics/drugs/" + myDrug.image,
+            "link": "/drugs/drug/"+myDrug._id,
+            "type": myDrug.type,
+            "unit": myDrug.unit,
+            "price": myDrug.price,
+            "volumemass": myDrug.volumemass
+          });
+          break;
+        }else if(tenTimes < 10){
+          var str = myDrug.symptoms+" "+myDrug.properties;
+          var target = query;
           var pos = -1;
           while ((pos = str.indexOf(target, pos + 1)) != -1) {
-            //console.log(myDrug);
-            drugsArr.push({
+            drugsSymppropArr.push({
               "name": myDrug.name,
               "image": "/pics/drugs/" + myDrug.image,
               "link": "/drugs/drug/"+myDrug._id,
-              "type": myDrug.type_of_volume,
+              "type": myDrug.type,
+              "unit": myDrug.unit,
               "price": myDrug.price,
-              "volume": myDrug.volume,
-              "spec": "symptomprop"
+              "volumemass": myDrug.volumemass
             });
+            tenTimes++;
             break;
           }
         }
-      }
-    };
-    res.render('search', { arr: drugsArr });
-  });
+      };
+      res.render('search', {
+        arrN: drugsNamesArr,
+        arrC: drugsCompaniesArr,
+        arrS: drugsSymppropArr,
+        query: query
+      });
+    });
+  }else{
+    res.render('search', {
+      arrN: [],
+      arrC: [],
+      arrS: [],
+      query: query
+    });
+  }
 });
 
 router.get('/about', function(req, res, next) {

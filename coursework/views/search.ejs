@@ -12,6 +12,12 @@
   <div id="pharmacyName">
     <a href="/"><img class="baseImg" alt="pharmacyName" src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
   </div>
+  <div id="basket">
+    <a href="/basket">
+      <div id="basketBackground"></div>
+      <div id="basketName"><label>Basket</label></div>
+    </a>
+  </div>
   <div id="logInField">
     <% if(null == user) {%>
       <div id="logregField">
@@ -31,18 +37,58 @@
 </div>
 <div class="content">
   <div id="backIndex">
-    <a href="/"><p><-- Go Back</p></a>
+    <a href="/"><p><<< Go Back</p></a>
   </div>
   <div id="products">
-    <% for (let i = 0; i < arr.length; i++) {  %>
-      <div class="product">
-        <a href="<%= arr[i].link %>" class="productLink">
-          <img class="imgLink" alt="<%= arr[i].name %>" src="<%= arr[i].image %>">
-          <br><label id="productName"><%= arr[i].name %></label>
-          <br><label class="productInfo">type: <%= arr[i].volume %> <%= arr[i].type %></label>
-          <br><label>price: <%= arr[i].price %></label>
-        </a>
-      </div>
+    <form class="searchSearch" action="/search">
+      <input type="search" name="q" placeholder="i want to search..." class="inputSearch">
+      <input type="submit" value="" class="submitSearch">
+    </form>
+    <% if (null != query){%>
+      <% if (arrN.length == 0 && arrS.length == 0 && arrC.length == 0){%>
+        <h1>There's no results for query: "<%= query %>"</h1>
+      <%}else{%>
+        <h1>Results for query: "<%= query %>"</h1>
+        <%if (arrN.length != 0){ %>
+          <h2>There're drugs:</h2>
+        <%}%>
+        <% for (let i = 0; i < arrN.length; i++) {  %>
+          <div class="product">
+            <a href="<%= arrN[i].link %>" class="productLink">
+              <img class="imgLink" alt="<%= arrN[i].name %>" src="<%= arrN[i].image %>">
+              <br><label id="productName"><%= arrN[i].name %></label>
+              <br><label class="productInfo">type: <%= arrN[i].volumemass %> <%= arrN[i].unit %>, <%= arrN[i].type %></label>
+              <br><label>price: <%= arrN[i].price %> UAH</label>
+            </a>
+          </div>
+        <%}%>
+        <%if (arrC.length != 0){ %>
+          <h2>Companies with same name:</h2>
+        <%}%>
+        <% for (let i = 0; i < arrC.length; i++) {  %>
+          <div class="product">
+            <a href="<%= arrC[i].link %>" class="productLink">
+              <img class="imgLink" alt="<%= arrC[i].name %>" src="<%= arrC[i].image %>">
+              <br><label id="productName"><%= arrC[i].name %></label>
+              <br><label class="productInfo">type: <%= arrC[i].volumemass %> <%= arrC[i].unit %>, <%= arrC[i].type %></label>
+              <br><label>price: <%= arrC[i].price %> UAH</label>
+            </a>
+          </div>
+        <%}%>
+        <%if (arrS.length != 0){ %>
+          <h2>Symptoms or properties:</h2>
+        <%}%>
+        <% for (let i = 0; i < arrS.length; i++) {  %>
+          <div class="product">
+            <a href="<%= arrS[i].link %>" class="productLink">
+              <img class="imgLink" alt="<%= arrS[i].name %>" src="<%= arrS[i].image %>">
+              <br><label id="productName"><%= arrS[i].name %></label>
+              <br><label class="productInfo">type: <%= arrS[i].volumemass %> <%= arrS[i].unit %>, <%= arrS[i].type %></label>
+              <br><label>price: <%= arrS[i].price %> UAH</label>
+            </a>
+          </div>
+        <%}%>
+      <%}%>
     <%}%>
   </div>
 </div>

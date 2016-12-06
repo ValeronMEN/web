@@ -8,8 +8,9 @@ var userSchema = new mongoose.Schema( {
   email: { type: String },
   password: { type: String },
   sex: { type: String },
-  admin: { type: Boolean },
-  avatar: { type: String }
+  admin: { type: Boolean, default: false },
+  avatar: { type: String, default: "default.png" },
+  orders: [ Object ]
 }, {
     versionKey: false
 });

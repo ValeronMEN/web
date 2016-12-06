@@ -11,6 +11,12 @@
   <div id="pharmacyName">
     <a href="/"><img class="baseImg" alt='pharmacyName' src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
   </div>
+  <div id="basket">
+    <a href="/basket">
+      <div id="basketBackground"></div>
+      <div id="basketName"><label>Basket</label></div>
+    </a>
+  </div>
   <div id="logInField">
     <% if(null == user) {%>
       <div id="logregField">
@@ -35,12 +41,19 @@
     <div id="rightsideDrug">
       <label id="drugName"><%= name %></label><br>
       <label id="drugBasicInfo">Company: <%= company %><br>
-      Volume: <%= volume %><br>
-      Type of volume: <%= type_of_volume %><br>
-      Price: <%= price %></label>
+      Volume or mass: <%= volumemass %><br>
+      Unit: <%= unit %><br>
+      Type: <%= type %><br>
+      Price: <%= price %> UAH</label>
       <br><br>
     </div>
-    <div id="buttonsideDrug"><button class="button" style="vertical-align:middle"><span>Add to Basket </span></button></div>
+    <div id="buttonsideDrug">
+      <form action="/basket" method="post">
+        <button class="button" style="vertical-align:middle">
+          <span>Add to Basket </span>
+        </button>
+      </form>
+    </div>
     <div id="bottomsideDrug">
       <h4>Symptoms:</h4><label class="drugNotBasicInfo"><%= symptoms %></label>
       <h4>Side effects:</h4><label class="drugNotBasicInfo"> <%= side_effects %></label>
@@ -51,6 +64,7 @@
       <h4>Properties:</h4><label class="drugNotBasicInfo"><%= properties %></label>
     </div>
     <% if(admin == true) {%>
+    <br>
     <form method="post">
        <input type="submit" value="Remove drug"></p>
     </form>

@@ -2,8 +2,7 @@ body {
   margin-top: 0px;
   margin-left: 0px;
   margin-right: 0px;
-  //background: #3E3;
-  background-image: url(../pics/pills.jpg);
+  background-image: url(/pics/pills.jpg);
   background-color: #c7b39b; /* Цвет фона */
 }
 a {
@@ -21,10 +20,45 @@ div.home {
   overflow: hidden;
 }
 div#pharmacyName {
-  width: 80%;
-  background: #3A3;
+  width: 70%;
+  background: #00590E;
   float: left;
   height: 150px;
+}
+div#basketBackground {
+  margin-left: 10%;
+  width: 75%;
+  height: 75%;
+  background-image: url(/pics/basket.png);
+  background-size: 100%;
+}
+div#basket {
+  width: 10%;
+  text-align: center;
+  background: #228B22;
+  float: left;
+  height: 150px;
+}
+div#basket a {
+  font-size: 20px;
+}
+div#basket a:hover{
+  color: #98FB98;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+div#basket a:hover div#basketBackground{
+  background-image: url(/pics/basketHover.png);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+div#basketName {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+div#basket a:hover div#basketName label {
+  text-shadow: 1px 1px 2px black;
+  cursor: pointer;
 }
 div#logInField {
   width: 20%;
@@ -98,7 +132,7 @@ div#advertisement {
   width: 100%;
   border: solid 1px black;
   float: left;
-  height: 100px;
+  height: 204px;
   clear: both;
   overflow: hidden;
 }
@@ -126,13 +160,30 @@ div#drugs {
    background-color: #00FF00;
 }
 div#drugsId {
-   margin-left: 10px;
-   margin-top: 5px;
    text-align: center;
 }
 div#drugsId a {
   font-size: 20px;
 }
+a#drugsLink div {
+  text-align: center;
+  padding: 9px;
+  width: 96%;
+  background-color: #32CD32;
+  float: left;
+}
+a#drugsLink {
+  text-decoration: none;
+  color: #3A3;
+}
+a#drugsLink :hover {
+  color: black;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  box-shadow: black 0 0 2px 0px;
+  background: linear-gradient(to top, #00FA9A 0%, #98FB98 100%);
+}
+
 label#productName{
   cursor: pointer;
   font-size: 20px;

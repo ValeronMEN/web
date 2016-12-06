@@ -57,8 +57,9 @@ router.post('/newdrug', ensureAuthenticated, image.single('image'), function(req
     }else{
       var name = req.body.name;
       var company = req.body.company;
-      var volume = req.body.volume;
-      var type_of_volume = req.body.type_of_volume;
+      var volumemass = req.body.volumemass;
+      var unit = req.body.unit;
+      var type = req.body.type;
       var price = req.body.price;
       var symptoms = req.body.symptoms;
       var side_effects = req.body.side_effects;
@@ -71,9 +72,12 @@ router.post('/newdrug', ensureAuthenticated, image.single('image'), function(req
 
       req.checkBody('name', 'Name is required').notEmpty();
       req.checkBody('company', 'Company is required').notEmpty();
-      req.checkBody('volume', "Volume is required or isn't a number").notEmpty().isInt();
-      req.checkBody('type_of_volume', 'Type of volume is required').notEmpty();
+      req.checkBody('volumemass', "Volume or mass is required").notEmpty();
+      req.checkBody('volumemass', "Volume or mass isn't a number").isInt();
+      req.checkBody('unit', "Unit is required").notEmpty();
+      req.checkBody('type', 'Type is required').notEmpty();
       req.checkBody('price', 'Price is required').notEmpty();
+      req.checkBody('price', "Price isn't a number").isInt();
       req.checkBody('symptoms', 'Symptoms is required').notEmpty();
       req.checkBody('side_effects', 'Side effects is required').notEmpty();
       req.checkBody('contraindications', 'Contraindications is required').notEmpty();
@@ -101,8 +105,9 @@ router.post('/newdrug', ensureAuthenticated, image.single('image'), function(req
         var newDrug = new Drug({
             name: name,
             company: company,
-            volume: volume,
-            type_of_volume: type_of_volume,
+            volumemass: volumemass,
+            unit: unit,
+            type: type,
             price: price,
             symptoms: symptoms,
             side_effects: side_effects,

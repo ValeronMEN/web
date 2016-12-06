@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
  <head>
-  <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/admin.css">
   <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
   <title>Administration</title>
  </head>
@@ -11,10 +11,16 @@
      <div id="pharmacyName">
        <a href="/"><img class="baseImg" alt='pharmacyName' src="../pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
      </div>
+     <div id="basket">
+       <a href="/basket">
+         <div id="basketBackground"></div>
+         <div id="basketName"><label>Basket</label></div>
+       </a>
+     </div>
      <div id="logInField">
        <div id="profileField">
          <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
-         <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="../pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+         <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
          <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
        </div>
      </div>
@@ -25,7 +31,7 @@
        <p>There are users:</p>
        <% for (let i = 0; i < arr.length; i++) {  %>
          <div class="users">
-           <div><img class="editUserImg" alt='deleteUserImg' src="../pics/avatars/<%= arr[i].avatar %>"></div>
+           <div><img class="editUserImg" alt='deleteUserImg' src="/pics/avatars/<%= arr[i].avatar %>"></div>
            <div id="editUserInfo"><label><%= arr[i].firstname %> <%= arr[i].lastname %><br><br>Username: <%= arr[i].username %><br>E-mail: <%= arr[i].email %><br>Sex: <%= arr[i].sex %></label></div>
            <div id="isAdmin">
            <%if(arr[i].admin == true){%>

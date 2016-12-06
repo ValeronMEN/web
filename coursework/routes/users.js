@@ -46,9 +46,6 @@ router.post('/register', function(req, res){
     var confirmPassword = req.body.confirmPassword;
     var sex = req.body.sex;
 
-    var admin = false;
-    var avatar = "default.png";
-
     req.checkBody('firstname', 'First name is required').notEmpty();
     req.checkBody('lastname', 'Last name is required').notEmpty();
     req.checkBody('email', 'Email is required').isEmail();
@@ -69,9 +66,7 @@ router.post('/register', function(req, res){
             lastname: lastname,
             email: email,
             password: password,
-            sex: sex,
-            admin: admin,
-            avatar: avatar
+            sex: sex
           });
 
           User.createUser(newUser, function(err, user){

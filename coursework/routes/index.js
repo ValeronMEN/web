@@ -23,9 +23,10 @@ router.get('/', function(req, res, next) {
               "name": myDrug.name,
               "image": "/pics/drugs/" + myDrug.image,
               "link": "/drugs/drug/"+myDrug._id,
-              "type": myDrug.type_of_volume,
+              "type": myDrug.type,
+              "unit": myDrug.unit,
               "price": myDrug.price,
-              "volume": myDrug.volume
+              "volumemass": myDrug.volumemass
             });
           }
         };

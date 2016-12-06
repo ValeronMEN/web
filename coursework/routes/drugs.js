@@ -35,8 +35,9 @@ router.get('/drug/:_id', function(req, res, next) {
       }
       res.render('drug', { name: drug.name,
       company: drug.company,
-      volume: drug.volume,
-      type_of_volume: drug.type_of_volume,
+      volumemass: drug.volumemass,
+      unit: drug.unit,
+      type: drug.type,
       price: drug.price,
       symptoms: drug.symptoms,
       side_effects: drug.side_effects,
@@ -78,9 +79,10 @@ router.get('/:page', function(req, res, next) {
               "name": myDrug.name,
               "image": "/pics/drugs/" + myDrug.image,
               "link": "/drugs/drug/"+myDrug._id,
-              "type": myDrug.type_of_volume,
+              "type": myDrug.type,
+              "unit": myDrug.unit,
               "price": myDrug.price,
-              "volume": myDrug.volume
+              "volumemass": myDrug.volumemass
             });
           }
         };

@@ -1,20 +1,26 @@
 <!doctype html>
 <html>
 <head>
-  <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../css/newdrug.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/newdrug.css">
   <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
   <title>vApteka</title>
 </head>
 <body>
   <div class="home">
     <div id="pharmacyName">
-      <a href="/"><img class="baseImg" alt='pharmacyName' src="../pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+      <a href="/"><img class="baseImg" alt='pharmacyName' src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+    </div>
+    <div id="basket">
+      <a href="/basket">
+        <div id="basketBackground"></div>
+        <div id="basketName"><label>Basket</label></div>
+      </a>
     </div>
     <div id="logInField">
       <div id="profileField">
         <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
-        <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="../pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+        <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
         <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
       </div>
     </div>
@@ -31,12 +37,16 @@
           <input type="text" name="company">
         </div>
         <div class="regField">
-          <label>Volume:</label>
-          <input type="text" name="volume">
+          <label>Volume or mass:</label>
+          <input type="text" name="volumemass">
         </div>
         <div class="regField">
-          <label>Type of volume:</label>
-          <input type="text" name="type_of_volume">
+          <label>Unit:</label>
+          <input type="text" name="unit">
+        </div>
+        <div class="regField">
+          <label>Type:</label>
+          <input type="text" name="type">
         </div>
         <div class="regField">
           <label>Price:</label>
@@ -48,11 +58,13 @@
         <br>
         <label>Company. For example "Bitner"</label>
         <br>
-        <label>Volume. For example "45"</label>
+        <label>Volume or mass. For example "45"</label>
         <br>
-        <label>Type of volume. For example "pills" or "ml, syrop"</label>
+        <label>Unit. For example "ml or mg"</label>
         <br>
-        <label>Price. For example "300 UAH" or "2 USD"</label>
+        <label>Type. For example "pills" or "syrop"</label>
+        <br>
+        <label>Price in UAH. For example "300"</label>
       </div>
       <div id="newDrugInsideContent2">
         <div class="regField">
