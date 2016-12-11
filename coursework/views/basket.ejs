@@ -1,55 +1,74 @@
 <!DOCTYPE HTML>
 <html>
- <head>
-  <link rel="stylesheet" href="/css/index.css">
-  <link rel="stylesheet" href="/css/basket.css">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
-  <title>vApteka</title>
- </head>
- <body>
+<head>
+ <link rel="stylesheet" href="/css/index.css">
+ <link rel="stylesheet" href="/css/basket.css">
+ <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+ <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+ <script type="text/javascript" src="/scripts/cookies.js"></script>
+ <title>vApteka</title>
+</head>
+<body>
 <div class="home">
-  <div id="pharmacyName">
-    <a href="/"><img class="baseImg" alt="pharmacyName" src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
-  </div>
-  <div id="basket">
-    <a href="/basket">
-      <div id="basketBackground"></div>
-      <div id="basketName"><label>Basket</label></div>
-    </a>
-  </div>
-  <div id="logInField">
-    <% if(null == user) {%>
-      <div id="logregField">
-        <a href="/users/login" id="loginLink"><div>Log in</div></a>
-        <a href="/users/register" id="loginLink"><div>Register</div></a>
-      </div>
-    <%}else {%>
-      <div id="profileField">
-        <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
-        <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
-        <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
-      </div>
-    <%} %>
-  </div>
-  </form>
-</div>
+ <div id="pharmacyName">
+   <a href="/"><img class="baseImg" alt="pharmacyName" src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+ </div>
+ <div id="basket">
+   <a href="/basket">
+     <div id="basketBackground"></div>
+     <div id="basketName"><label>Basket</label></div>
+   </a>
+ </div>
+ <div id="logInField">
+   <% if(null == user) {%>
+     <div id="logregField">
+       <a href="/users/login" id="loginLink"><div>Log in</div></a>
+       <a href="/users/register" id="loginLink"><div>Register</div></a>
+     </div>
+   <%}else {%>
+     <div id="profileField">
+       <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
+       <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+       <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
+     </div>
+   <%} %>
+ </div>
 </div>
 <div class="content">
-  <div id="basketProducts">
-    <%} if(null == user.drugs) {%>
-      <h4>There's no items in basket</h4>
-    <%}else{%>
-      <% for (let i = 0; i < user.drugs.length; i++) {  %>
-        <div>
-          <h4><%= user.drugs[i].name %></h4>
-        </div>
-      <%}%>
-    <%}%>
-  </div>
+ <div id="basketProducts">
+   <% if (null != arr){%>
+     <% for (let i = 0; i < arr.length; i++){%>
+       <div class="drugToOrder">
+         <div><img alt='deleteUserImg' src="<%= arr[i].image %>"></div>
+         <div id="drugToOrderInfo">
+           <label>
+             <b><%= arr[i].name %></b><br><br>
+             Volume or mass: <%= arr[i].volumemass %> <%= arr[i].unit %><br>
+             Type: <%= arr[i].type %><br>
+             Price: <%= arr[i].price %> <%= bills %><br>
+             Amount: <%= arr[i].amount %>
+           </label>
+         </div>
+         <div id = "basketButtonField">
+           <button class="basketButton" type="button" onclick="deleteCookieDrug('<%= arr[i].id %>'); document.location.reload();">Remove 1 item</button>
+           <button class="basketButton" type="button" onclick="deleteCookieDrugType('<%= arr[i].id %>'); document.location.reload();">Remove all of this</button>
+         </div>
+       </div>
+       <p> <!-- space for css --> </p>
+     <%}%>
+     <div id="removeAllButt"><button class="basketButton" type="button" onclick="deleteCookieDrugAll(); document.location.reload();">Remove all</button></div>
+     <p>Sum price: <%= price %> <%= bills %></p>
+     <a href="/basket/confirm" id="toConfirm"><div>To order</div></a>
+     <br><br><br>
+     <p> <!-- space for css --> </p>
+   <%}else{%>
+     <h3>There's no items in basket</h3>
+     <a href="/drugs">To Drugs</a>
+   <%}%>
+ </div>
 </div>
 <div id="bottomOfSite">
-  <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+ <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
 </div>
 </body>
 </html>

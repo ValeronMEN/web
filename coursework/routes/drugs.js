@@ -33,7 +33,8 @@ router.get('/drug/:_id', function(req, res, next) {
       if (null != req.user){
         admin = req.user.admin;
       }
-      res.render('drug', { name: drug.name,
+      res.render('drug', {
+      name: drug.name,
       company: drug.company,
       volumemass: drug.volumemass,
       unit: drug.unit,

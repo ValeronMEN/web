@@ -56,6 +56,10 @@ div#buttonsideDrug {
   cursor: pointer;
 }
 
+.button:hover {
+  background-color: #DC143C;
+}
+
 button.button span {
   cursor: pointer;
   display: inline-block;
