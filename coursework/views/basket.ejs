@@ -45,11 +45,13 @@
    <% if (null != arr){%>
      <% for (let i = 0; i < arr.length; i++){%>
        <div class="drugToOrder">
-         <div><img alt='deleteUserImg' src="<%= arr[i].image %>"></div>
+         <div>
+           <img alt='deleteUserImg' src="<%= arr[i].image %>">
+         </div>
          <div id="drugToOrderInfo">
            <label>
              <b><%= arr[i].name %></b><br><br>
-             Volume or mass: <%= arr[i].volumemass %> <%= arr[i].unit %><br>
+             Volume/mass: <%= arr[i].volumemass %> <%= arr[i].unit %><br>
              Type: <%= arr[i].type %><br>
              Price: <%= arr[i].price %> <%= bills %><br>
              Amount: <%= arr[i].amount %>
@@ -62,19 +64,26 @@
        </div>
        <p> <!-- space for css --> </p>
      <%}%>
-     <div id="removeAllButt"><button class="basketButton" type="button" onclick="deleteCookieDrugAll(); document.location.reload();">Remove all</button></div>
+     <div id="removeAllButt">
+       <button class="basketButton" type="button" onclick="deleteCookieDrugAll(); document.location.reload();">Remove all</button>
+     </div>
      <p>Sum price: <%= price %> <%= bills %></p>
-     <a href="/basket/confirm" id="toConfirm"><div>To order</div></a>
+     <a href="/basket/confirm" id="toConfirm">
+       <div>To order</div>
+     </a>
      <br><br><br>
      <p> <!-- space for css --> </p>
    <%}else{%>
      <h3>There's no items in basket</h3>
-     <a href="/drugs">To Drugs</a>
+     <br>
+     <a id="basketGoToDrugs" href="/drugs">
+       <div>Go To Drugs</div>
+     </a>
    <%}%>
  </div>
 </div>
 <div id="bottomOfSite">
- <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+  <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
 </div>
 </body>
 </html>

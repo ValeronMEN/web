@@ -2,7 +2,7 @@
 <html>
 <head>
   <link rel="stylesheet" href="/css/index.css">
-  <link rel="stylesheet" href="/css/signup.css">
+  <link rel="stylesheet" href="/css/confirm.css">
   <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
   <script type="text/javascript" src="/scripts/cookies.js"></script>
   <script type="text/javascript" src="/scripts/onload.js"></script>
@@ -70,17 +70,18 @@
     </form>
     <p>
     </p>
-
     <% if(typeof errors != 'undefined'){ %>
     <% errors.forEach(function(elements){ %>
-    <div class="alert alert-danger"><%= elements.msg %></div>
+    <div class="alert alert-danger">
+      <%= elements.msg %>
+    </div>
     <%}); %>
     <%} %>
-
     <% if(error_msg != '') {%>
-    <div class="alert alert-danger"><%= error_msg %></div>
+    <div class="alert alert-danger">
+      <%= error_msg %>
+    </div>
     <%} %>
-
   </div>
   <div id="bottomOfSite">
     <p id="rights">(c) 2016 Vapteka, all rights reserved</p>

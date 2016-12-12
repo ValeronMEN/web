@@ -13,3 +13,6 @@ a {
   font-size: 17px;
   color: white;
 }
+a:hover {
+  color: #00FFFF;
+}

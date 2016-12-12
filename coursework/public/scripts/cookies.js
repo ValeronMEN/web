@@ -1,15 +1,13 @@
 function setCookieDrug(value){
-  if (null == getCookie("drughere")){ // drughere
-    document.cookie = "drug=" + encodeURI(value)+"$1," + "; path=/basket";
-    document.cookie = "drughere=" + encodeURI(value)+"$1," + "; path=/drugs/drug";
+  if (null == getCookie("drug")){ // drughere
+    document.cookie = "drug=" + encodeURI(value)+"$1," + "; path=/";
     setSize();
-  }else if(null != getCookie("drughere")){
-    var cookieStr = getCookie("drughere");
+  }else if(null != getCookie("drug")){
+    var cookieStr = getCookie("drug");
     var startInd = cookieStr.indexOf(value);
     if (startInd == -1){
       cookieStr = value + "$1," + cookieStr;
-      document.cookie = "drug=" + encodeURI(cookieStr) + ";  path=/basket";
-      document.cookie = "drughere=" + encodeURI(cookieStr) + ";  path=/drugs/drug";
+      document.cookie = "drug=" + encodeURI(cookieStr) + ";  path=/";
       setSize();
     }else{
       var subStr = cookieStr.substring(startInd);
@@ -20,8 +18,7 @@ function setCookieDrug(value){
       amount++;
       var newStr = value + "$" + amount + ",";
       cookieStr = cookieStr.replace(subStr+",", newStr);
-      document.cookie = "drug=" + encodeURI(cookieStr) + "; path=/basket";
-      document.cookie = "drughere=" + encodeURI(cookieStr) + "; path=/drugs/drug";
+      document.cookie = "drug=" + encodeURI(cookieStr) + "; path=/";
       setSize();
     }
   }
@@ -41,15 +38,13 @@ function deleteCookieDrug(value) {
     if (null == newStr){
       deleteCookieDrugAll();
     }else{
-      document.cookie = "drug=" + encodeURI(newStr) + "; path=/basket";
-      document.cookie = "drughere=" + encodeURI(newStr) + "; path=/drugs/drug";
+      document.cookie = "drug=" + encodeURI(newStr) + "; path=/";
       deleteSize(1);
     }
   }else{
     var newStr = value + "$" + amount + ",";
     newStr = cookieStr.replace(subStr+",", newStr);
-    document.cookie = "drug=" + encodeURI(newStr) + "; path=/basket";
-    document.cookie = "drughere=" + encodeURI(newStr) + "; path=/drugs/drug";
+    document.cookie = "drug=" + encodeURI(newStr) + "; path=/";
     deleteSize(1);
   }
 }
@@ -60,22 +55,19 @@ function deleteCookieDrugType(value) {
   var subStr = cookieStr.substring(startInd);
   var endInd = subStr.indexOf(",");
   var newStr = cookieStr.substring(0, startInd) + subStr.substring(endInd+1);
-
   subStr = subStr.substring(0, endInd);
   startInd = subStr.indexOf("$");
   var amount = parseInt(subStr.substring(startInd+1, endInd));
   if (null == newStr){
     deleteCookieDrugAll();
   }else{
-    document.cookie = "drughere=" + encodeURI(newStr) + "; path=/drugs/drug";
-    document.cookie = "drug=" + encodeURI(newStr) + "; path=/basket";
+    document.cookie = "drug=" + encodeURI(newStr) + "; path=/";
     deleteSize(amount);
   }
 }
 
 function deleteCookieDrugAll(){
-  document.cookie = "drug=" + "" + "; path=/basket; expires=1";
-  document.cookie = "drughere=" + "" + "; path=/drugs/drug; expires=1";
+  document.cookie = "drug=" + "" + "; path=/; expires=-1";
   deleteSize("All");
 }
 
@@ -114,8 +106,7 @@ function deleteSize(userSize){
   var cookieSize = getCookie('size');
   if (null == cookieSize){
     document.cookie = "size=0; path=/; expires=-1";
-  }
-  else{
+  }else{
     var size = parseInt(cookieSize);
     size -= userSize;
     if (size < 1 || isNaN(userSize)){
@@ -131,8 +122,7 @@ function getSize(){
   var size = parseInt(cookieSize);
   if (isNaN(size) || size == null){
     return 0;
-  }
-  else{
+  }else{
     return size;
   }
 }

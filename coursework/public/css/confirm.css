@@ -1,0 +1,88 @@
+div.confirmContent {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  background: #FFF;
+  min-height: 550px;
+  border: solid 1px black;
+}
+div#confirmContentSub{
+  margin-left: 2%;
+  margin-right: 2%;
+}
+div#regConfirmInsideContent {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 30%;
+  text-align: right;
+  float: left;
+  border: solid 1px black;
+  height: 245px;
+  background-color: #F5FFFA;
+}
+div#logConfirmInsideContent {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 30%;
+  text-align: right;
+  float: left;
+  border: solid 1px black;
+  display: none;
+  height: 245px;
+  background-color: #F5FFFA;
+}
+
+.confirmField {
+  padding: 7px;
+  padding-right: 15px;
+}
+
+div#bottomConfirmInsideContent{
+  clear: both;
+}
+
+div.successContent {
+   font-size: 25px;
+   margin-left: 5px;
+   padding: 7px;
+ }
+div.successContent a {
+  font-size: 20px;
+}
+
+div.alert-danger {
+  margin-left: 20px;
+  color: red;
+  margin-top: 5px;
+}
+div.alert-success {
+  margin-left: 20px;
+  color: #3A3;
+  margin-top: 5px;
+}
+
+div.confirmOrder {
+  border: solid 1px black;
+  text-align: center;
+  background-color: #F5FFFA;
+}
+div#confirmOrderInfo {
+  width: 94%;
+  padding: 20px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  display: inline-block;
+  overflow: hidden;
+  border: solid 1px green;
+  background-color: white;
+}
+label#firstConfirmLabel {
+  float: left;
+}
+label#secondConfirmLabel {
+  float: right;
+}
+
+div#addresssphone {
+  width: 20%;
+}
