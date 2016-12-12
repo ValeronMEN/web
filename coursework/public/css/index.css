@@ -298,3 +298,21 @@ p#rights {
 .search .submit:hover {
   opacity: 0.8;
 }
+
+div#circle {
+  position: relative;
+  top: -55px;
+  left: 70px;
+  -moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  text-align: center;
+  visibility: hidden;
+  border: solid 1px black;
+}
+div#circle div {
+  padding-top: 3px;
+}
