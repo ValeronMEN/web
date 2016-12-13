@@ -58,3 +58,8 @@ module.exports.deleteDrug = function(id, callback){
   var query = {_id: id};
   Drug.remove(query, callback);
 };
+
+module.exports.getDrugsByName = function(name,callback,limit){
+  var query = {'name' : new RegExp('^'+name,"i")}
+  Drug.find(query, callback).limit(limit);
+}

@@ -16,6 +16,16 @@ router.get('/', function(req, res, next){
   }
 });
 
+router.get('/bytag/name',function(req,res){
+  Drug.getDrugsByName(req.query.name, function(err, drugs){
+    if(err)
+    {
+      res.send("error");
+    }
+    res.send({drugs:drugs});
+  });
+});
+
 router.get('/:query', function(req, res, next){
   var query = req.params.query;
   if (query.length > 2){

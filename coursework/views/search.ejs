@@ -5,8 +5,10 @@
   <link rel="stylesheet" href="/css/search.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <script type="text/javascript" src="/jquery/jquery.min.js"></script>
   <script type="text/javascript" src="/scripts/cookies.js"></script>
   <script type="text/javascript" src="/scripts/onload.js"></script>
+  <script type="text/javascript" src="/scripts/ajax_search.js"></script>
   <title>vApteka</title>
  </head>
  <body>
@@ -47,10 +49,13 @@
     <a href="/"><p><<< Go Back</p></a>
   </div>
   <div id="products">
-    <form class="searchSearch" action="/search">
-      <input type="search" name="q" placeholder="i want to search..." class="inputSearch">
-      <input type="submit" value="" class="submitSearch">
-    </form>
+    <div class="search_area">
+      <form class="searchSearch" action="/search" method="get">
+        <input type="search" name="q" placeholder="i want to search..." class="inputSearch" id="search_box" autocomplete="off">
+        <input type="submit" value="" class="submitSearch" id="searchSubButt">
+      </form>
+      <div id="search_advice_wrapper"></div>
+    </div>
     <% if (null != query){%>
       <% if (arrN.length == 0 && arrS.length == 0 && arrC.length == 0){%>
         <h1>There's no results for query: "<%= query %>"</h1>
