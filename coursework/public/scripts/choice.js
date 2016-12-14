@@ -4,8 +4,10 @@ $(document).ready(function() {
         $("div.confirmChoice").hide();
         if (choice == 'signin'){
           $("#logConfirmInsideContent").show();
+          $("#confirmForm").attr("action", "/basket/login");
         }else if(choice == 'signup'){
           $("#regConfirmInsideContent").show();
+          $("#confirmForm").attr("action", "/basket/register");
         }
     });
 });

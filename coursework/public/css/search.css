@@ -75,11 +75,11 @@ div#backIndex p {
 }
 #search_advice_wrapper .advice_variant:hover{
   color: white;
-  background-color: #20B2AA;
+  background-color: #8A2BE2;
 }
 #search_advice_wrapper .active{
   cursor: pointer;
   padding: 8px 37px 9px 15px;
   color: white;
-  background-color: #20B2AA;
+  background-color: #8A2BE2;
 }

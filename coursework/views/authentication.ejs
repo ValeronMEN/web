@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/confirm.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <script type="text/javascript" src="/jquery/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="/scripts/cookies.js"></script>
+  <script type="text/javascript" src="/scripts/onload.js"></script>
+  <script type="text/javascript" src="/scripts/choice.js"></script>
+  <title>vApteka</title>
+</head>
+<body>
+  <div class="home">
+    <div id="pharmacyName">
+      <a href="/"><img class="baseImg" alt='pharmacyName' src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+    </div>
+    <div id="basket">
+      <a href="/basket">
+        <div id="basketBackground"></div>
+        <div id="basketName">
+          <label>Basket</label>
+          <div id="circle">
+            <div id="basketSize"></div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div id="logInField">
+      <% if(null == user) {%>
+        <div id="logregField">
+          <a href="/users/login" id="loginLink"><div>Log in</div></a>
+          <a href="/users/register" id="loginLink"><div>Register</div></a>
+        </div>
+      <%}else {%>
+        <div id="profileField">
+          <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
+          <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+          <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
+        </div>
+      <%}%>
+    </div>
+  </div>
+  <div class="confirmContent">
+    <div id="confirmContentSub">
+      <form method="post" accept-charset="UTF-8" action="/basket/register" id="confirmForm">
+          <div class="regConfirmField">
+            <h3>For the first time?</h3>
+            <input type="radio" name="inorup" value="signup" checked>Sign Up
+            <input type="radio" name="inorup" value="signin">Sign In
+          </div>
+          <br>
+          <div id="regConfirmInsideContent" class="confirmChoice">
+            <div class="confirmField">
+              <label>First name:</label>
+              <input type="text" name="firstname">
+            </div>
+            <div class="confirmField">
+              <label>Last name:</label>
+              <input type="text" name="lastname">
+            </div>
+            <div class="confirmField">
+              <label>E-mail:</label>
+              <input type="text" name="email">
+            </div>
+            <div class="confirmField">
+              <label>Username:</label>
+              <input type="text" name="usernameReg">
+            </div>
+            <div class="confirmField">
+              <label>Password:</label>
+              <input type="password" name="passwordReg">
+            </div>
+            <div class="confirmField">
+              <label>Confirm password:</label>
+              <input type="password" name="confirmPassword">
+            </div>
+            <div class="confirmField">
+              <label id="sexLabel">Choose your sex:</label>
+              <input type="radio" name="sex" value="male" checked>Male
+              <input type="radio" name="sex" value="female">Female
+            </div>
+          </div>
+          <div id="logConfirmInsideContent" class="confirmChoice">
+            <div class="confirmField">
+              <label>Login:</label>
+              <input type="text" name="username">
+            </div>
+            <div class="confirmField">
+              <label>Password:</label>
+              <input type="password" name="password">
+            </div>
+          </div>
+          <div id="bottomConfirmInsideContent">
+            <div class="confirmField">
+              <input type="submit" name="submitBtn">
+            </div>
+          </div>
+      </form>
+    </div>
+
+    <% if(typeof errors != 'undefined'){ %>
+    <% errors.forEach(function(elements){ %>
+    <div class="alert alert-danger"><%= elements.msg %></div>
+    <%}); %>
+    <%} %>
+
+    <% if(success_msg != '') {%>
+        <div class="alert alert-success"><%=success_msg%></div>
+    <%} %>
+    <% if(error_msg != '') {%>
+        <div class="alert alert-danger"><%=error_msg%></div>
+    <%} %>
+    <% if(error != '') {%>
+        <div class="alert alert-danger"><%=error%></div>
+    <%} %>
+
+  </div>
+  <div id="bottomOfSite">
+    <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+  </div>
+</body>
+</html>

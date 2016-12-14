@@ -68,7 +68,11 @@
        <button class="basketButton" type="button" onclick="deleteCookieDrugAll(); document.location.reload();">Remove all</button>
      </div>
      <p>Sum price: <%= price %> <%= bills %></p>
-     <a href="/basket/confirm" id="toConfirm">
+     <% if (null != user){%>
+       <a href="/basket/confirm" id="toConfirm">
+     <%}else{%>
+       <a href="/basket/authentication" id="toConfirm">
+     <%}%>
        <div>To order</div>
      </a>
      <br><br><br>

@@ -2,7 +2,7 @@ var suggest_count = 0;
 var input_initial_value = '';
 var suggest_selected = 0;
 
-$(window).load(function(){
+$(window).on("load",function(){
 	$("#search_box").keyup(function(I){ // читаем ввод с клавиатуры
 		switch(I.keyCode) {
 			case 13:  document.getElementById('searchSubButt').click(); break; // enter
@@ -64,7 +64,7 @@ $(window).load(function(){
 	});
 
 	// делаем обработку клика по подсказке
-	$('.advice_variant').live('click',function(){
+	$(document).on('click','.advice_variant',function(){
 		// ставим текст в input поиска
 		$('#search_box').val($(this).text());
 		// прячем слой подсказки

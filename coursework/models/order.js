@@ -1,10 +1,11 @@
 var mongoose = require("mongoose");
 
 var orderSchema = new mongoose.Schema( {
-    drugs: [ Object ],
+    drugs: [ String ],
     creation_date: { type: Date, default: Date.now  },
     status: { type: String, default: "inprocess"  },
-    owner: { Object }
+    owner: { type: String },
+    price: { type: Number }
 }, {
     versionKey: false
 });

@@ -6,6 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
   <script type="text/javascript" src="/jquery/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="/jquery/jquery.cycle.all.js"></script>
+  <script type="text/javascript" src="/scripts/ajax_search.js"></script>
   <script type="text/javascript" src="/scripts/index.js"></script>
   <script type="text/javascript" src="/scripts/cookies.js"></script>
   <script type="text/javascript" src="/scripts/onload.js"></script>
@@ -46,16 +47,19 @@
 </div>
 <div class="content">
   <div id="advertisement">
-    <a href="http://google.ua"><img alt="advertisement" src="/pics/advSigi.jpg" width="100%" height="100%"></a>
-    <a href="http://google.ua"><img alt="advertisement" src="/pics/advPsy.jpg" width="100%" height="100%"></a>
-    <a href="http://google.ua"><img alt="advertisement" src="/pics/advFanto.jpg" width="100%" height="100%"></a>
+    <img alt="advertisement" src="/pics/advSigi.jpg" width="100%" height="100%">
+    <img alt="advertisement" src="/pics/advPsy.jpg" width="100%" height="100%">
+    <img alt="advertisement" src="/pics/advFanto.jpg" width="100%" height="100%">
   </div>
   <div class="toolbar">
     <div id="search">
-      <form class="search">
-        <input type="search" name="q" placeholder="i want to search..." class="input">
-        <input type="submit" value="" class="submit">
-      </form>
+      <div class="search_area">
+        <form class="search">
+          <input type="search" name="q" placeholder="i want to search..." class="input" id="search_box" autocomplete="off">
+          <input type="submit" value="" class="submit" id="searchSubButt">
+        </form>
+        <div id="search_advice_wrapper"></div>
+      </div>
     </div>
     <div id="drugs">
       <div id="drugsId">
@@ -68,6 +72,7 @@
       </div>
     </div>
   </div>
+  <!--
   <div id='categories'>
     <div id="categoriesField">
       <form>
@@ -78,6 +83,7 @@
       </form>
     </div>
   </div>
+  -->
   <div id="products">
     <% for (let i = 0; i < arr.length; i++) {  %>
       <div class="product">

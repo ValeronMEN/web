@@ -1,8 +1,8 @@
 function setCookieDrug(value){
-  if (null == getCookie("drug")){ // drughere
+  if (null == getCookie("drug")){
     document.cookie = "drug=" + encodeURI(value)+"$1," + "; path=/";
     setSize();
-  }else if(null != getCookie("drug")){
+  }else if(null != getCookie("drug") && getSize() < 99){
     var cookieStr = getCookie("drug");
     var startInd = cookieStr.indexOf(value);
     if (startInd == -1){
