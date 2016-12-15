@@ -11,6 +11,8 @@ var expressValidator = require("express-validator");
 var flash = require("connect-flash");
 var mongo = require("mongodb");
 var session = require("express-session");
+var csrf = require('csurf');
+var csrfProtection = csrf({cookie:true});
 
 mongoose.connect('mongodb://localhost/medicine');
 var db = mongoose.connection;
@@ -37,8 +39,8 @@ app.set('view engine', 'ejs');
 //passport data
 app.use(session({
   secret: 'everyoneknowimvaleron',
-  saveUninitialized: true,
-  resave: true
+  saveUninitialized: false, //true
+  resave: false //true
 }));
 
 app.use(passport.initialize());
@@ -78,11 +80,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/basket', basket);
+app.use('/basket', csrfProtection, basket);
 app.use('/search', search);
-app.use('/admins', admins);
+app.use('/admins', csrfProtection, admins);
 app.use('/api', api);
-app.use('/users', users);
+app.use('/users', csrfProtection, users);
 app.use('/drugs', drugs);
 app.use('/', index);
 

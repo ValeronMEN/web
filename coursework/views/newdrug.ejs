@@ -106,6 +106,7 @@
           <label>Choose .jpeg image:</label>
           <input type="file" name="image" accept="image/jpeg">
         </div>
+        <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
         <div class="regField">
           <input id="submitButt" type="submit" value="Add new drug">
         </div>

@@ -2,10 +2,13 @@ var mongoose = require("mongoose");
 
 var orderSchema = new mongoose.Schema( {
     drugs: [ String ],
+    sizes: [ Number ],
     creation_date: { type: Date, default: Date.now  },
     status: { type: String, default: "inprocess"  },
     owner: { type: String },
-    price: { type: Number }
+    price: { type: Number },
+    address: { type: String },
+    phonenumber: { type: String }
 }, {
     versionKey: false
 });
@@ -27,9 +30,14 @@ module.exports.addOrder = function(order, callback){
 module.exports.updateOrder = function(id, order, options, callback){
   var query = {_id: id};
   var update = {
-    products: order.products,
+    drugs: order.drugs,
+    sizes: order.sizes,
     creation_date: order.creation_date,
-    status: order.status
+    status: order.status,
+    owner: order.owner,
+    price: order.price,
+    address: order.address,
+    phonenumber: order.phonenumber
   };
   Order.findOneAndUpdate(query, update, options, callback);
 };

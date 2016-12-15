@@ -26,9 +26,17 @@
      </div>
      <div id="logInField">
        <div id="profileField">
-         <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
-         <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
-         <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
+         <a href="/users/profile">
+           <label><%= user.firstname %> <%= user.lastname %></label>
+         </a>
+         <div id="avatarImg">
+           <a href="/users/profile">
+             <img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px">
+           </a>
+         </div>
+         <a href="/users/logout" id="loginLink">
+           <div id="logoutF">Log out</div>
+         </a>
        </div>
      </div>
    </div>
@@ -42,6 +50,9 @@
          </li>
          <li>
            <a href="/admins/newdrug">To add new drug in the store</a>
+         </li>
+         <li>
+           <a href="/admins/orders">To check orders</a>
          </li>
        </ul>
      </div>

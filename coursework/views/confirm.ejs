@@ -5,8 +5,18 @@
   <link rel="stylesheet" href="/css/confirm.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <script type="text/javascript" src="/jquery/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="/scripts/cookies.js"></script>
-  <script type="text/javascript" src="/scripts/onload.js"></script>
+  <script>
+  window.onload = function() {
+    var a = getSize();
+    if (a != 0 && a != null){
+      document.getElementById("basketSize").innerHTML = a;
+      document.getElementById("circle").style.visibility = "visible"
+    }
+    removeDeleteConstant();
+  }
+  </script>
   <title>vApteka</title>
  </head>
  <body>
@@ -39,21 +49,20 @@
       </div>
     <%} %>
   </div>
-  </form>
 </div>
 </div>
 <div class="confirmContent">
   <div id="confirmContentSub">
     <div id="bottomConfirmInsideContent">
-      <form>
+      <form id="confirmForm" method="post">
       <div id="addresssphone">
         <div class="confirmField">
-          <label>Phone number:</label>
-          <input type="text" name="phonenumber">
+          <label><b>Phone number:</b><br>(for example, '+380995451992')</label>
+          <input id="reqForm1" type="text" name="phonenumber" required size="30">
         </div>
         <div class="confirmField">
-          <label>Address:</label>
-          <input type="text" name="address">
+          <label><b>Address:</b><br>(for example, 'Ukraine, Kyiv, Rosha 666b, bush №12')</label>
+          <input id="reqForm2" type="text" name="address" required size="40">
         </div>
       </div>
       <br>
@@ -78,10 +87,10 @@
         <label>Contol sum:  <%= price %> <%= bills %></label>
       </div>
       <br>
+      <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
       <div class="confirmField">
-        <input id="submitButt" type="submit" value="Confirm">
+        <input id="submitButt" type="submit" value="Confirm" onclick="setDeleteConstant();">
       </div>
-      <br>
     </form>
     </div>
 
@@ -89,6 +98,9 @@
     <% errors.forEach(function(elements){ %>
     <div class="alert alert-danger"><%= elements.msg %></div>
     <%}); %>
+    <%} %>
+    <% if(error_msg != '') {%>
+    <div class="alert alert-danger"><%=error_msg%></div>
     <%} %>
   </div>
 </div>

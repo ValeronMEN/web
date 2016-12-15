@@ -21,7 +21,7 @@ var avatar = multer({ storage: storage });
 
 router.get('/register', function(req, res, next) {
   if (null == req.user){
-    res.render('signup');
+    res.render('signup', {csrfToken: req.csrfToken()});
   }
   else{
     res.redirect("/");
@@ -30,7 +30,7 @@ router.get('/register', function(req, res, next) {
 
 router.get('/login', function(req, res, next){
   if (null == req.user){
-    res.render('login');
+    res.render('login', {csrfToken: req.csrfToken()});
   }
   else{
     res.redirect("/");
@@ -70,13 +70,15 @@ router.post('/register', function(req, res){
           });
 
           User.createUser(newUser, function(err, user){
-            if(err) throw err;
-            console.log(user);
+            if(err){
+              throw err;
+            }else{
+              console.log(user);
+              req.flash('success_msg', 'You are registred and now can log in');
+              res.redirect('login');
+            }
           });
-
-          req.flash('success_msg', 'You are registred and now can log in');
-          res.redirect('login');
-      }
+        }
     }else{
       req.flash('error_msg', "Username is busy");
       res.redirect('register');
@@ -162,7 +164,7 @@ router.post('/profile/changepassword', ensureAuthenticated, function(req, res){
 });
 
 router.get('/profile', ensureAuthenticated, function(req, res, next) {
-    res.render('user');
+    res.render('user', {csrfToken: req.csrfToken()});
 });
 
 router.post('/profile/removeavatar', ensureAuthenticated, function (req, res, next) {

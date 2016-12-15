@@ -34,7 +34,10 @@ router.get('/users', ensureAuthenticated, function(req, res, next) {
         throw err;
       }
       console.log(users);
-      res.render('adminusers', {arr: users});
+      res.render('adminusers', {
+        arr: users,
+        csrfToken: req.csrfToken()
+      });
     });
   }else{
     res.redirect("/");
@@ -43,7 +46,122 @@ router.get('/users', ensureAuthenticated, function(req, res, next) {
 
 router.get('/newdrug', ensureAuthenticated, function(req, res, next) {
   if(req.user.admin == true){
-    res.render('newdrug');
+    res.render('newdrug', {
+      csrfToken: req.csrfToken()
+    });
+  }else{
+    res.redirect("/");
+  }
+});
+
+router.get('/orders', ensureAuthenticated, function(req, res, next) {
+  if(req.user.admin == true){
+    Order.getOrders(function(err, orders){
+      if (err){
+        throw err;
+      }else{
+        var arr = [];
+        for(let i=0; i<orders.length; i++){
+          let drugsOrderArr = [];
+          User.getUserById(orders[i].owner, function(err, user){
+            if (err) throw err;
+            for(let j=0; j<orders[i].drugs.length; j++){
+              Drug.getDrugById(orders[i].drugs[j], function(err, drug){
+                drugsOrderArr.push({
+                  name: drug.name,
+                  volumemass: drug.volumemass,
+                  unit: drug.unit,
+                  type: drug.type,
+                  price: drug.price,
+                  size: orders[i].sizes[j]
+                });
+                if (drugsOrderArr.length == orders[i].drugs.length){
+                  arr.push({
+                    drugs: drugsOrderArr,
+                    owner_firstname: user.firstname,
+                    owner_lastname: user.lastname,
+                    owner_email: user.email,
+                    status: orders[i].status,
+                    date: orders[i].creation_date,
+                    address: orders[i].address,
+                    phonenumber: orders[i].phonenumber,
+                    price: orders[i].price,
+                    id: orders[i]._id
+                  });
+                  if (arr.length == orders.length){
+                    var sortarr = arr.sort(function compareNumeric(a, b) {
+                       return a.status.localeCompare(b.status);
+                    });
+                    console.log(arr);
+                    res.render('adminorders', {
+                      arr: sortarr,
+                      bills: "UAH",
+                      csrfToken: req.csrfToken()
+                    });
+                  }
+                }
+              });
+            }
+          });
+        }
+      }
+    });
+  }else{
+    res.redirect("/");
+  }
+});
+
+router.post('/orders/expect/:_id', ensureAuthenticated, function(req, res, next) {
+  if(req.user.admin == true){
+    Order.getOrderById(req.params._id, function(err, order){
+      var newOrder = order;
+      newOrder.status = "expect";
+      Order.updateOrder(req.params._id, newOrder, {}, function(err, oldorder){
+        if (err) throw err;
+        res.redirect("/admins/orders");
+      });
+    });
+  }else{
+    res.redirect("/");
+  }
+});
+
+router.post('/orders/completed/:_id', ensureAuthenticated, function(req, res, next) {
+  if(req.user.admin == true){
+    Order.getOrderById(req.params._id, function(err, order){
+      var newOrder = order;
+      newOrder.status = "completed";
+      Order.updateOrder(req.params._id, newOrder, {}, function(err, oldorder){
+        if (err) throw err;
+        res.redirect("/admins/orders");
+      });
+    });
+  }else{
+    res.redirect("/");
+  }
+});
+
+router.post('/orders/canceled/:_id', ensureAuthenticated, function(req, res, next) {
+  if(req.user.admin == true){
+    Order.getOrderById(req.params._id, function(err, order){
+      var newOrder = order;
+      newOrder.status = "canceled";
+      Order.updateOrder(req.params._id, newOrder, {}, function(err, oldorder){
+        if (err) throw err;
+        res.redirect("/admins/orders");
+      });
+    });
+  }else{
+    res.redirect("/");
+  }
+});
+
+router.post('/orders/delete/:_id', ensureAuthenticated, function(req, res, next) {
+  if(req.user.admin == true){
+    Order.deleteOrder(req.params._id, function(err, order){
+      if (err) throw err;
+      res.redirect("/admins/orders");
+    });
   }else{
     res.redirect("/");
   }

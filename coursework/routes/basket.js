@@ -31,7 +31,7 @@ router.get('/', function(req, res, next){
           if (drugs.length == arr.length-1){
             var sortdrugs = drugs.sort(function compareNumeric(a, b) {
                return a.name.localeCompare(b.name);
-            })
+            });
             res.render('basket', {
               price: price,
               arr: sortdrugs,
@@ -45,7 +45,11 @@ router.get('/', function(req, res, next){
 });
 
 router.get('/authentication', function(req, res, next){
-  res.render("authentication");
+  if (null == req.user){
+    res.render("authentication", {csrfToken: req.csrfToken()});
+  }else{
+    res.redirect("/basket/confirm");
+  }
 });
 
 router.get('/confirm', ensureAuthenticated, function(req, res, next){
@@ -78,7 +82,8 @@ router.get('/confirm', ensureAuthenticated, function(req, res, next){
             res.render('confirm', {
               price: price,
               arr: sortdrugs,
-              bills: "UAH"
+              bills: "UAH",
+              csrfToken: req.csrfToken()
             });
           }
         }
@@ -90,47 +95,64 @@ router.get('/confirm', ensureAuthenticated, function(req, res, next){
 router.post('/confirm', ensureAuthenticated, function(req, res, next){
   var phonenumber = req.body.phonenumber;
   var address = req.body.address;
-
   req.checkBody('phonenumber', 'Phone number is required').notEmpty();
   req.checkBody('address', 'Address is required').notEmpty();
-
   var errors = req.validationErrors();
 
-  if(errors){
-    res.render('confirm', {errors: errors});
-  }else{
-    if (typeof req.cookies.drug == 'undefined' || req.cookies.drug == "" || null == req.cookies.drug){
-      res.redirect("/");
-    }else{
-      var arr = req.cookies.drug.split(",");
-      var drugs = [];
-      var price = 0;
-      for (let i=0; i<arr.length-1; i++){
-        Drug.getDrugById(arr[i].substring(0, arr[i].indexOf("$")), function(err, drug){
-          if (err || null == drug || typeof drug == 'undefined'){
-            res.redirect("/");
-          }else{
-            let size = parseInt(arr[i].substring(arr[i].indexOf("$")+1));
-            drugs.push(drug._id);
-            price += (drug.price * size);
-            if (drugs.length == arr.length-1){
-              var newOrder = new User({
-                owner: user._id,
-                price: price,
-                drugs: drugs
-              });
-              Order.addOrder(newOrder, function(err, order){
-                if(err){
-                  throw err;
-                }else{
-                  res.redirect("/");
-                }
-              });
+  if(!errors){
+    if (typeof req.cookies.drug != 'undefined' && req.cookies.drug != "" && null != req.cookies.drug){
+      if( (-1 != phonenumber.indexOf("+")) && (!isNaN(phonenumber.substring(phonenumber.indexOf("+")))) && (13 == phonenumber.length) ){
+        var arr = req.cookies.drug.split(",");
+        var drugs = [];
+        var sizes = [];
+        var price = 0;
+        for (let i=0; i<arr.length-1; i++){
+          Drug.getDrugById(arr[i].substring(0, arr[i].indexOf("$")), function(err, drug){
+            if (err || null == drug || typeof drug == 'undefined'){
+              res.redirect("/basket/confirm");
+            }else{
+              let size = parseInt(arr[i].substring(arr[i].indexOf("$")+1));
+              drugs.push(drug._id);
+              sizes.push(size);
+              price += (drug.price * size);
+              if (drugs.length == arr.length-1 && sizes.length == arr.length-1){
+                var newOrder = new Order({
+                  owner: req.user._id,
+                  price: price,
+                  drugs: drugs,
+                  sizes: sizes,
+                  address: address,
+                  phonenumber: phonenumber
+                });
+                console.log(newOrder);
+                Order.addOrder(newOrder, function(err, order){
+                  if(err){
+                    throw err;
+                  }else{
+                    res.redirect("/users/profile");
+                  }
+                });
+              }
             }
-          }
-        });
+          });
+        }
+      }else{
+        if (-1 == phonenumber.indexOf("+")){
+          req.flash('error_msg', "You forgot '+' token");
+          res.redirect('/basket/confirm');
+        }else if(13 != phonenumber.length){
+          req.flash('error_msg', "Your phone number is not full");
+          res.redirect('/basket/confirm');
+        }else{
+          req.flash('error_msg', "Phone number must consist of only digits (and '+' token)");
+          res.redirect('/basket/confirm');
+        }
       }
+    }else{
+      res.redirect("/basket/confirm");
     }
+  }else{
+    res.render('confirm', {errors: errors});
   }
 });
 

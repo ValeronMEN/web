@@ -84,5 +84,6 @@ label#secondConfirmLabel {
 }
 
 div#addresssphone {
-  width: 20%;
+  padding-top: 10px;
+  width: 30%;
 }

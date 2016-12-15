@@ -46,6 +46,7 @@
            <%}else{%>
              <p id="notadmin">This user isn't admin</p>
              <form action="users/deleteuser/<%= arr[i]._id %>" method="post">
+                <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
                 <input type="submit" value="Remove user"></p>
              </form>
            <%}%>

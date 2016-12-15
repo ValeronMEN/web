@@ -117,6 +117,27 @@ function deleteSize(userSize){
   }
 }
 
+function fillSize(userSize){
+  document.cookie = "size=0; path=/; expires=-1";
+}
+
+function setDeleteConstant(){
+  document.cookie = "deleteConst=1; path=/";
+}
+
+function removeDeleteConstant(){
+  document.cookie = "deleteConst=0; path=/";
+}
+
+function checkDeleteConstant(){
+  if (getCookie('deleteConst').localeCompare("1") == 0){
+    console.log("here");
+    document.cookie = "deleteConst=0; path=/; expires=-1";
+    deleteCookieDrugAll();
+    fillSize();
+  }
+}
+
 function getSize(){
   var cookieSize = getCookie('size');
   var size = parseInt(cookieSize);
