@@ -87,3 +87,23 @@ div#addresssphone {
   padding-top: 10px;
   width: 30%;
 }
+
+input.confirmBtn {
+   background: -moz-linear-gradient(#ADFF2F, #00FF00, #ADFF2F);
+   background: -webkit-gradient(linear, 0 0, 0  100%, from(#ADFF2F), to(#ADFF2F), color-stop(0.5, #00FF00));
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+   padding: 12px;
+   color: #333;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 5px;
+   border: 1px solid #666;
+   cursor: pointer;
+}
+input.confirmBtn:hover{
+  transition: all 0.5s;
+  background: -moz-linear-gradient(#00FA9A, #00FF7F, #00FA9A);
+  background: -webkit-gradient(linear, 0 0, 0  100%, from(#00FA9A), to(#00FA9A), color-stop(0.5, #00FF7F));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+  color: #2F4F4F;
+}

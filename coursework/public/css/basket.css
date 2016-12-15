@@ -57,7 +57,6 @@ button.basketButton:hover {
   background: linear-gradient(to top, #DC143C 0%, #FF0000 100%);
   cursor: pointer;
 }
-
 a#toConfirm div {
   border: 1px solid black;
   padding: 20px;
@@ -79,7 +78,6 @@ a#toConfirm div:hover {
   background: linear-gradient(to top, #00FA9A 0%, #98FB98 100%);
   cursor: pointer;
 }
-
 a#basketGoToDrugs div {
   border: 1px solid black;
   padding: 15px;

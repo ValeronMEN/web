@@ -25,6 +25,10 @@ module.exports.getDrugs = function(callback, limit){
   Drug.find(callback).limit(limit);
 };
 
+module.exports.getPaginationDrugs = function(skip, limit, callback){
+  Drug.find(callback).skip(skip).limit(limit);
+}
+
 module.exports.getDrugById = function(id, callback){
   Drug.findById(id, callback);
 };

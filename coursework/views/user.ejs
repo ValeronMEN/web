@@ -63,7 +63,7 @@
             <p>
               Choose .jpeg file to change avatar<br>
               <input type="file" name="avatar" accept="image/jpeg"><br>
-              <!--<input type="hidden" name="_csrf" value='<%=csrfToken%>'>-->
+              <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
               <input class="greenInput" type="submit" value="Submit">
             </p>
          </form>
@@ -88,9 +88,9 @@
              <div class="alert alert-danger"><%=error_msg%></div>
          <%} %>
        </div>
+       <br><a href="/users/profile/orders">To my orders</a>
        <% if(user.admin == true){%>
-         <br>
-         <a href="/admins">Administration</a>
+         <br><a href="/admins">Administration</a>
        <%}%>
      </div>
    </div>

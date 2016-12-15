@@ -9,10 +9,10 @@ var bcrypt = require('bcryptjs');
 var file_functions = require('../modules/files');
 
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: function (req, file, cb){
     cb(null, './public/pics/avatars/')
   },
-  filename: function (req, file, cb) {
+  filename: function (req, file, cb){
     cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
   }
 });
@@ -163,8 +163,57 @@ router.post('/profile/changepassword', ensureAuthenticated, function(req, res){
   }
 });
 
-router.get('/profile', ensureAuthenticated, function(req, res, next) {
+router.get('/profile', ensureAuthenticated, function(req, res, next){
     res.render('user', {csrfToken: req.csrfToken()});
+});
+
+router.get('/profile/orders', ensureAuthenticated, function(req, res, next){
+  Order.getOrdersByOwnerId(req.user._id, function(err, orders){
+    if (err){
+      throw err;
+    }else{
+      var arr = [];
+      for(let i=0; i<orders.length; i++){
+        let drugsOrderArr = [];
+        for(let j=0; j<orders[i].drugs.length; j++){
+          Drug.getDrugById(orders[i].drugs[j], function(err, drug){
+            drugsOrderArr.push({
+              name: drug.name,
+              volumemass: drug.volumemass,
+              unit: drug.unit,
+              type: drug.type,
+              price: drug.price,
+              size: orders[i].sizes[j]
+            });
+            if (drugsOrderArr.length == orders[i].drugs.length){
+              arr.push({
+                drugs: drugsOrderArr,
+                owner_firstname: req.user.firstname,
+                owner_lastname: req.user.lastname,
+                owner_email: req.user.email,
+                status: orders[i].status,
+                date: orders[i].creation_date,
+                address: orders[i].address,
+                phonenumber: orders[i].phonenumber,
+                price: orders[i].price,
+                id: orders[i]._id
+              });
+              if (arr.length == orders.length){
+                var sortarr = arr.sort(function compareNumeric(a, b) {
+                   return a.status.localeCompare(b.status);
+                });
+                console.log(arr);
+                res.render('orders', {
+                  arr: sortarr,
+                  bills: "UAH"
+                });
+              }
+            }
+          });
+        }
+      }
+    }
+  });
 });
 
 router.post('/profile/removeavatar', ensureAuthenticated, function (req, res, next) {

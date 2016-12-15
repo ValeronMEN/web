@@ -68,43 +68,15 @@
              <div id="orderBottomSide">
                <%if(arr[i].status.localeCompare("inprocess") == 0){%>
                  <div class="orderBottomLeft">
-                   <label id="inprocessStatus">
-                     Status: processing
-                   </label>
-                 </div>
-                 <div class="orderBottomRight">
-                   <form action="orders/canceled/<%= arr[i].id %>" method="post">
-                      <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
-                      <input class="statusBtns" type="submit" value="Set status 'Canceled'">
-                   </form><br>
-                   <form action="orders/expect/<%= arr[i].id %>" method="post">
-                      <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
-                      <input class="statusBtns" id="statusPositive" type="submit" value="Set status 'Expects'">
-                   </form>
+                   <label id="inprocessStatus">Status: processing</label>
                  </div>
                <%}else if(arr[i].status.localeCompare("expect") == 0){%>
                  <div class="orderBottomLeft">
                    <label id="expectStatus">Status: expects</label>
                  </div>
-                 <div class="orderBottomRight">
-                   <form action="orders/canceled/<%= arr[i].id %>" method="post">
-                      <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
-                      <input class="statusBtns" type="submit" value="Set status 'Canceled'">
-                   </form><br>
-                   <form action="orders/completed/<%= arr[i].id %>" method="post">
-                      <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
-                      <input class="statusBtns" id="statusPositive" type="submit" value="Set status 'Completed'">
-                   </form>
-                 </div>
                <%}else{%>
                  <div class="orderBottomLeft">
                    <label id="completedStatus">Status: <%= arr[i].status %></label>
-                 </div>
-                 <div class="orderBottomRight">
-                   <form action="orders/delete/<%= arr[i].id %>" method="post">
-                      <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
-                      <input class="deleteBtn" type="submit" value="Delete record">
-                   </form>
                  </div>
                <%}%>
              </div>

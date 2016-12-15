@@ -10,7 +10,6 @@ div#orderSubContent {
   margin-left: 2%;
   margin-right: 2%;
 }
-
 div.orders {
   border: solid 1px green;
   width: 100%;
@@ -39,7 +38,6 @@ div#orderBottomSide {
   margin-left: 1%;
   margin-bottom: 1%;
 }
-
 label#inprocessStatus{
   color: orange;
   text-shadow: black 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px 0px, black -1px -1px, black 0px -1px, black 1px -1px;
@@ -52,7 +50,6 @@ label#completedStatus{
   color: green;
   text-shadow: black 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px 0px, black -1px -1px, black 0px -1px, black 1px -1px;
 }
-
 input.statusBtns {
    background: -moz-linear-gradient(#ADFF2F, #00FF00, #ADFF2F);
    background: -webkit-gradient(linear, 0 0, 0  100%, from(#ADFF2F), to(#ADFF2F), color-stop(0.5, #00FF00));
@@ -76,7 +73,6 @@ input.deleteBtn{
   padding: 7px;
   cursor: pointer;
 }
-
 div.orderBottomLeft{
   float: left;
 }
@@ -86,4 +82,11 @@ div.orderBottomRight{
 }
 div.orderBottomLeft label{
   font-size: 30px;
+}
+input#statusPositive:hover{
+  transition: all 0.5s;
+  background: -moz-linear-gradient(#1E90FF, #0000FF, #1E90FF);
+  background: -webkit-gradient(linear, 0 0, 0  100%, from(#1E90FF), to(#1E90FF), color-stop(0.5, #0000FF));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+  color: white;
 }

@@ -23,6 +23,10 @@ module.exports.getOrderById = function(id, callback){
   Order.findById(id, callback);
 };
 
+module.exports.getOrdersByOwnerId = function(id, callback){
+  Order.find({ 'owner' : id }, callback);
+}
+
 module.exports.addOrder = function(order, callback){
   Order.create(order, callback);
 };

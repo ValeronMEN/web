@@ -5,33 +5,25 @@ router.get('/', function(req, res, next) {
   if (null != req.query.q){
     var path = "/search/"+encodeURIComponent(req.query.q);
     res.redirect(path);
-  }
-  else{
-    var arr = [];
+  }else{
+    var limit = 15;
     Drug.count(function(err, count){
-      Drug.getDrugs(function(err, drugs){
-        if (err){
-          throw err;
-        }
-        for (let i = count-1; i > count-16; i--){
-          let myDrug = drugs[i];
-          if (null == drugs[i]){
-            break;
-          }
-          else{
-            arr.push({
-              "name": myDrug.name,
-              "image": "/pics/drugs/" + myDrug.image,
-              "link": "/drugs/drug/"+myDrug._id,
-              "type": myDrug.type,
-              "unit": myDrug.unit,
-              "price": myDrug.price,
-              "volumemass": myDrug.volumemass
-            });
-          }
-        };
-        res.render('index', { arr: arr });
-      });
+      if (count <= limit){
+        Drug.getDrugs(function(err, drugs){
+          if (err) throw err;
+          res.render('index', {
+            "arr": drugs
+          });
+        });
+      }else{
+        var skip = count - 15;
+        Drug.getPaginationDrugs(skip, limit, function(err, drugs){
+          if (err) throw err;
+          res.render('index', {
+            "arr": drugs
+          });
+        });
+      }
     });
   }
 });

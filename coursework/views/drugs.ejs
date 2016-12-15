@@ -47,8 +47,8 @@
   <div id="products">
     <% for (let i = 0; i < arr.length; i++) {  %>
       <div class="product">
-        <a href="<%= arr[i].link %>" class="productLink">
-          <img class="imgLink" alt="<%= arr[i].name %>" src="<%= arr[i].image %>">
+        <a href="/drugs/drug/<%= arr[i]._id %>" class="productLink">
+          <img class="imgLink" alt="<%= arr[i].name %>" src="/pics/drugs/<%= arr[i].image %>">
           <br><label id="productName"><%= arr[i].name %></label>
           <br><label class="productInfo">type: <%= arr[i].volumemass %> <%= arr[i].unit %>, <%= arr[i].type %></label>
           <br><label>price: <%= arr[i].price %> UAH</label>

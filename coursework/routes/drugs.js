@@ -58,46 +58,26 @@ router.get('/', function(req, res, next) {
   res.redirect("/drugs/1");
 });
 
-router.get('/:page', function(req, res, next) {
-  var arr = []; // array of my drugs
+router.get('/:page', function(req, res, next){
+  var limit = 15;
   Drug.count(function(err, count){
-    var pages = Math.ceil(count / 15);
-    var page = parseInt(req.params.page);
-    if (NaN != page & page <= pages & page != 0){
-      Drug.getDrugs(function(err, drugs){
-        if (err){
-          throw err;
-        }
-        var end = page * 15;
-        var start = end - 15;
-        for (let i = start; i < end; i++){
-          let myDrug = drugs[i];
-          if (null == drugs[i]){
-            break;
-          }
-          else{
-            arr.push({
-              "name": myDrug.name,
-              "image": "/pics/drugs/" + myDrug.image,
-              "link": "/drugs/drug/"+myDrug._id,
-              "type": myDrug.type,
-              "unit": myDrug.unit,
-              "price": myDrug.price,
-              "volumemass": myDrug.volumemass
-            });
-          }
-        };
+    var pages = Math.ceil(count / limit);
+    var page = parseInt(req.params.page) - 1;
+    if (NaN != page && page < pages){
+      var skip = limit * page;
+      Drug.getPaginationDrugs(skip, limit, function(err, drugs){
+        if (err) throw err;
         res.render('drugs', {
-          "arr": arr,
+          "arr": drugs,
           "pages": pages,
-          "page": page
+          "page": page + 1
         });
       });
     }else{
-      res.render('error');
+      res.render("error");
     }
   });
-});
+})
 
 function ensureAuthenticated(req, res, next){
   if(req.isAuthenticated()){
