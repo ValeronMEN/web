@@ -30,8 +30,8 @@ div#bottomsideDrug {
 label#drugBasicInfo {
   font-size: 20px;
 }
-label.drugNotBasicInfo {
-  margin-left: 10px;
+.drugNotBasicInfo {
+  margin-left: 1%;
 }
 label#drugName {
   font-size: 30px;

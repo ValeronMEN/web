@@ -49,7 +49,7 @@ router.get('/:query', function(req, res, next){
             "price": myDrug.price,
             "volumemass": myDrug.volumemass
           });
-          break;
+          continue;
         }else if(query.localeCompare(myDrug.company) == 0 && drugsCompaniesArr.length < 5){
           drugsCompaniesArr.push({
             "name": myDrug.name,
@@ -60,7 +60,7 @@ router.get('/:query', function(req, res, next){
             "price": myDrug.price,
             "volumemass": myDrug.volumemass
           });
-          break;
+          continue;
         }else if(tenTimes < 10){
           var str = myDrug.symptoms+" "+myDrug.properties;
           var target = query;

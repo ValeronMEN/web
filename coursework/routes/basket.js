@@ -179,7 +179,10 @@ router.post('/register', function(req, res){
         var errors = req.validationErrors();
 
         if(errors){
-          res.render('authentication', {errors: errors});
+          res.render('authentication', {
+            errors: errors,
+            csrfToken: req.csrfToken()
+          });
         }else{
           var newUser = new User({
             username: username,

@@ -63,7 +63,7 @@ router.get('/:page', function(req, res, next){
   Drug.count(function(err, count){
     var pages = Math.ceil(count / limit);
     var page = parseInt(req.params.page) - 1;
-    if (NaN != page && page < pages){
+    if (NaN != page && page < pages && page >= 0){
       var skip = limit * page;
       Drug.getPaginationDrugs(skip, limit, function(err, drugs){
         if (err) throw err;

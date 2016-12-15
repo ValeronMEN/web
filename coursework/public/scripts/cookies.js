@@ -130,11 +130,13 @@ function removeDeleteConstant(){
 }
 
 function checkDeleteConstant(){
-  if (getCookie('deleteConst').localeCompare("1") == 0){
-    console.log("here");
-    document.cookie = "deleteConst=0; path=/; expires=-1";
-    deleteCookieDrugAll();
-    fillSize();
+  var delConst = getCookie('deleteConst');
+  if (null != delConst){
+    if (delConst.localeCompare("1") == 0){
+      document.cookie = "deleteConst=0; path=/; expires=-1";
+      deleteCookieDrugAll();
+      fillSize();
+    }
   }
 }
 

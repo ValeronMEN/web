@@ -33,7 +33,7 @@
     </div>
   </div>
   <div class="regContent">
-    <form enctype="multipart/form-data" method="post">
+    <form action="/admins/newdrug?_csrf=<%=csrfToken%>" enctype="multipart/form-data" method="post">
       <div id="newDrugInsideContent1">
         <div class="regField">
           <label>Name:</label>
@@ -106,7 +106,6 @@
           <label>Choose .jpeg image:</label>
           <input type="file" name="image" accept="image/jpeg">
         </div>
-        <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
         <div class="regField">
           <input id="submitButt" type="submit" value="Add new drug">
         </div>

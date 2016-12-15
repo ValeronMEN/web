@@ -61,13 +61,12 @@
       </button>
     </div>
     <div id="bottomsideDrug">
-      <h4>Symptoms:</h4><label class="drugNotBasicInfo"><%= symptoms %></label>
-      <h4>Side effects:</h4><label class="drugNotBasicInfo"> <%= side_effects %></label>
-      <h4>Contraindications:</h4><label class="drugNotBasicInfo"><%= contraindications %></label>
-      <h4>Overdose:</h4><label class="drugNotBasicInfo"><%= overdose %></label>
-      <h4>Storage conditions:</h4><label class="drugNotBasicInfo"><%= storage_conditions %></label>
-      <h4>Mode of application:</h4><label class="drugNotBasicInfo"><%= mode_of_application %></label>
-      <h4>Properties:</h4><label class="drugNotBasicInfo"><%= properties %></label>
+      <h4>Symptoms:</h4><pre class="drugNotBasicInfo"><%= symptoms %></pre>
+      <h4>Contraindications:</h4><pre class="drugNotBasicInfo"><%= contraindications %></pre>
+      <h4>Overdose:</h4><pre class="drugNotBasicInfo"><%= overdose %></pre>
+      <h4>Storage conditions:</h4><pre class="drugNotBasicInfo"><%= storage_conditions %></pre>
+      <h4>Mode of application:</h4><pre class="drugNotBasicInfo"><%= mode_of_application %></pre>
+      <h4>Properties:</h4><pre class="drugNotBasicInfo"><%= properties %></pre>
     </div>
     <% if(admin == true) {%>
     <br>

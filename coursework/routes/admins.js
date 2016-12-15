@@ -67,20 +67,40 @@ router.get('/orders', ensureAuthenticated, function(req, res, next) {
             if (err) throw err;
             for(let j=0; j<orders[i].drugs.length; j++){
               Drug.getDrugById(orders[i].drugs[j], function(err, drug){
-                drugsOrderArr.push({
-                  name: drug.name,
-                  volumemass: drug.volumemass,
-                  unit: drug.unit,
-                  type: drug.type,
-                  price: drug.price,
-                  size: orders[i].sizes[j]
-                });
+                if (null != drug){
+                  drugsOrderArr.push({
+                    name: drug.name,
+                    volumemass: drug.volumemass,
+                    unit: drug.unit,
+                    type: drug.type,
+                    price: drug.price,
+                    size: orders[i].sizes[j]
+                  });
+                }else{
+                  drugsOrderArr.push({
+                    name: "Unknown",
+                    volumemass: 0,
+                    unit: "Unknown",
+                    type: "Unknown",
+                    price: 0,
+                    size: orders[i].sizes[j]
+                  });
+                }
                 if (drugsOrderArr.length == orders[i].drugs.length){
+                  if (null == user){
+                    var owner_firstname = "Unknown";
+                    var owner_lastname = "Unknown";
+                    var owner_email = "Unknown";
+                  }else{
+                    var owner_firstname = user.firstname;
+                    var owner_lastname = user.lastname;
+                    var owner_email = user.email;
+                  }
                   arr.push({
                     drugs: drugsOrderArr,
-                    owner_firstname: user.firstname,
-                    owner_lastname: user.lastname,
-                    owner_email: user.email,
+                    owner_firstname: owner_firstname,
+                    owner_lastname: owner_lastname,
+                    owner_email: owner_email,
                     status: orders[i].status,
                     date: orders[i].creation_date,
                     address: orders[i].address,
