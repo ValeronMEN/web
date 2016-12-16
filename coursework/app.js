@@ -14,7 +14,7 @@ var session = require("express-session");
 var csrf = require('csurf');
 var csrfProtection = csrf({cookie:true});
 
-mongoose.connect("mongodb://medicine:babenko@ds011311.mlab.com:11311/heroku_5h1vm4gq");
+mongoose.connect("mongodb://heroku_5h1vm4gq:hpn8ltarohbou5s4137vh0vff3@ds011311.mlab.com:11311/heroku_5h1vm4gq");
 var db = mongoose.connection;
 Drug = require("./models/drug");
 User = require("./models/user");
