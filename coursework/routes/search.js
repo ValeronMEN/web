@@ -20,7 +20,7 @@ router.get('/bytag/name',function(req,res){
   Drug.getDrugsByName(req.query.name, function(err, drugs){
     if(err)
     {
-      res.send("error");
+      throw err;
     }
     res.send({drugs:drugs});
   });

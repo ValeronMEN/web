@@ -36,7 +36,7 @@
      <div id="logInField">
        <div id="profileField">
          <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
-         <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+         <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="data:image/jpg;base64, <%= user.avatar %>" width="66px" lenght="66px"></a></div>
          <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
        </div>
      </div>
@@ -44,7 +44,9 @@
    <!-- Special part start -->
    <div class="userContent">
      <div id="currentUser">
-       <div id="userimage"><img class="avatarImg" alt='avatar' src="/pics/avatars/<%= user.avatar %>" width="200px" lenght="200px"></div>
+       <div id="userimage">
+         <img class="avatarImg" alt='avatar' src="data:image/jpg;base64, <%= user.avatar %>" width="200px" lenght="200px">
+       </div>
        <div id="divInfo">
          <p><b>First name</b>: <%= user.firstname %><br>
            <b>Last name</b>: <%= user.lastname %><br>
@@ -63,7 +65,6 @@
             <p>
               Choose .jpeg file to change avatar<br>
               <input type="file" name="avatar" accept="image/jpeg"><br>
-              <!--<input type="hidden" name="_csrf" value='<%=csrfToken%>'>-->
               <input class="greenInput" type="submit" value="Submit">
             </p>
          </form>

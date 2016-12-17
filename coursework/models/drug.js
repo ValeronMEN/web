@@ -14,7 +14,7 @@ var drugSchema = new mongoose.Schema( {
     storage_conditions: { type: String },
     mode_of_application: { type: String },
     properties: { type: String },
-    image: { type: String, default: "drugnoimage.jpg"  }
+    image: { type: Buffer  }
 }, {
     versionKey: false
 });

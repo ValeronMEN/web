@@ -24,7 +24,7 @@ router.get('/', function(req, res, next){
             unit: drug.unit,
             type: drug.type,
             price: drug.price,
-            image: "/pics/drugs/"+drug.image,
+            image: drug.image,
             amount: size
           });
           price += (drug.price * size);

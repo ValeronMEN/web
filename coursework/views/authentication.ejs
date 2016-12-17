@@ -35,7 +35,7 @@
       <%}else {%>
         <div id="profileField">
           <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
-          <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+          <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="data:image/jpg;base64, <%= user.avatar %>" width="66px" lenght="66px"></a></div>
           <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
         </div>
       <%}%>
@@ -94,6 +94,7 @@
           <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
           <div id="bottomConfirmInsideContent">
             <div class="confirmField">
+              <br/>
               <input class="confirmBtn" type="submit" name="submitBtn" value="Authenticate">
             </div>
           </div>

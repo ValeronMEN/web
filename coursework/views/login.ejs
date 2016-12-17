@@ -36,15 +36,15 @@
       <div id="regInsideContent">
         <div class="regField">
           <label>Login:</label>
-          <input type="text" name="username">
+          <input required type="text" name="username">
         </div>
         <div class="regField">
           <label>Password:</label>
-          <input type="password" name="password">
+          <input required type="password" name="password">
         </div>
         <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
         <div class="regField">
-          <input id="submitButt" type="submit" value="Sign In!">
+          <input id="submitButt" class="signinBtn" type="submit" value="Sign In!">
         </div>
       </div>
     </form>

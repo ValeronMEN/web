@@ -27,7 +27,7 @@
      <div id="logInField">
        <div id="profileField">
          <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
-         <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+         <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="data:image/jpg;base64, <%= user.avatar %>" width="66px" lenght="66px"></a></div>
          <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
        </div>
      </div>
@@ -38,8 +38,13 @@
        <p>There are users:</p>
        <% for (let i = 0; i < arr.length; i++) {  %>
          <div class="users">
-           <div><img class="editUserImg" alt='deleteUserImg' src="/pics/avatars/<%= arr[i].avatar %>"></div>
-           <div id="editUserInfo"><label><%= arr[i].firstname %> <%= arr[i].lastname %><br><br>Username: <%= arr[i].username %><br>E-mail: <%= arr[i].email %><br>Sex: <%= arr[i].sex %></label></div>
+           <div><img class="editUserImg" alt='deleteUserImg' src="data:image/jpg;base64, <%= arr[i].avatar %>"></div>
+           <div id="editUserInfo">
+             <label>
+               <%= arr[i].firstname %> <%= arr[i].lastname %><br><br>
+               Username: <%= arr[i].username %><br>E-mail: <%= arr[i].email %><br>Sex: <%= arr[i].sex %>
+             </label>
+           </div>
            <div id="isAdmin">
            <%if(arr[i].admin == true){%>
              <p id="admin">This user is admin</p>

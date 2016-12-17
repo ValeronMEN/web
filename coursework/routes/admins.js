@@ -6,18 +6,8 @@ var fs = require('fs');
 var passport       = require('passport');
 var LocalStrategy  = require('passport-local').Strategy;
 
-var file_functions = require('../modules/files');
-
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/pics/drugs/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
-  }
-});
-
-var image = multer({ storage: storage });
+var image = multer({ inMemory: true,
+                     storage: multer.memoryStorage({}) });
 
 router.get('/', ensureAuthenticated, function(req, res, next) {
   if(req.user.admin == true){
@@ -60,68 +50,76 @@ router.get('/orders', ensureAuthenticated, function(req, res, next) {
       if (err){
         throw err;
       }else{
-        var arr = [];
-        for(let i=0; i<orders.length; i++){
-          let drugsOrderArr = [];
-          User.getUserById(orders[i].owner, function(err, user){
-            if (err) throw err;
-            for(let j=0; j<orders[i].drugs.length; j++){
-              Drug.getDrugById(orders[i].drugs[j], function(err, drug){
-                if (null != drug){
-                  drugsOrderArr.push({
-                    name: drug.name,
-                    volumemass: drug.volumemass,
-                    unit: drug.unit,
-                    type: drug.type,
-                    price: drug.price,
-                    size: orders[i].sizes[j]
-                  });
-                }else{
-                  drugsOrderArr.push({
-                    name: "Unknown",
-                    volumemass: 0,
-                    unit: "Unknown",
-                    type: "Unknown",
-                    price: 0,
-                    size: orders[i].sizes[j]
-                  });
-                }
-                if (drugsOrderArr.length == orders[i].drugs.length){
-                  if (null == user){
-                    var owner_firstname = "Unknown";
-                    var owner_lastname = "Unknown";
-                    var owner_email = "Unknown";
+        if (null != orders[0]){
+          var arr = [];
+          for(let i=0; i<orders.length; i++){
+            let drugsOrderArr = [];
+            User.getUserById(orders[i].owner, function(err, user){
+              if (err) throw err;
+              for(let j=0; j<orders[i].drugs.length; j++){
+                Drug.getDrugById(orders[i].drugs[j], function(err, drug){
+                  if (null != drug){
+                    drugsOrderArr.push({
+                      name: drug.name,
+                      volumemass: drug.volumemass,
+                      unit: drug.unit,
+                      type: drug.type,
+                      price: drug.price,
+                      size: orders[i].sizes[j]
+                    });
                   }else{
-                    var owner_firstname = user.firstname;
-                    var owner_lastname = user.lastname;
-                    var owner_email = user.email;
-                  }
-                  arr.push({
-                    drugs: drugsOrderArr,
-                    owner_firstname: owner_firstname,
-                    owner_lastname: owner_lastname,
-                    owner_email: owner_email,
-                    status: orders[i].status,
-                    date: orders[i].creation_date,
-                    address: orders[i].address,
-                    phonenumber: orders[i].phonenumber,
-                    price: orders[i].price,
-                    id: orders[i]._id
-                  });
-                  if (arr.length == orders.length){
-                    var sortarr = arr.sort(function compareNumeric(a, b) {
-                       return a.status.localeCompare(b.status);
-                    });
-                    console.log(arr);
-                    res.render('adminorders', {
-                      arr: sortarr,
-                      bills: "UAH",
-                      csrfToken: req.csrfToken()
+                    drugsOrderArr.push({
+                      name: "Unknown",
+                      volumemass: 0,
+                      unit: "Unknown",
+                      type: "Unknown",
+                      price: 0,
+                      size: orders[i].sizes[j]
                     });
                   }
-                }
-              });
-            }
+                  if (drugsOrderArr.length == orders[i].drugs.length){
+                    if (null == user){
+                      var owner_firstname = "Unknown";
+                      var owner_lastname = "Unknown";
+                      var owner_email = "Unknown";
+                    }else{
+                      var owner_firstname = user.firstname;
+                      var owner_lastname = user.lastname;
+                      var owner_email = user.email;
+                    }
+                    arr.push({
+                      drugs: drugsOrderArr,
+                      owner_firstname: owner_firstname,
+                      owner_lastname: owner_lastname,
+                      owner_email: owner_email,
+                      status: orders[i].status,
+                      date: orders[i].creation_date,
+                      address: orders[i].address,
+                      phonenumber: orders[i].phonenumber,
+                      price: orders[i].price,
+                      id: orders[i]._id
+                    });
+                    if (arr.length == orders.length){
+                      var sortarr = arr.sort(function compareNumeric(a, b) {
+                         return a.status.localeCompare(b.status);
+                      });
+                      console.log(arr);
+                      res.render('adminorders', {
+                        arr: sortarr,
+                        bills: "UAH",
+                        csrfToken: req.csrfToken()
+                      });
+                    }
+                  }
+                });
+              }
+            });
+          }
+        }else{
+          res.render('adminorders', {
+            arr: [],
+            bills: "UAH",
+            csrfToken: req.csrfToken()
           });
         }
       }
@@ -206,7 +204,7 @@ router.post('/newdrug', ensureAuthenticated, image.single('image'), function(req
       var storage_conditions = req.body.storage_conditions;
       var mode_of_application = req.body.mode_of_application;
       var properties = req.body.properties;
-      var image = req.file.filename;
+      var image = req.file.buffer.toString('base64');
 
       req.checkBody('name', 'Name is required').notEmpty();
       req.checkBody('company', 'Company is required').notEmpty();
@@ -226,20 +224,8 @@ router.post('/newdrug', ensureAuthenticated, image.single('image'), function(req
 
       var errors = req.validationErrors();
       if(errors){
-        if (null != req.file.filename){
-          var old_path = "./public/pics/drugs/" + req.file.filename;
-          file_functions.deleteFile(old_path);
-        }
         res.render('newdrug', {errors: errors});
       }else{
-        //symptoms = symptoms.replace(/\r\n|\r|\n/g,"<br>");
-        //side_effects = side_effects.replace(/\r\n|\r|\n/g,"<br>");
-        //contraindications = contraindications.replace(/\r\n|\r|\n/g,"<br>");
-        //mode_of_application = mode_of_application.replace(/\r\n|\r|\n/g,"<br>");
-        //overdose = overdose.replace(/\r\n|\r|\n/g,"<br>");
-        //storage_conditions = storage_conditions.replace(/\r\n|\r|\n/g,"<br>");
-        //properties = properties.replace(/\r\n|\r|\n/g,"<br>");
-
         var newDrug = new Drug({
             name: name,
             company: company,
@@ -283,10 +269,6 @@ router.post('/users/deleteuser/:_id', ensureAuthenticated, function(req, res, ne
         }
         else{
           User.deleteUser(userToDelete._id, function(err, removingUser){
-            if (userToDelete.avatar != "default.png"){
-              var old_path = "./public/pics/avatars/" + userToDelete.avatar;
-              file_functions.deleteFile(old_path);
-            }
             res.redirect("/admins/users");
           });
         }

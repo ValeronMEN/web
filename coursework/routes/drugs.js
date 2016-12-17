@@ -1,18 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-var file_functions = require('../modules/files');
-
 router.post('/drug/:_id', ensureAuthenticated, function(req, res, next) {
   if(req.user.admin == true){
     Drug.getDrugById(req.params._id, function(err, drugToDelete){
       if (err){
         res.render('error');
-      }
-      else{
-        var old_path = "./public/pics/drugs/" + drugToDelete.image;
+      }else{
         Drug.deleteDrug(drugToDelete._id, function(err, drug){
-          file_functions.deleteFile(old_path);
           req.flash('success_msg', 'Successful removing!');
           res.redirect('/admins/newdrug');
         });
@@ -27,8 +22,7 @@ router.get('/drug/:_id', function(req, res, next) {
   Drug.getDrugById(req.params._id, function(err, drug){
     if ((null == drug)||(err == true)){
       res.render('error');
-    }
-    else{
+    }else{
       var admin = false;
       if (null != req.user){
         admin = req.user.admin;
@@ -49,7 +43,7 @@ router.get('/drug/:_id', function(req, res, next) {
       properties: drug.properties,
       _id: drug._id,
       admin: admin,
-      image: "/pics/drugs/"+drug.image});
+      image: drug.image});
     }
   });
 });
@@ -74,7 +68,7 @@ router.get('/:page', function(req, res, next){
         });
       });
     }else{
-      res.render("error");
+      res.redirect("/");
     }
   });
 })
@@ -82,8 +76,7 @@ router.get('/:page', function(req, res, next){
 function ensureAuthenticated(req, res, next){
   if(req.isAuthenticated()){
     return next();
-  }
-  else{
+  }else{
     req.flash('error_msg', 'You are not logged in');
     res.redirect('/users/login');
   }

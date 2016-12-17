@@ -34,7 +34,7 @@
     <%}else {%>
       <div id="profileField">
         <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
-        <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+        <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="data:image/jpg;base64, <%= user.avatar %>" width="66px" lenght="66px"></a></div>
         <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
       </div>
     <%} %>
@@ -44,7 +44,7 @@
 <div class="content">
   <div id="currentDrug">
     <div id="upperside">
-      <img class="currentImg" alt='<%= name %>' src="<%= image %>" width="300px" lenght="300px">
+      <img class="currentImg" alt='<%= name %>' src="data:image/jpg;base64, <%= image %>" width="300px" lenght="300px">
     </div>
     <div id="rightsideDrug">
       <label id="drugName"><%= name %></label><br>

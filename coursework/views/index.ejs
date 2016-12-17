@@ -37,7 +37,7 @@
     <%}else {%>
       <div id="profileField">
         <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
-        <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="/pics/avatars/<%= user.avatar %>" width="66px" lenght="66px"></a></div>
+        <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="data:image/jpg;base64, <%= user.avatar %>" width="66px" lenght="66px"></a></div>
         <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
       </div>
     <%} %>
@@ -72,23 +72,11 @@
       </div>
     </div>
   </div>
-  <!--
-  <div id='categories'>
-    <div id="categoriesField">
-      <form>
-        <button class="categoriesButtons">Category</button>
-        <button class="categoriesButtons">Category</button>
-        <button class="categoriesButtons">Category</button>
-        <button class="categoriesButtons">Category</button>
-      </form>
-    </div>
-  </div>
-  -->
   <div id="products">
     <% for (let i = arr.length - 1; i >= 0 ; i--) {  %>
       <div class="product">
         <a href="/drugs/drug/<%= arr[i]._id %>" class="productLink">
-          <img class="imgLink" alt="<%= arr[i].name %>" src="/pics/drugs/<%= arr[i].image %>">
+          <img class="imgLink" alt="<%= arr[i].name %>" src="data:image/jpg;base64, <%= arr[i].image %>">
           <br><label id="productName"><%= arr[i].name %></label>
           <br><label class="productInfo">type: <%= arr[i].volumemass %> <%= arr[i].unit %>, <%= arr[i].type %></label>
           <br><label>price: <%= arr[i].price %> UAH</label>
