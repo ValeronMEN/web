@@ -67,7 +67,7 @@
         <% for (let i = 0; i < arrN.length; i++) {  %>
           <div class="product">
             <a href="<%= arrN[i].link %>" class="productLink">
-              <img class="imgLink" alt="<%= arrN[i].name %>" src="<%= arrN[i].image %>">
+              <img class="imgLink" alt="<%= arrN[i].name %>" src="data:image/jpg;base64, <%= arrN[i].image %>">
               <br><label id="productName"><%= arrN[i].name %></label>
               <br><label class="productInfo">type: <%= arrN[i].volumemass %> <%= arrN[i].unit %>, <%= arrN[i].type %></label>
               <br><label>price: <%= arrN[i].price %> UAH</label>
@@ -80,7 +80,7 @@
         <% for (let i = 0; i < arrC.length; i++) {  %>
           <div class="product">
             <a href="<%= arrC[i].link %>" class="productLink">
-              <img class="imgLink" alt="<%= arrC[i].name %>" src="<%= arrC[i].image %>">
+              <img class="imgLink" alt="<%= arrC[i].name %>" src="data:image/jpg;base64, <%= arrC[i].image %>">
               <br><label id="productName"><%= arrC[i].name %></label>
               <br><label class="productInfo">type: <%= arrC[i].volumemass %> <%= arrC[i].unit %>, <%= arrC[i].type %></label>
               <br><label>price: <%= arrC[i].price %> UAH</label>
@@ -93,7 +93,7 @@
         <% for (let i = 0; i < arrS.length; i++) {  %>
           <div class="product">
             <a href="<%= arrS[i].link %>" class="productLink">
-              <img class="imgLink" alt="<%= arrS[i].name %>" src="<%= arrS[i].image %>">
+              <img class="imgLink" alt="<%= arrS[i].name %>"src="data:image/jpg;base64, <%= arrS[i].image %>">
               <br><label id="productName"><%= arrS[i].name %></label>
               <br><label class="productInfo">type: <%= arrS[i].volumemass %> <%= arrS[i].unit %>, <%= arrS[i].type %></label>
               <br><label>price: <%= arrS[i].price %> UAH</label>

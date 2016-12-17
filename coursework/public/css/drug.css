@@ -32,6 +32,7 @@ label#drugBasicInfo {
 }
 .drugNotBasicInfo {
   margin-left: 1%;
+  verflow: scroll;
 }
 label#drugName {
   font-size: 30px;

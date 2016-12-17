@@ -42,7 +42,7 @@ router.get('/:query', function(req, res, next){
         if (query.localeCompare(myDrug.name) == 0 && drugsNamesArr.length < 5){
           drugsNamesArr.push({
             "name": myDrug.name,
-            "image": "/pics/drugs/" + myDrug.image,
+            "image": myDrug.image,
             "link": "/drugs/drug/"+myDrug._id,
             "type": myDrug.type,
             "unit": myDrug.unit,
@@ -53,7 +53,7 @@ router.get('/:query', function(req, res, next){
         }else if(query.localeCompare(myDrug.company) == 0 && drugsCompaniesArr.length < 5){
           drugsCompaniesArr.push({
             "name": myDrug.name,
-            "image": "/pics/drugs/" + myDrug.image,
+            "image": myDrug.image,
             "link": "/drugs/drug/"+myDrug._id,
             "type": myDrug.type,
             "unit": myDrug.unit,
@@ -68,7 +68,7 @@ router.get('/:query', function(req, res, next){
           while ((pos = str.indexOf(target, pos + 1)) != -1) {
             drugsSymppropArr.push({
               "name": myDrug.name,
-              "image": "/pics/drugs/" + myDrug.image,
+              "image": myDrug.image,
               "link": "/drugs/drug/"+myDrug._id,
               "type": myDrug.type,
               "unit": myDrug.unit,
