@@ -7,6 +7,7 @@
   <script type="text/javascript" src="/scripts/cookies.js"></script>
   <script type="text/javascript" src="/scripts/focus.js"></script>
   <script type="text/javascript" src="/scripts/onload.js"></script>
+  <script type="text/javascript" src="/scripts/removedrug.js"></script>
   <title>vApteka</title>
  </head>
  <body>
@@ -70,15 +71,27 @@
     </div>
     <% if(admin == true) {%>
     <br>
-    <form method="post">
-       <input type="submit" value="Remove drug"></p>
-    </form>
+    <input type="button" value="Remove drug" id="show-button">
     <%}%>
  </div>
 </div>
+<div id="prompt-form-container">
+    <form method="post" id="prompt-form">
+      <div id="prompt-message"></div>
+      <input type="submit" value="Yes">
+      <input type="button" name="cancel" value="Cancel">
+    </form>
+  </div>
 <!-- Special part ends -->
 <div id="bottomOfSite">
   <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
 </div>
+<script>
+document.getElementById('show-button').onclick = function() {
+  showPrompt("Are you want to remove this item?", function(value) {
+    //
+  });
+};
+</script>
 </body>
 </html>

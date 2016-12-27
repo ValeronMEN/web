@@ -62,3 +62,16 @@ div.alert-success {
   color: #3A3;
   margin-top: 5px;
 }
+
+textarea {
+  border: solid 2px black;
+}
+input#submitButt {
+  padding: 10px;
+}
+input.basicFields {
+  border: solid 2px black;
+}
+label#labelNumber1, label#labelNumber2 {
+  color: red;
+}

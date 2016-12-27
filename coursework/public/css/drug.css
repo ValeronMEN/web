@@ -1,4 +1,4 @@
-﻿/* current drug */
+/* current drug */
 div#currentDrug {
   padding: 30px;
   width: 100%;
@@ -84,4 +84,56 @@ button.button:hover span {
 button.button:hover span:after {
   opacity: 1;
   right: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#prompt-form {
+  display: inline-block;
+  padding: 5px 5px 5px 5px;
+  width: 200px;
+  border: 1px solid black;
+  vertical-align: middle;
+  background-color: white;
+}
+
+#prompt-form-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: none;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+#prompt-form-container:before {
+  display: inline-block;
+  height: 100%;
+  content: '';
+  vertical-align: middle;
+}
+
+#cover-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+  opacity: 0.3;
+}
+
+#prompt-form input[name="text"] {
+  display: block;
+  margin: 5px;
+  width: 180px;
 }

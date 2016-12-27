@@ -37,27 +37,27 @@
       <div id="newDrugInsideContent1">
         <div class="regField">
           <label>Name:</label>
-          <input type="text" name="name">
+          <input id="basic1" class="basicFields" type="text" name="name">
         </div>
         <div class="regField">
           <label>Company:</label>
-          <input type="text" name="company">
+          <input id="basic2" class="basicFields" type="text" name="company">
         </div>
         <div class="regField">
-          <label>Volume or mass:</label>
-          <input type="text" name="volumemass">
+          <label id="labelNumber1"></label><label>Volume or mass:</label>
+          <input id="number1" class="basicFields" type="text" name="volumemass">
         </div>
         <div class="regField">
           <label>Unit:</label>
-          <input type="text" name="unit">
+          <input id="basic3" class="basicFields" type="text" name="unit">
         </div>
         <div class="regField">
           <label>Type:</label>
-          <input type="text" name="type">
+          <input id="basic4" class="basicFields" type="text" name="type">
         </div>
         <div class="regField">
-          <label>Price:</label>
-          <input type="text" name="price">
+          <label id="labelNumber2"></label><label>Price:</label>
+          <input id="number2" class="basicFields" type="text" name="price">
         </div>
       </div>
       <div id="newDrugComments1">
@@ -76,38 +76,38 @@
       <div id="newDrugInsideContent2">
         <div class="regField">
           <label>Symptoms:</label>
-          <textarea name="symptoms" rows="7" cols="60"></textarea>
+          <textarea id="textarea1" name="symptoms" rows="7" cols="60"></textarea>
         </div>
         <div class="regField">
           <label>Side effects:</label>
-          <textarea name="side_effects" rows="7" cols="60"></textarea>
+          <textarea id="textarea2" name="side_effects" rows="7" cols="60"></textarea>
         </div>
         <div class="regField">
           <label>Contraindications:</label>
-          <textarea name="contraindications" rows="7" cols="60"></textarea>
+          <textarea id="textarea3" name="contraindications" rows="7" cols="60"></textarea>
         </div>
         <div class="regField">
           <label>Overdose:</label>
-          <textarea name="overdose" rows="7" cols="60"></textarea>
+          <textarea id="textarea4" name="overdose" rows="7" cols="60"></textarea>
         </div>
         <div class="regField">
           <label>Storage conditions:</label>
-          <textarea name="storage_conditions" rows="7" cols="60"></textarea>
+          <textarea id="textarea5" name="storage_conditions" rows="7" cols="60"></textarea>
         </div>
         <div class="regField">
           <label>Mode of application:</label>
-          <textarea name="mode_of_application" rows="7" cols="60"></textarea>
+          <textarea id="textarea6" name="mode_of_application" rows="7" cols="60"></textarea>
         </div>
         <div class="regField">
           <label>Properties:</label>
-          <textarea name="properties" rows="7" cols="60"></textarea>
+          <textarea id="textarea7" name="properties" rows="7" cols="60"></textarea>
         </div>
         <div class="regField">
           <label>Choose .jpeg image:</label>
-          <input type="file" name="image" accept="image/jpeg">
+          <input id="imageInput" type="file" name="image" accept="image/jpeg">
         </div>
         <div class="regField">
-          <input id="submitButt" type="submit" value="Add new drug">
+          <input id="submitButt" type="submit" value="Add new drug" disabled>
         </div>
       </div>
     </form>
@@ -126,6 +126,79 @@
     <%} %>
   </div>
 </div>
+
+<script>
+var textarea = [];
+for (let i=1; i<8; i++){
+  textarea[i-1] = document.getElementById("textarea"+i);
+}
+sumbit = document.getElementById("submitButt");
+image = document.getElementById("imageInput");
+for (let i=0; i<4; i++){
+  textarea[i+7] = document.getElementById("basic"+(i+1));
+}
+var numbers = [];
+for (let i=1; i<3; i++){
+  numbers[i-1] = document.getElementById("number"+i);
+}
+
+for (let i=0; i<(7+4); i++){
+  textarea[i].oninput = function() {
+    if ("" != textarea[i].value){
+      textarea[i].style.border = "solid 2px #00FF00";
+      unlockButt();
+    }else{
+      textarea[i].style.border = "solid 2px red";
+      sumbit.disabled = 1;
+    }
+  };
+}
+
+for (let i=0; i<2; i++){
+  numbers[i].oninput = function() {
+    if ((!isNaN(numbers[i].value)) && (numbers[i].value != "")){
+      numbers[i].style.border = "solid 2px #00FF00";
+      document.getElementById("labelNumber"+(i+1)).innerHTML = "";
+      unlockButt();
+    }else{
+      numbers[i].style.border = "solid 2px red";
+      if (isNaN(numbers[i].value)){
+        document.getElementById("labelNumber"+(i+1)).innerHTML = "It's not a number! -> ";
+      }
+      if (numbers[i].value == ""){
+        document.getElementById("labelNumber"+(i+1)).innerHTML = "";
+      }
+      sumbit.disabled = 1;
+    }
+  };
+}
+
+image.onchange = function() {
+  if (image.value != ""){
+    unlockButt();
+  }else{
+    sumbit.disabled = 1;
+  }
+};
+
+unlockButt = function(){
+  var counter = 0;
+  for (let i=0; i<(7+4); i++){
+    if (textarea[i].value != ''){
+      counter++;
+    }
+  }
+  for (let i=0; i<2; i++){
+    if ((!isNaN(numbers[i].value)) && (numbers[i].value != "")){
+      counter++;
+    }
+  }
+  if (counter == (7+4+2) && image.value != ""){
+    sumbit.disabled = 0;
+  }
+}
+</script>
+
 <div id="bottomOfSite">
   <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
 </div>
