@@ -156,17 +156,17 @@ for (let i=0; i<(7+4); i++){
 
 for (let i=0; i<2; i++){
   numbers[i].oninput = function() {
-    if ((!isNaN(numbers[i].value)) && (numbers[i].value != "")){
+    if ((!isNaN(numbers[i].value)) && (numbers[i].value != "") && (numbers[i].value>=1)){
       numbers[i].style.border = "solid 2px #00FF00";
       document.getElementById("labelNumber"+(i+1)).innerHTML = "";
       unlockButt();
     }else{
       numbers[i].style.border = "solid 2px red";
+      if (numbers[i].value<1){
+        document.getElementById("labelNumber"+(i+1)).innerHTML = "Negative or bad number! -> ";
+      }
       if (isNaN(numbers[i].value)){
         document.getElementById("labelNumber"+(i+1)).innerHTML = "It's not a number! -> ";
-      }
-      if (numbers[i].value<1 && !isNaN(numbers[i].value)){
-        document.getElementById("labelNumber"+(i+1)).innerHTML = "Negative or bad number! -> ";
       }
       if (numbers[i].value == ""){
         document.getElementById("labelNumber"+(i+1)).innerHTML = "";
