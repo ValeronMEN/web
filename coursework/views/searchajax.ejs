@@ -11,15 +11,15 @@
   <script type="text/javascript" src="/scripts/onload.js"></script>
   <script type="text/javascript" src="/scripts/mustache.js"></script>
   <script id="my-list-template" type="x-tmpl-mustache">
+{{#drugs}}
   <div class="product" style="height: 100px; background-color: #ADFF2F">
-    {{#drugs}}
     <a href="/drugs/drug/{{_id}}" class="productLink">
       <br><label id="productName">{{name}}</label>
       <br><label class="productInfo">type: {{volumemass}} {{unit}}, {{type}}</label>
       <br><label class="productInfo">price: {{price}} UAH</label>
     </a>
-    {{/drugs}}
   </div>
+{{/drugs}}
   </script>
   <title>vApteka</title>
  </head>
