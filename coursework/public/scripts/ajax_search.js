@@ -11,7 +11,6 @@ $(window).on("load",function(){
 			case 40:  // стрелка вниз
 			break;
 			default:
-				// производим поиск только при вводе более 2х символов
 				if($(this).val().length>1){
           input_initial_value = $(this).val();
           var aName = $(this).val();

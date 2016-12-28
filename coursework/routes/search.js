@@ -16,6 +16,10 @@ router.get('/', function(req, res, next){
   }
 });
 
+router.get('/special/ajax',function(req,res){
+   res.render("searchajax");
+});
+
 router.get('/bytag/name',function(req,res){
   Drug.getDrugsByName(req.query.name, function(err, drugs){
     if(err)
