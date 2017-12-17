@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var bcrypt = require('bcryptjs');
+var shortId = require('short-mongo-id');
 
 router.get('/', ensureAuthenticated, function(req, res, next) {
   if(req.user.admin == 1){
@@ -64,6 +66,8 @@ router.post('/create_network', ensureAuthenticated, function(req, res, next){
           if(err) throw err;
           Network.addAdmin(network._id, req.user.username, function(err, old_network){
             if(err) throw err;
+            network.password = shortId(network._id);
+            network.save();
             res.redirect('/networks');
           });
         });

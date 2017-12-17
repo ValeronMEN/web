@@ -102,11 +102,66 @@ router.get('/join_network', ensureAuthenticated, function(req, res, next){
 
 router.post('/join_network', ensureAuthenticated, function (req, res, next) {
   var flatnumber = req.body.flatnumber;
+  var password = req.body.password;
+
+  req.checkBody('flatnumber', 'Flat number is required').notEmpty();
+  req.checkBody('password', 'Password is required').notEmpty();
+
+  var errors = req.validationErrors();
+  if(!errors){
+    Network.getNetworkByPassword(password, function(err, new_network){
+      if (!err){
+        // get user id
+        User.getUserById(req.user._id, function(err, received_user) {
+          if (!err){
+            if (received_user.network !== ''){
+              console.log('Not null');
+              // get old user network
+              Network.getNetworkById(received_user.network, function(err, network){
+                if (err) throw err;
+                // remove user from old network
+                Network.removeObjectsFromNetwork('users', req.user._id, function(err, unneeded_network1){
+                  if (err) throw err;
+                  // add user to network to connect
+                  Network.addUser(new_network._id, req.user._id, function(err, unneeded_network2){
+                    if (err) throw err;
+                    // add network to user
+                    received_user.network = new_network._id;
+                    res.redirect('/feed')
+                  });
+                });
+              });
+            }else{
+              console.log('Null');
+              // add user to network to connect
+              Network.addUser(new_network._id, req.user._id, function(err, unneeded_network2){
+                if (err) throw err;
+                // add network to user
+                received_user.network = new_network._id;
+                res.redirect('/feed')
+              });
+            }
+          }else{
+            res.redirect('/profile');
+          }
+        });
+      }else{
+        res.redirect('/profile')
+      }
+    });
+  }else{
+  }
+});
+
+/*
+router.post('/join_network', ensureAuthenticated, function (req, res, next) {
+  var flatnumber = req.body.flatnumber;
   var country = req.body.country;
   var city = req.body.city;
   var district = req.body.district;
   var street = req.body.street;
   var housenumber = req.body.housenumber;
+  var password = req.body.password;
 
   req.checkBody('country', 'Country is required').notEmpty();
   req.checkBody('city', 'City is required').notEmpty();
@@ -114,6 +169,7 @@ router.post('/join_network', ensureAuthenticated, function (req, res, next) {
   req.checkBody('street', 'Street is required').notEmpty();
   req.checkBody('housenumber', 'House number is required').isDecimal();
   req.checkBody('flatnumber', 'Flat number is required').notEmpty();
+  req.checkBody('password', 'Password is required').notEmpty();
 
   var errors = req.validationErrors();
   if(!errors){
@@ -122,41 +178,57 @@ router.post('/join_network', ensureAuthenticated, function (req, res, next) {
       city: city,
       district: district,
       street: street,
-      housenumber: housenumber
+      housenumber: housenumber,
+      password: password
     });
+    // get network to connect
     Network.getNetworkByAddress(user_network, function(err, new_network){
-      if (err){
-        res.redirect('/profile')
-      }else{
-        User.getUserById(req.user._id, function(err, received_user) {
-          if (err){
-            res.redirect('/profile');
-          }else{
-            if (received_user.network !== 'underfined'){
-              console.log('Not underfined');
-              Network.getNetworkById(received_user.network, function(err, network){
-                if (err) throw err;
-                Network.removeObjectsFromNetwork('users', req.user._id, function(err, unneeded_network1){
-                  Network.addUser(new_network._id, req.user._id, function(err, unneeded_network2){
+      bcrypt.genSalt(10, function(err, salt) {
+        if (!err){
+          // get user id
+          User.getUserById(req.user._id, function(err, received_user) {
+            if (!err){
+              if (received_user.network !== ''){
+                console.log('Not underfined');
+                // get old user network
+                Network.getNetworkById(received_user.network, function(err, network){
+                  if (err) throw err;
+                  // remove user from old network
+                  Network.removeObjectsFromNetwork('users', req.user._id, function(err, unneeded_network1){
                     if (err) throw err;
-                    received_user.network = new_network._id;
-                    res.redirect('/feed')
+                    // add user to network to connect
+                    Network.addUser(new_network._id, req.user._id, function(err, unneeded_network2){
+                      if (err) throw err;
+                      // add network to user
+                      received_user.network = new_network._id;
+                      res.redirect('/feed')
+                    });
                   });
                 });
-              });
+              }else{
+                console.log('Underfined');
+                // add user to network to connect
+                Network.addUser(new_network._id, req.user._id, function(err, unneeded_network2){
+                  if (err) throw err;
+                  // add network to user
+                  received_user.network = new_network._id;
+                  res.redirect('/feed')
+                });
+              }
             }else{
-              //
+              res.redirect('/profile');
             }
-          }
-        });
-      }
+          });
+        }else{
+          res.redirect('/profile')
+        }
+      });
     });
   }else{
     res.redirect('/profile/join_network');
   }
 });
-
-
+*/
 
 
 function ensureAuthenticated(req, res, next){

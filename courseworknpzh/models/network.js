@@ -3,14 +3,15 @@ var mongoose = require("mongoose");
 var networkSchema = new mongoose.Schema( {
   admins: [ String ],
   users: [ String ],
-  country: { type: String, default: 'Ukraine' },
-  city: { type: String, default: 'Kiev' },
-  district: { type: String },
-  street: { type: String },
-  housenumber: { type: Number },
+  country: { type: String, default: 'Ukraine', required: true },
+  city: { type: String, default: 'Kiev', required: true },
+  district: { type: String, required: true },
+  street: { type: String, required: true },
+  housenumber: { type: Number, required: true },
   polls: [ {type: mongoose.Schema.Types.ObjectId, ref :'Poll'} ],
   requests: [ {type: mongoose.Schema.Types.ObjectId, ref :'Request'} ],
   notifications: [ {type: mongoose.Schema.Types.ObjectId, ref :'Notification'} ], // NotificationModel
+  password: { type: String },
 },{
   versionKey: false
 });
@@ -123,19 +124,22 @@ module.exports.removeObjectsFromNetwork = function(objects, id, callback)
     callback);
 }
 
-module.exports.getNetworkByAddress = function(network, callback){
-  var query = Network.findOne({
-    'country': network.country,
-    'city': network.city,
-    'district': network.district,
-    'street': network.street,
-    'housenumber': network.housenumber
-  });
+module.exports.getNetworkByAddress = function(network, callback)
+{
+  var query = {
+    country: network.country,
+    city: network.city,
+    district: network.district,
+    street: network.street,
+    housenumber: network.housenumber
+  };
+  Network.findOne(query,callback);
 }
 
-/*
-module.exports.getNetworkByAddress = function(address, callback){
-  var query = {username: username};
-  Network.findOne(query, callback);
+module.exports.getNetworkByPassword = function(password, callback)
+{
+  var query = {
+    password: password
+  };
+  Network.findOne(query,callback);
 }
-*/
