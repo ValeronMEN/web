@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var passport       = require('passport');
+var LocalStrategy  = require('passport-local').Strategy;
+var bcrypt = require('bcryptjs');
 
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index', { csrfToken: req.csrfToken() });
 });
 
 router.get('/login', function(req, res, next){
@@ -17,7 +20,7 @@ router.get('/login', function(req, res, next){
 });
 
 router.post('/login',
-  passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login', failureFlash: true}),
+  passport.authenticate('local', {successRedirect:'/', failureRedirect:'/login'}), // , failureFlash: true
   function(req, res) {
     res.redirect('/');
 });
@@ -45,23 +48,21 @@ router.post('/register', function(req, res){
     var confirmPassword = req.body.confirmPassword;
     var phonenumber = req.body.phonenumber;
 
-    // var flatnumber = req.body.flatnumber;
-    // req.checkBody('flatnumber', 'Flat number is required').notEmpty();
-
     req.checkBody('firstname', 'First name is required').notEmpty();
     req.checkBody('lastname', 'Last name is required').notEmpty();
     req.checkBody('email', 'Email is required').isEmail();
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
     req.checkBody('confirmPassword', 'Passwords do not match').equals(req.body.password);
-    req.checkBody('phonenumber', 'Phone number is required').notEmpty().isMobilePhone('en-UA');
+    req.checkBody('phonenumber', 'Phone number is required').notEmpty()
+    // .isMobilePhone('uk-UA');
 
     User.getUserByUsername(username, function(err, user){
       if (null == user){
         var errors = req.validationErrors();
 
         if(errors){
-          res.render('signup', {
+          res.render('register', {
             errors: errors,
             csrfToken: req.csrfToken()
           });

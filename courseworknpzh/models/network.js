@@ -28,6 +28,19 @@ module.exports.getNetworkObjectsById = function(id, objectName, callback){
   }).exec(callback);
 }
 
+module.exports.getAllNetworkObjectsById = function(id, callback){
+  Network.findById(id).populate({
+      path: 'poll',
+      populate: { path: 'poll' }
+  }).populate({
+      path: 'notification',
+      populate: { path: 'notification' }
+  }).populate({
+      path: 'request',
+      populate: { path: 'request' }
+  }).exec(callback);
+}
+
 module.exports.updateNetwork = function(id, network, options, callback){
   var query = {_id: id};
   var updateObject = {
@@ -62,9 +75,53 @@ module.exports.addAdmin = function(id, new_admin, callback){
       id,
       {$push: {admins: new_admin}},
       { safe: true, upsert: true, new: true },
-      function(err, model) { console.log(err); }
+      callback
   );
 };
+
+module.exports.addNotification = function(id, new_notification, callback){
+  Network.findByIdAndUpdate(
+      id,
+      {$push: {notifications: new_notification}},
+      { safe: true, upsert: true, new: true },
+      callback
+  );
+};
+
+module.exports.addRequest = function(id, new_request, callback){
+  Network.findByIdAndUpdate(
+      id,
+      {$push: {requests: new_request}},
+      { safe: true, upsert: true, new: true },
+      callback
+  );
+};
+
+module.exports.addUser = function(id, new_user, callback){
+  Network.findByIdAndUpdate(
+      id,
+      {$push: {users: new_user}},
+      { safe: true, upsert: true, new: true },
+      callback
+  );
+};
+
+module.exports.addPoll = function(id, new_poll, callback){
+  Network.findByIdAndUpdate(
+      id,
+      {$push: {polls: new_poll}},
+      { safe: true, upsert: true, new: true },
+      callback
+  );
+};
+
+module.exports.removeObjectsFromNetwork = function(objects, id, callback)
+{
+  Network.update({},
+    {"$pull": { objects: id }},
+    {multi: true},
+    callback);
+}
 
 module.exports.getNetworkByAddress = function(network, callback){
   var query = Network.findOne({
@@ -74,7 +131,6 @@ module.exports.getNetworkByAddress = function(network, callback){
     'street': network.street,
     'housenumber': network.housenumber
   });
-  console.log(query._id)
 }
 
 /*

@@ -1,1 +1,11 @@
 <h1>Networks</h1>
+<% for (let i = networks.length-1; i >= 0; i--) {  %>
+  Street: <%= networks[i].street %><br>
+  ID: <%= networks[i]._id %><br>
+  <form method="post" accept-charset="UTF-8">
+    <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+    <input type="hidden" name="id" value="<%=networks[i]._id%>">
+    <input class="signupBtn" type="submit" name="search" value="delete">
+  </form>
+  admins: <%= networks[i].admins %><br><br>
+<%}%>

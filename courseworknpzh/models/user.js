@@ -12,7 +12,7 @@ var userSchema = new mongoose.Schema( {
   phonenumber: { type: String, required: true },
   admin: { type: Number, default: 0 }, // for default set user (code = 0)
   avatar: { type: String, default: './public/images/avatars/default.jpg' },
-  network: { type: mongoose.Schema.Types.ObjectId, ref :'Network', default: -1 },
+  network: { type: mongoose.Schema.Types.ObjectId, ref :'Network' },
 },{
   versionKey: false
 });
