@@ -1,0 +1,17 @@
+<h1>hi</h1>
+<form method="post" accept-charset="UTF-8">
+  <div id="regInsideContent">
+    <div class="regField">
+      <label>Login:</label>
+      <input required type="text" name="username">
+    </div>
+    <div class="regField">
+      <label>Password:</label>
+      <input required type="password" name="password">
+    </div>
+    <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+    <div class="regField">
+      <input id="submitButt" class="signinBtn" type="submit" value="Sign In!">
+    </div>
+  </div>
+</form>
