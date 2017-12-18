@@ -5,7 +5,15 @@ var LocalStrategy  = require('passport-local').Strategy;
 var bcrypt = require('bcryptjs');
 
 router.get('/', function(req, res, next) {
-  res.render('index', { csrfToken: req.csrfToken() });
+  res.render('home/index', { csrfToken: req.csrfToken() });
+});
+
+router.get('/login/panel',function(req,res){
+  if(req.user.admin == 0){
+    res.redirect("/profile");
+  }else if(req.user.admin == 1){
+    res.redirect("/dashboard");
+  }
 });
 
 router.get('/login', function(req, res, next){
@@ -20,7 +28,7 @@ router.get('/login', function(req, res, next){
 });
 
 router.post('/login',
-  passport.authenticate('local', {successRedirect:'/', failureRedirect:'/login'}), // , failureFlash: true
+  passport.authenticate('local', {successRedirect:'/login/panel', failureRedirect:'/#login'}), // , failureFlash: true
   function(req, res) {
     res.redirect('/');
 });
@@ -35,7 +43,9 @@ router.get('/register', function(req, res, next) {
     res.render('register', { csrfToken: req.csrfToken() });
   }
   else{
-    res.redirect("/");
+    if(req.user.admin == 0)
+        res.redirect("/profile");
+    res.redirect("/dashboard")
   }
 });
 
@@ -82,13 +92,13 @@ router.post('/register', function(req, res){
             }else{
               console.log(user);
               // req.flash('success_msg', 'You are registred and now can log in');
-              res.redirect('login');
+              res.redirect('/#login');
             }
           });
         }
     }else{
       // req.flash('error_msg', "Username is busy");
-      res.redirect('register');
+      res.redirect('/#register');
     };
   });
 });

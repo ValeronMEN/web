@@ -1,20 +1,31 @@
 {
-  "name": "courseworknpzh",
-  "version": "0.0.0",
-  "private": true,
+  "name": "course3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "body-parser": "~1.18.2",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "connect-flash": "*",
+    "cookie-parser": "*",
+    "csurf": "*",
     "ejs": "*",
-    "express": "^4.15.5",
-    "flash": "^1.1.0",
-    "morgan": "~1.9.0",
-    "nodemon": "^1.13.3",
-    "pug": "2.0.0-beta11",
-    "serve-favicon": "~2.4.5"
-  }
+    "ejs-mate": "*",
+    "express": "*",
+    "express-session": "*",
+    "express-validator": "*",
+    "flash": "*",
+    "mongoose": "*",
+    "morgan": "^1.9.0",
+    "multer": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "serve-favicon": "*",
+    "short-mongo-id": "*"
+  },
+  "author": "",
+  "license": "ISC"
 }

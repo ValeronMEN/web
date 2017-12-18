@@ -19,7 +19,7 @@ var storage = multer.diskStorage({
 var avatar = multer({ storage: storage });
 
 router.get('/', ensureAuthenticated, function(req, res, next){
-    res.render('profile', {
+    res.render('profile/dashboard', {
       user: req.user,
       csrfToken: req.csrfToken()
     });
@@ -32,14 +32,99 @@ router.post('/', ensureAuthenticated, avatar.single('avatar'), function (req, re
       myuser.avatar = req.file.filename;
       User.updateUser(req.user.id, myuser, {}, function(err, mynewuser){
         if(err) throw err;
-        res.redirect('/profile');
+          res.redirect('/profile');
       });
     });
   }
   else{
-    res.redirect('/profile');
+      res.redirect('/profile');
   }
 });
+
+// render unknown
+router.get('/requests', ensureAuthenticated, function(req, res, next){
+  Request.getRequestByAuthor(req.user._id, function(err, requests){
+    console.log(requests);
+    res.render('requests_user', {
+      requests: requests,
+      csrfToken: req.csrfToken()
+    });
+  });
+});
+
+// render unknown
+router.post('/requests', ensureAuthenticated, function(req, res, next) {
+  if(req.user.admin == 0){
+    Request.deleteRequest(req.body.id, function(err, request){
+      if (err) throw err;
+      res.redirect("/profile/requests");
+    });
+  }else{
+    res.redirect("/");
+  }
+});
+
+// render unknown
+router.get('/notifications', ensureAuthenticated, function(req, res, next) {
+  if(req.user.admin == 0){
+    NotificationModel.getNotificationsByNetwork(req.user.network, function(err, notifications){
+      if (err) throw err;
+      console.log(notifications);
+      console.log('why');
+      res.render('notifications', {
+        notifications: notifications,
+        csrfToken: req.csrfToken()
+      });
+    });
+  }else{
+    res.redirect("/");
+  }
+});
+
+// render unknown
+router.get('/create_request', ensureAuthenticated, function(req, res, next){
+  Category.getCategories(function(err, categories){
+    res.render('create_request', {
+      categories: categories,
+      csrfToken: req.csrfToken()
+    });
+  });
+});
+
+// render unknown
+router.post('/create_request', ensureAuthenticated, function(req, res, next){
+    if (req.user.admin == 0){
+      var title = req.body.title;
+      var text = req.body.text;
+      var category = req.body.category;
+
+      req.checkBody('title', 'Title is required').notEmpty();
+      req.checkBody('text', 'Text is required').notEmpty();
+      req.checkBody('category', 'Category is required').notEmpty();
+
+      var errors = req.validationErrors();
+      if(!errors){
+        var newRequest = new Request({
+          title: title,
+          text: text,
+          category: category,
+          author: req.user._id
+        });
+
+        Request.createRequest(newRequest, function(err, request){
+          if(err) throw err;
+          Network.addRequest(req.user.network, request, function(err, old_network){
+            if(err) throw err;
+            res.redirect('/profile/requests');
+          });
+        });
+      }else{
+        res.redirect('/');
+      }
+    }else{
+      res.redirect('/');
+    }
+  });
 
 router.post('/change_password', ensureAuthenticated, function(req, res){
   if ('' !== req.body.oldPassword && '' !== req.body.newPassword && '' !== req.body.newConfirmPassword){
@@ -58,22 +143,22 @@ router.post('/change_password', ensureAuthenticated, function(req, res){
                     updateUser.password = hash;
                     updateUser.save();
                     // req.flash('success_msg', "Password has changed");
-                    res.redirect('/profile');
+                      res.redirect('/profile');
                 });
               });
             });
           }else{
             // req.flash('error_msg', "New passwords don't match or absent");
-            res.redirect('/profile');
+              res.redirect('/profile');
           }
         }else{
           // req.flash('error_msg', "Old and new passwords do not match");
-          res.redirect('/profile');
+            res.redirect('/profile');
         }
     });
   }else{
     // req.flash('error_msg', "One or several fields are required");
-    res.redirect('/profile');
+      res.redirect('/profile');
   }
 });
 
@@ -120,14 +205,17 @@ router.post('/join_network', ensureAuthenticated, function (req, res, next) {
               Network.getNetworkById(received_user.network, function(err, network){
                 if (err) throw err;
                 // remove user from old network
-                Network.removeObjectsFromNetwork('users', req.user._id, function(err, unneeded_network1){
+                Network.removeUsersFromNetwork(req.user._id, function(err, unneeded_network1){
                   if (err) throw err;
                   // add user to network to connect
                   Network.addUser(new_network._id, req.user._id, function(err, unneeded_network2){
                     if (err) throw err;
                     // add network to user
-                    received_user.network = new_network._id;
-                    res.redirect('/feed')
+                    received_user.network = new_network._id,
+                    received_user.flatnumber = flatnumber
+                    User.updateUser(req.user._id, received_user, {}, function(err, updated_user){
+                      res.redirect('/');
+                    });
                   });
                 });
               });
@@ -137,106 +225,32 @@ router.post('/join_network', ensureAuthenticated, function (req, res, next) {
               Network.addUser(new_network._id, req.user._id, function(err, unneeded_network2){
                 if (err) throw err;
                 // add network to user
-                received_user.network = new_network._id;
-                res.redirect('/feed')
+                received_user.network = new_network._id,
+                received_user.flatnumber = flatnumber
+                User.updateUser(req.user._id, received_user, {}, function(err, updated_user){
+                  res.redirect('/');
+                });
               });
             }
           }else{
-            res.redirect('/profile');
+            res.redirect('/');
           }
         });
       }else{
-        res.redirect('/profile')
+        res.redirect('/');
       }
     });
   }else{
+    res.redirect('/');
   }
 });
-
-/*
-router.post('/join_network', ensureAuthenticated, function (req, res, next) {
-  var flatnumber = req.body.flatnumber;
-  var country = req.body.country;
-  var city = req.body.city;
-  var district = req.body.district;
-  var street = req.body.street;
-  var housenumber = req.body.housenumber;
-  var password = req.body.password;
-
-  req.checkBody('country', 'Country is required').notEmpty();
-  req.checkBody('city', 'City is required').notEmpty();
-  req.checkBody('district', 'District is required').notEmpty();
-  req.checkBody('street', 'Street is required').notEmpty();
-  req.checkBody('housenumber', 'House number is required').isDecimal();
-  req.checkBody('flatnumber', 'Flat number is required').notEmpty();
-  req.checkBody('password', 'Password is required').notEmpty();
-
-  var errors = req.validationErrors();
-  if(!errors){
-    var user_network = new Network({
-      country: country,
-      city: city,
-      district: district,
-      street: street,
-      housenumber: housenumber,
-      password: password
-    });
-    // get network to connect
-    Network.getNetworkByAddress(user_network, function(err, new_network){
-      bcrypt.genSalt(10, function(err, salt) {
-        if (!err){
-          // get user id
-          User.getUserById(req.user._id, function(err, received_user) {
-            if (!err){
-              if (received_user.network !== ''){
-                console.log('Not underfined');
-                // get old user network
-                Network.getNetworkById(received_user.network, function(err, network){
-                  if (err) throw err;
-                  // remove user from old network
-                  Network.removeObjectsFromNetwork('users', req.user._id, function(err, unneeded_network1){
-                    if (err) throw err;
-                    // add user to network to connect
-                    Network.addUser(new_network._id, req.user._id, function(err, unneeded_network2){
-                      if (err) throw err;
-                      // add network to user
-                      received_user.network = new_network._id;
-                      res.redirect('/feed')
-                    });
-                  });
-                });
-              }else{
-                console.log('Underfined');
-                // add user to network to connect
-                Network.addUser(new_network._id, req.user._id, function(err, unneeded_network2){
-                  if (err) throw err;
-                  // add network to user
-                  received_user.network = new_network._id;
-                  res.redirect('/feed')
-                });
-              }
-            }else{
-              res.redirect('/profile');
-            }
-          });
-        }else{
-          res.redirect('/profile')
-        }
-      });
-    });
-  }else{
-    res.redirect('/profile/join_network');
-  }
-});
-*/
-
 
 function ensureAuthenticated(req, res, next){
-  if(req.isAuthenticated()){
+  if(req.isAuthenticated() && req.user.admin == 0){
     return next();
   }
   else{
-    res.redirect('/login');
+    res.redirect('/#login');
   }
 }
 

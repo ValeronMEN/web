@@ -3,8 +3,9 @@ var mongoose = require("mongoose");
 var notificationSchema = new mongoose.Schema( {
   title: { type: String },
   text: { type: String },
-  author: { type: String },
+  author: { type: mongoose.Schema.Types.ObjectId, ref :'User' },
   creationdate: { type: Date, default: Date.now },
+  network: { type: mongoose.Schema.Types.ObjectId, ref :'Network' },
 },{
   versionKey: false
 });
@@ -22,6 +23,7 @@ module.exports.updateNotification = function(id, notification, options, callback
     text: notification.text,
     author: notification.author,
     creationdate: notification.creationdate,
+    network: notification.network,
   };
   NotificationModel.findOneAndUpdate(query, updateObject, options, callback);
 };
@@ -37,4 +39,10 @@ module.exports.getNotifications = function(callback, limit){
 
 module.exports.getNotificationById = function(id, callback){
   NotificationModel.findById(id, callback);
+};
+
+module.exports.getNotificationsByNetwork = function(network, callback){
+  NotificationModel.find({
+    'network': network
+  }, callback);
 };

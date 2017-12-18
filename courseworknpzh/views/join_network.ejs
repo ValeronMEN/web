@@ -9,6 +9,7 @@
   <!-- Otdelno -->
   <label>Password:</label>
   <input required type="text" name="password">
+  <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
   <div class="regField">
     <input id="submitButt" class="signupBtn" type="submit" value="Sign Me Up!">
   </div>

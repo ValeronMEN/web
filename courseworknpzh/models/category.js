@@ -9,7 +9,7 @@ var categorySchema = new mongoose.Schema( {
 var Category = module.exports = mongoose.model("Category", categorySchema);
 
 module.exports.createCategory = function(category, callback){
-  Category.create(request, callback);
+  Category.create(category, callback);
 };
 
 module.exports.updateCategory = function(id, category, options, callback){

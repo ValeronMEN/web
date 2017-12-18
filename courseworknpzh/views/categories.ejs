@@ -1,0 +1,11 @@
+<h1>categories</h1>
+<% for (let i = categories.length-1; i >= 0; i--) {  %>
+  ID: <%= categories[i]._id %><br>
+  Name: <%= categories[i].name %><br>
+  <form method="post" accept-charset="UTF-8">
+    <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+    <input type="hidden" name="id" value="<%=categories[i]._id%>">
+    <input class="signupBtn" type="submit" name="search" value="delete">
+  </form>
+  <br><br>
+<%}%>

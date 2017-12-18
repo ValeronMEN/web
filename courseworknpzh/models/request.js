@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 
 var requestSchema = new mongoose.Schema( {
+  title: { type: String },
   text: { type: String },
   category: { type: String },
   author: { type: String },
@@ -19,10 +20,10 @@ module.exports.createRequest = function(request, callback){
 module.exports.updateRequest = function(id, request, options, callback){
   var query = {_id: id};
   var updateObject = {
+    title: request.title,
     text: request.text,
     category: request.category,
-    owner: request.owner,
-    network: request.network,
+    author: request.author,
     creationdate: request.creationdate,
     status: request.status,
   };
@@ -38,6 +39,16 @@ module.exports.getRequests = function(callback, limit){
   Request.find(callback).limit(limit);
 };
 
+module.exports.getRequestsByCategory = function(input_category, callback, limit){
+  Request.findOne({ category: input_category }, callback).limit(limit);
+};
+
 module.exports.getRequestById = function(id, callback){
   Request.findById(id, callback);
+};
+
+module.exports.getRequestByAuthor = function(author, callback){
+  Request.find({
+    'author': author
+   }, callback);
 };

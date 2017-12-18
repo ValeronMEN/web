@@ -101,7 +101,7 @@ module.exports.addRequest = function(id, new_request, callback){
 module.exports.addUser = function(id, new_user, callback){
   Network.findByIdAndUpdate(
       id,
-      {$push: {users: new_user}},
+      {$push: { users: new_user }},
       { safe: true, upsert: true, new: true },
       callback
   );
@@ -110,16 +110,24 @@ module.exports.addUser = function(id, new_user, callback){
 module.exports.addPoll = function(id, new_poll, callback){
   Network.findByIdAndUpdate(
       id,
-      {$push: {polls: new_poll}},
+      {$push: { polls: new_poll }},
       { safe: true, upsert: true, new: true },
       callback
   );
 };
 
-module.exports.removeObjectsFromNetwork = function(objects, id, callback)
+module.exports.removeRequestsFromNetwork = function(id, callback)
 {
   Network.update({},
-    {"$pull": { objects: id }},
+    {"$pull": { requests: id }},
+    {multi: true},
+    callback);
+}
+
+module.exports.removeUsersFromNetwork = function(id, callback)
+{
+  Network.update({},
+    {"$pull": { users: id }},
     {multi: true},
     callback);
 }
@@ -138,8 +146,12 @@ module.exports.getNetworkByAddress = function(network, callback)
 
 module.exports.getNetworkByPassword = function(password, callback)
 {
-  var query = {
-    password: password
-  };
-  Network.findOne(query,callback);
+  Network.findOne({ password: password }, callback);
 }
+
+module.exports.getRequestByStreetAndHousenumber = function(street, housenumber, callback){
+  Request.find({
+    'street': street,
+    'housenumber': housenumber
+  }, callback);
+};
