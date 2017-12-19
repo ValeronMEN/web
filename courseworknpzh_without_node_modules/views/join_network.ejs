@@ -1,0 +1,16 @@
+<h1>Join network</h1>
+<form method="post" accept-charset="UTF-8">
+  <div id="regInsideContent">
+    <div class="regField">
+      <label>Flat number:</label>
+      <input required type="text" name="flatnumber">
+    </div>
+  </div>
+  <!-- Otdelno -->
+  <label>Password:</label>
+  <input required type="text" name="password">
+  <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+  <div class="regField">
+    <input id="submitButt" class="signupBtn" type="submit" value="Sign Me Up!">
+  </div>
+</form>

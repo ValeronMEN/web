@@ -1,0 +1,29 @@
+<h1>Create network</h1>
+<form method="post" accept-charset="UTF-8">
+  <div id="regInsideContent">
+    <div class="regField">
+      <label>Country:</label>
+      <input required type="text" name="country">
+    </div>
+    <div class="regField">
+      <label>City:</label>
+      <input required type="text" name="city">
+    </div>
+    <div class="regField">
+      <label>District:</label>
+      <input required type="text" name="district">
+    </div>
+    <div class="regField">
+      <label>Street:</label>
+      <input required type="text" name="street">
+    </div>
+    <div class="regField">
+      <label>House number:</label>
+      <input required type="text" name="housenumber">
+    </div>
+  </div>
+  <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+  <div class="regField">
+    <input id="submitButt" class="signupBtn" type="submit" value="Sign Me Up!">
+  </div>
+</form>
