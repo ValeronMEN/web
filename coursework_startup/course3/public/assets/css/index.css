@@ -1,0 +1,395 @@
+.remodal{
+  background: #191a24;
+  width: 40%;
+
+
+}
+.my-label{
+  color: white;
+  /* float: left; */
+  padding: 10px 0;
+  font-weight: bold;
+  font-size: 1.1em;
+  text-align: center;
+}
+.my-text-inputs{
+  color: white !important;
+  margin-bottom: 25px;
+}
+.my-btn{
+  height: 50px;
+  margin-top: 25px !important;
+  border: 0 !important;
+  line-height: 1em;
+  border-radius: 0 !important;
+}
+.my-form-header{
+  margin-bottom: 2em !important
+}
+.my-form-header h2{
+  margin:0
+}
+.my-form-links{
+  text-decoration:none;
+  color: white;
+  float:left;
+  border: 0;
+  margin-top: 30px;
+}
+.my-right{
+  float: right !important;
+}
+.my-bg-graph{
+  background:#191a24 !important
+  border: 1px solid #fff !important;
+  color: #73879C;
+}
+.flot-tick-label{
+  color:white !important;
+}
+.calendar-table{
+  background: inherit;
+}
+.table-condensed{
+  background: inherit
+}
+.daterangepicker {
+  background: #191a24;
+}
+.report-item-shortDesc p{
+    font-size: 1.3em;
+      line-height: 1.5em;
+      max-height: 75px;
+      overflow: hidden;
+      float: left;
+      text-transform: capitalize;
+}
+.report-item-shortDesc span{
+  font-size: 1.3em;
+    line-height: 1.5em;
+    max-height: 75px;
+    overflow: hidden;
+    color: #3eccb5;
+    margin-left: 8px;
+}
+.report-item-date{
+  text-align: right;
+}
+.report-item{
+  position: relative;
+  padding: 25px 0;
+  transition: all 250ms;
+}
+
+.report-item-title h3{
+  font-weight: bold;
+  font-size: 1.7em;
+}
+.report-item-author h4{
+  font-style: italic;
+}
+.report-item-date h4{
+  font-style: italic
+}
+.report-item::after{
+  content: "";
+  display: block;
+  width: 85%;
+  height: 1px;
+  margin:auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right:0;
+  background: #3eccb5;
+
+
+}
+a{
+  border: none;
+}
+.report-item:hover{
+  background: #22313f;
+
+}
+.report-item-author-date{
+  padding: 0;
+}
+.icon-location{
+
+}
+.select-wrapper-category{
+  float: right;
+}
+.request-network{
+  height: 150px;
+}
+.request-network img{
+    max-width: 100%;
+    height: 80px
+}
+.request-network input[type="text"]{
+  float: left; margin-right:1%;
+}
+.request-network-icon{
+  float: left;
+  text-align: center;
+}
+.request-network-icon a{
+  text-align: center;
+}
+.request-network span{
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 1.1em;
+}
+#category{
+  color: white;
+  font-size: 1.1em;
+  margin-top: 7px;
+}
+#categoryUser{
+  color: white;
+  font-size: 1.1em;
+  margin-top: 7px;
+  height: 51px;
+}
+.report-status{
+  text-align: right;
+  font-size: 1.2em;
+  font-style: italic;
+}
+.alt a{
+  border: 1px solid white;
+      display: block;
+      width: 100%;
+      height: 35px;
+      text-align: center;
+      line-height: 35px;
+      transition: all 250ms !important;
+}
+.alt a:hover{
+  background: #3eccb5;
+  color: white !important;
+  border:1px solid #3eccb5;
+}
+.networkList-search a{
+  background: transparent;
+    display: block;
+    width: 80%;
+    height: 53px;
+    border: 1px solid #5e5f66;
+    border-radius: 3px;
+    padding: 0;
+    line-height: 53px
+}
+.networkList-search-container{
+  padding: 0;
+  height: 110px;
+}
+.network-create-form{
+  clear: none;
+  float: left;
+}
+.network-create-form label{
+  float: left;
+}
+.user-report-item{
+
+padding: 1em 0;
+}
+.user-report-item-shortDesc{
+    height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 1.1em;
+}
+.user-report-status{
+
+}
+.user-report-item-date{
+  text-align: left;    font-style: italic;
+}
+.user-report-item-author{
+  text-align: right;    font-style: italic;
+}
+.user-request-container{
+  position: relative;
+
+}
+.userSelectWrapper::before{
+  top: 50%
+}
+.my-textArea{
+  display: block;
+  width: 100%;
+  resize: none;
+  outline: none;
+  color: #fff;
+    border: solid 1px rgba(255, 255, 255, 0.3);
+}
+.my-textArea:focus{
+  border: 1px solid #3eccb5;
+  outline:none;
+}
+.data-remodal-action{
+  width: 60%;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border:  solid 1px #525151;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #191a24 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.indexDropDown{
+  position: absolute;
+background: #fff;
+margin-top: 0;
+border: 1px solid #D9DEE4;
+-webkit-box-shadow: none;
+right: 0 !important;
+top: 50px !important;
+width: 220px;
+left: 50% !important;
+}
+#nav{
+  position: relative;
+}
+.request-btn{
+  margin-top: 0 !important;
+}
+.notification-container-li p{
+  font-size: 1.1em;
+  margin:0;
+  margin-top: 10px;
+  text-transform: capitalize;
+}
+.report-status{
+  text-transform: capitalize;
+}
+.notification-container-li{
+  transition: all 200ms;
+  cursor: hand;
+}
+.notification-container-li:hover{
+  background: #22313F;
+}
+.my-menu{
+  transition: all 250ms;
+}
+.boldTitle{
+  font-weight: bold;
+}
+
+.requestContainer a{
+padding:0;
+}
+.requestContainer a:hover{
+  color: white !important;
+}
+.report-item-title h3, h4{
+  text-transform: capitalize;
+}
+.notification-container{
+  border: none;
+  padding:0;
+}
+.notification-container-li h2{
+  text-transform: capitalize;
+  font-weight: bold;
+}
+.notification-container-li{
+  height: 130px;
+  overflow: hidden;
+}
+.notification-container-li a{
+  display: block;
+}
+.notification-container-li a:hover{
+  color: #fff !important;
+}
+.categories-wrapper h4{
+  font-weight: bold;
+  font-size: 2em;
+}
+.categories-wrapper li{
+  font-size:1.5em;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.3);
+  height: 60px;
+}
+.report-item-dashboard{
+  padding:5px;
+}
+.report-item-dashboard h3{
+  font-size:1.3em;
+}
+.report-item-dashboard h4,.report-status-dashboard{
+  font-size: 1em;
+}
+.dashboard-notification-li{
+  padding: 5px 0;
+}
+.dashboard-notification{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.dashboard-notification h2{
+  font-size: 1.3em !important;
+}
+.dashboard-notification p{
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.x_title h2{
+  font-weight: bold;
+}
+.report-item-shortDesc-profile{
+
+}
+.request-full p{
+  max-height: none;
+}
+
+.requestDeleteButton{
+  border: 1px solid white;
+    display: block;
+    width: 10%;
+    float: right;
+    height: 35px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    text-align: center;
+    line-height: 35px;
+    transition: all 250ms !important;
+}
+.sidebar-footer{
+  display: none;
+}
+.contactUs{
+  background: transparent;
+}
+.my-message{
+  float: left;
+  clear: both;
+  font-size:1.4em;
+}
+.my-row{
+  width: 80%;
+}

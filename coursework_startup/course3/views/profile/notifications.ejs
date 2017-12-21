@@ -1,0 +1,37 @@
+<% layout('profile/layout') -%>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel notification-container">
+      <div class="x_content">
+        <div class="dashboard-widget-content">
+
+          <ul class="list-unstyled timeline widget">
+            <% if(notifications) {%>
+              <% if(notifications.length == 0) {%>
+                  No notifications to show
+                <%} %>
+              <% for (let i = notifications.length-1; i >= 0; i--) {  %>
+              <li class="notification-container-li">
+                <a href="/profile/notifications/<%= notifications[i]._id%>">
+                  <div class="block">
+                    <div class="block_content">
+                      <h2 class="title">
+                            <%= notifications[i].title %>
+                                    </h2>
+                      <div class="byline">
+                        <span><%= notifications[i].creationdate.toUTCString() %></span>
+                      </div>
+                      <p class="excerpt"><%= notifications[i].text %>
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <%}%>
+              <%}%>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

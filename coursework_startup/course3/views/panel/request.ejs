@@ -1,0 +1,32 @@
+<% layout('panel/layout') -%>
+<link href="../assets/css/main.css" rel="stylesheet">
+<link href="../assets/css/custom.css" rel="stylesheet">
+<link href="../assets/css/index.css" rel="stylesheet">
+<% if(request && typeof(request) != 'undefined') {%>
+<div class="row requestContainer">
+    <div class="col-md-12 col-sm-12 col-xs-12 report-item">
+      <div class="col-md-12 col-sm-12 report-item-title">
+        <h3><%= request.title %></h3>
+      </div>
+      <div class="col-md-12 col-sm-12 report-item-author-date">
+        <div class="col-md-6 col-ms-12 report-item-author">
+          <h4><span class="boldTitle">Відправлений: </span><%= request.author.firstname %> <%= request.author.patronymic %> <%= request.author.lastname %></h4>
+        </div>
+        <div class="col-md-6 col-ms-12 report-item-date">
+          <h4><%= request.creationdate.toUTCString() %></h4>
+        </div>
+        <div class="col-md-6 col-ms-6 report-item-author">
+          <h4><span class="boldTitle">Категорії: </span> <%= request.category %></h4>
+        </div>
+        <div class="col-md-6 col-sm-6 report-status">
+          <span><span class="boldTitle">Статус: </span><%= request.status %> </span>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 report-item-shortDesc request-full">
+        <p>
+          <%= request.text %>
+        </p>
+      </div>
+    </div>
+</div>
+<%} %>

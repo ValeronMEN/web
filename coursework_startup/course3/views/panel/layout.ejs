@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Коммуникационная сеть Дом </title>
+    <script src="../../assets/js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="../../assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../../assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../../assets/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../../assets/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="../../assets/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../../assets/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="../../assets/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link rel="stylesheet" href="../../assets/css/remodal.css">
+		<link rel="stylesheet" href="../../assets/css/remodal-default-theme.css">
+		<script src="../../assets/js/remodal.js"></script>
+    <link href="../../assets/css/custom.css" rel="stylesheet">
+    <link href="../../assets/css/index.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col my-menu">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="/" class="site_title"> <span>Коседо</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="../../images/avatars/<%=user.avatar %>" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Ласкаво просимо,</span>
+                <h2><%=user.firstname%></h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>Меню</h3>
+                <ul class="nav side-menu">
+                  <li><a href="/dashboard"><i class="fa fa-desktop"></i> Панель приладів</a></li>
+                    <li><a href="/dashboard/requests"><i class="fa fa-inbox"></i> Заяви</a></li>
+                  <li><a><i class="fa fa-building-o"></i> Житлові мережі <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/dashboard/networks">Оглянути</a></li>
+                      <li><a href="#createNetwork">Створити мережу</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-bell"></i> Сповіщення <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/dashboard/notifications">Оглянути</a></li>
+                      <li><a href="#create_notification">Створити сповіщення</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-list"></i> Категорїі <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/dashboard/categories">Оглянути</a></li>
+                      <li><a href="#create_category">Створити</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-pencil"></i> Редагувати профіль <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#ChangeAvatar">Змінити аватар</a></li>
+                      <li><a href="#changePassword">Змінити пароль</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/img.jpg" alt=""><%=user.firstname%> <%=user.lastname%>
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="/profile"> Профіль</a></li>
+                    <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Вийти</a></li>
+                  </ul>
+                </li>
+
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <!-- top tiles -->
+          <%- body -%>
+          <!-- /top tiles -->
+
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+
+
+
+
+
+    <!-- jQuery -->
+    <script src="../../assets/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../../assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../assets/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../../assets/vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../../assets/vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../../assets/vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../../assets/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../../assets/vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../../assets/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../../assets/vendors/Flot/jquery.flot.js"></script>
+    <script src="../../assets/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../../assets/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../../assets/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../../assets/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../../assets/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../../assets/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../../assets/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../../assets/vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../../assets/vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../../assets/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../../assets/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../../assets/vendors/moment/min/moment.min.js"></script>
+    <script src="../../assets/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../../assets/build/js/custom.js"></script>
+
+
+
+
+
+    <link href="../../assets/css/main.css" rel="stylesheet">
+    <link href="../../assets/css/custom.css" rel="stylesheet">
+    <link href="../../assets/css/index.css" rel="stylesheet">
+    <div class="remodal" data-remodal-id="changePassword">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <header class="major my-form-header">
+        <h2>Змінити пароль</h2>
+      </header>
+      <form method="post" action="/dashboard/change_password">
+        <div class="row uniform 100%">
+          <div class="12u$">
+            <label class="my-label" for="oldPassword">Старий пароль</label>
+            <input class="my-text-inputs"type="password" name="oldPassword" id="oldPassword" value="" placeholder="Старий пароль">
+            <label class="my-label" for="newPassword">Новий пароль</label>
+            <input class="my-text-inputs"type="password" name="newPassword" id="newPassword" value="" placeholder="Новий пароль">
+            <label class="my-label" for="newConfirmPassword">Підвердити пароль</label>
+            <input class="my-text-inputs"type="password" name="newConfirmPassword" id="newConfirmPassword" value="" placeholder="Підвердити пароль">
+            <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+            <div class="12u$">
+              <button class="button special fit my-btn">Зберегти</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!--<button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+      <button data-remodal-action="confirm" class="remodal-confirm">OK</button>-->
+
+    </div>
+
+    <div class="remodal" data-remodal-id="ChangeAvatar">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <header class="major my-form-header">
+        <h2>Змінити аватар</h2>
+      </header>
+      <form method="post" enctype="multipart/form-data" action="/dashboard/?_csrf=<%=csrfToken%>">
+        <div class="row uniform 100%">
+          <div class="12u$">
+            <label class="my-label" for="avatar">Завантажити аватар</label>
+            <input class="my-text-inputs"type="file" name="avatar" id="avatar" accept="image/jpeg" placeholder="Upload an avatar">
+            <div class="12u$">
+              <button class="button special fit my-btn">Завантажити</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!--<button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+      <button data-remodal-action="confirm" class="remodal-confirm">OK</button>-->
+
+    </div>
+    <div class="remodal" data-remodal-id="modal">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <header class="major my-form-header">
+        <h2>Search apartment buildings</h2>
+      </header>
+      <form method="post" action="/">
+        <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+        <div class="row uniform 100%">
+          <div class="12u$">
+            <label class="my-label" for="street">Street</label>
+            <input class="my-text-inputs"type="text" name="street" id="street" value="" placeholder="Street">
+            <label class="my-label" for="housenumber">House number</label>
+            <input class="my-text-inputs"type="text" name="housenumber" id="housenumber" value="" placeholder="housenumber">
+
+          </div>
+        </div>
+      </form>
+      <!--<button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+      <button data-remodal-action="confirm" class="remodal-confirm">OK</button>-->
+      <button class="button special fit my-btn">Search</button>
+    </div>
+    <div class="remodal" data-remodal-id="create_category">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <header class="major my-form-header">
+        <h2>Створити категорію</h2>
+      </header>
+      <form method="post" action="/dashboard/create_category">
+          <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+        <div class="row uniform 100%">
+          <div class="12u$">
+            <label class="my-label" for="category_name">І'мя</label>
+            <input class="my-text-inputs" type="text" name="category_name" id="street" value="" placeholder="Category's name">
+            <label class="my-label" for="category_name">Category Resource</label>
+            <input class="my-text-inputs" type="text" name="category_resource" id="category_resource" value="" placeholder="Category Resource">
+          </div>
+          <div class="12u$">
+            <button class="button special fit my-btn">Save</button>
+          </div>
+        </div>
+      </form>
+      <!--<button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+      <button data-remodal-action="confirm" class="remodal-confirm">OK</button>-->
+
+    </div>
+    <div class="remodal" data-remodal-id="create_notification">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <header class="major my-form-header">
+        <h2>Створити сповіщення</h2>
+      </header>
+      <form method="post" action="/dashboard/create_notification">
+        <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+        <div class="row uniform 100%">
+          <div class="12u$">
+            <label class="my-label" for="title">Назва</label>
+            <input class="my-text-inputs"type="text" name="title" id="title" value="" placeholder="Назва...">
+            <label class="my-label" for="text">Повідомлення</label>
+            <input class="my-text-inputs"type="text" name="text" id="text" value="" placeholder="Повідомлення...">
+            <label class="my-label" for="text">Мережа</label>
+            <input class="my-text-inputs"type="text" name="network" id="text" value="" placeholder="Мережа...">
+          </div>
+          <div class="12u$">
+              <button class="button special fit my-btn">Відправити</button>
+          </div>
+        </div>
+      </form>
+      <!--<button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+      <button data-remodal-action="confirm" class="remodal-confirm">OK</button>-->
+
+    </div>
+
+    <div class="remodal" data-remodal-id="categoryModal">
+      <button data-remodal-action="close" class="remodal-close"></button>
+        <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+      <header class="major my-form-header">
+        <h2>Select categories</h2>
+      </header>
+      <form method="post" action="/dashboard/create_category">
+        <div class="row uniform 100%">
+          <div class="12u$">
+            <label class="my-label" for="name">Search</label>
+            <input class="my-text-inputs"type="text" name="name" id="name" value="" placeholder="type in a word...">
+            <label class="my-label" for="name">Select</label>
+            <div class="select-wrapper">
+												<select name="category" id="category">
+													<option selected isabled value style="display:none">Category</option>
+													<option value="1">Manufacturing</option>
+													<option value="1">Shipping</option>
+													<option value="1">Administration</option>
+													<option value="1">Human Resources</option>
+												</select>
+											</div>
+
+          </div>
+        </div>
+      </form>
+      <!--<button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+      <button data-remodal-action="confirm" class="remodal-confirm">OK</button>-->
+      <button class="button special fit my-btn">Search</button>
+    </div>
+    <div class="remodal" data-remodal-id="createNetwork">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <header class="major my-form-header">
+        <h2>Створити мережу</h2>
+      </header>
+      <form method="post" action="/dashboard/create_network">
+        <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+        <div class="row uniform 100%">
+          <div class="6u$ network-create-form">
+            <label class="my-label" for="country">Країна</label>
+            <input class="my-text-inputs"type="text" name="country" id="country" value="" placeholder="Країна">
+          </div>
+          <div class="6u$ network-create-form">
+            <label class="my-label" for="city">Місто</label>
+            <input class="my-text-inputs"type="text" name="city" id="city" value="" placeholder="Місто">
+          </div>
+          <div class="6u$ network-create-form">
+            <label class="my-label" for="district">Район</label>
+            <input class="my-text-inputs"type="text" name="district" id="district" value="" placeholder="Район">
+          </div>
+          <div class="6u$ network-create-form">
+            <label class="my-label" for="street">Вулиця</label>
+            <input class="my-text-inputs"type="text" name="street" id="street" value="" placeholder="Вулиця">
+          </div>
+          <div class="6u$ network-create-form">
+            <label class="my-label" for="housenumber">Номер будинку</label>
+            <input class="my-text-inputs"type="text" name="housenumber" id="housenumber" value="" placeholder="Номер будинку">
+          </div>
+          <div class="12u$ network-create-form">
+            <button class="button special fit my-btn">Створити</button>
+          </div>
+        </div>
+      </form>
+      <!--<button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+      <button data-remodal-action="confirm" class="remodal-confirm">OK</button>-->
+
+    </div>
+  </body>
+</html>
