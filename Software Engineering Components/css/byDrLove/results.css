@@ -1,0 +1,29 @@
+table#resultsTable {
+  background-color: #32CD32;
+  border: 1px solid black;
+  width: 100%;
+}
+
+table#resultsTable td {
+   border: 1px solid black;
+   padding-left: 3px;
+}
+
+table#resultsTable th {
+   border: 1px solid black;
+   text-align: center;
+}
+
+table#resultsTable td.orgButtonTd {
+  text-align: center;
+  padding-top: 17px;
+}
+
+td.delEditTd {
+  text-align: center;
+}
+
+input.delEditBtn {
+  padding: 6px 10px;
+  height: 100%;
+}

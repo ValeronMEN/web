@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+   <!--- Basic Page Needs
+   ================================================== -->
+   <meta charset="utf-8">
+	<title>Результати пошуку</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+   <!-- Mobile Specific Metas
+   ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+    ================================================== -->
+   <link rel="stylesheet" href="css/default.css">
+	 <link rel="stylesheet" href="css/layout.css">
+   <link rel="stylesheet" href="css/media-queries.css">
+
+   <link rel="stylesheet" href="css/byDrLove/results.css">
+   <link rel="stylesheet" href="css/byDrLove/footer.css">
+
+   <!-- Script
+   ================================================== -->
+	<script src="js/modernizr.js"></script>
+
+   <!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="favicon.png" >
+
+</head>
+
+<body>
+  <div class="wrapper">
+
+	<div id="preloader">
+      <div id="status">
+         <img src="images/preloader.gif" height="64" width="64" alt="">
+      </div>
+   </div>
+
+   <!-- Intro Section
+   ================================================== -->
+
+   <nav id="nav-wrap">
+
+      <a class="menu-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+     <a class="menu-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+      <ul id="nav" class="nav">
+         <li><a class="smoothscroll" href="./index.html">Додому</a></li>
+         <li><a class="smoothscroll" href="./help.html">Допомога</a></li>
+
+         <li><a class="smoothscroll" href="./profile.html">Персональний кабінет</a></li>
+      </ul>
+
+   </nav>
+
+   <!-- About Section
+   ================================================== -->
+   <section id="about">
+
+      <div class="row section-header">
+      	<div class="twelve columns">
+	         <h1>Результати пошуку</h1>
+         </div>
+      </div>
+
+      <div id="divTable">
+        <table id="resultsTable">
+          <tr>
+            <th>Реєстраційний номер запису в Єдиному реєстрі</th>
+            <th>Стан</th>
+            <th>Повне найменування (Скорочене найменування)</th>
+            <th>Номер та дата видачі свідоцтва / дубліката свідоцтва</th>
+            <th>Дата реєстрації</th>
+            <th>Детальніше</th>
+
+            <th>Редагування</th>
+            <th>Видалення</th>
+          </tr>
+          <tr>
+            <td>TestName</td>
+            <td>State</td>
+            <td id="go1">Fullname</td>
+            <td></td>
+            <td></td>
+            <td class="orgButtonTd">
+              <a href="./result.html"><button>▶</button></a>
+            </td>
+
+            <td class="orgButtonTd">
+              <a href="./updateOne.html"><button>▶</button></a>
+            </td>
+            <td class="delEditTd">
+              <form action="id/delete" method="post">
+                <input type="submit" value="Видалити" onclick="return checking();" class="delEditBtn">
+              </form>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+   </section>
+
+   <!-- footer
+   ================================================== -->
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <ul class="copyright">
+             <li>Всі права захищені "Держiнформ'юст" © 2013 - 2018</li>
+            </ul>
+
+         </div>
+
+      </div>
+
+      <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#intro"><i class="icon-up-open"></i></a></div>
+
+   </footer> <!-- Footer End-->
+
+ </div>
+
+   <!-- Java Script
+   ================================================== -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+
+	<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+   <script src="js/gmaps.js"></script>
+   <script src="js/waypoints.js"></script>
+   <script src="js/jquery.countdown.js"></script>
+   <script src="js/jquery.placeholder.js"></script>
+   <script src="js/backstretch.js"></script>
+   <script src="js/init.js"></script>
+
+   <script>
+   function checking() {
+    var name = document.getElementById("go1").innerHTML;
+    if (confirm("Видалити з Реєстру " + name + "?")) {
+        return true;
+    } else {
+        return false;
+    }
+   }
+   </script>
+
+</body>
+
+</html>

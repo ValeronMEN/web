@@ -1,0 +1,11 @@
+div.error {
+  background-color: #b00000;
+  text-align: center;
+}
+
+div#divLogin label{
+  padding-top: 6px;
+  font-weight: normal;
+  margin: 0;
+  font-family: Geneva, Arial, Helvetica, sans-serif;
+}
