@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/newdrug.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <script type="text/javascript" src="/scripts/cookies.js"></script>
+  <script type="text/javascript" src="/scripts/onload.js"></script>
+  <title>vApteka</title>
+</head>
+<body>
+  <div class="home">
+    <div id="pharmacyName">
+      <a href="/"><img class="baseImg" alt='pharmacyName' src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+    </div>
+    <div id="basket">
+      <a href="/basket">
+        <div id="basketBackground"></div>
+        <div id="basketName">
+          <label>Basket</label>
+          <div id="circle">
+            <div id="basketSize"></div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div id="logInField">
+      <div id="profileField">
+        <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
+        <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="data:image/jpg;base64, <%= user.avatar %>" width="66px" lenght="66px"></a></div>
+        <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
+      </div>
+    </div>
+  </div>
+  <div class="regContent">
+    <form action="/admins/newdrug?_csrf=<%=csrfToken%>" enctype="multipart/form-data" method="post">
+      <div id="newDrugInsideContent1">
+        <div class="regField">
+          <label>Name:</label>
+          <input id="basic1" class="basicFields" type="text" name="name">
+        </div>
+        <div class="regField">
+          <label>Company:</label>
+          <input id="basic2" class="basicFields" type="text" name="company">
+        </div>
+        <div class="regField">
+          <label id="labelNumber1"></label><label>Volume or mass:</label>
+          <input id="number1" class="basicFields" type="text" name="volumemass">
+        </div>
+        <div class="regField">
+          <label>Unit:</label>
+          <input id="basic3" class="basicFields" type="text" name="unit">
+        </div>
+        <div class="regField">
+          <label>Type:</label>
+          <input id="basic4" class="basicFields" type="text" name="type">
+        </div>
+        <div class="regField">
+          <label id="labelNumber2"></label><label>Price:</label>
+          <input id="number2" class="basicFields" type="text" name="price">
+        </div>
+      </div>
+      <div id="newDrugComments1">
+        <label>Name: name of drug. For example "Memoria"</label>
+        <br>
+        <label>Company. For example "Bitner"</label>
+        <br>
+        <label>Volume or mass. For example "45"</label>
+        <br>
+        <label>Unit. For example "ml or mg"</label>
+        <br>
+        <label>Type. For example "pills" or "syrop"</label>
+        <br>
+        <label>Price in UAH. For example "300"</label>
+      </div>
+      <div id="newDrugInsideContent2">
+        <div class="regField">
+          <label>Symptoms:</label>
+          <textarea id="textarea1" name="symptoms" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Side effects:</label>
+          <textarea id="textarea2" name="side_effects" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Contraindications:</label>
+          <textarea id="textarea3" name="contraindications" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Overdose:</label>
+          <textarea id="textarea4" name="overdose" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Storage conditions:</label>
+          <textarea id="textarea5" name="storage_conditions" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Mode of application:</label>
+          <textarea id="textarea6" name="mode_of_application" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Properties:</label>
+          <textarea id="textarea7" name="properties" rows="7" cols="60"></textarea>
+        </div>
+        <div class="regField">
+          <label>Choose .jpeg image:</label>
+          <input id="imageInput" type="file" name="image" accept="image/jpeg">
+        </div>
+        <div class="regField">
+          <input id="submitButt" type="submit" value="Add new drug" disabled>
+        </div>
+      </div>
+    </form>
+  <div id="newDrugComments2">
+    <% if(typeof errors != 'undefined'){ %>
+    <% errors.forEach(function(elements){ %>
+    <div class="alert alert-danger"><%= elements.msg %></div>
+    <%}); %>
+    <%} %>
+
+    <% if(error_msg != '') {%>
+    <div class="alert alert-danger"><%= error_msg %></div>
+    <%} %>
+    <% if(success_msg != '') {%>
+    <div class="alert alert-success"><%= success_msg %></div>
+    <%} %>
+  </div>
+</div>
+
+<script>
+var textarea = [];
+for (let i=1; i<8; i++){
+  textarea[i-1] = document.getElementById("textarea"+i);
+}
+sumbit = document.getElementById("submitButt");
+image = document.getElementById("imageInput");
+for (let i=0; i<4; i++){
+  textarea[i+7] = document.getElementById("basic"+(i+1));
+}
+var numbers = [];
+for (let i=1; i<3; i++){
+  numbers[i-1] = document.getElementById("number"+i);
+}
+
+for (let i=0; i<(7+4); i++){
+  textarea[i].oninput = function() {
+    if ("" != textarea[i].value){
+      textarea[i].style.border = "solid 2px #00FF00";
+      unlockButt();
+    }else{
+      textarea[i].style.border = "solid 2px red";
+      sumbit.disabled = 1;
+    }
+  };
+}
+
+for (let i=0; i<2; i++){
+  numbers[i].oninput = function() {
+    if ((!isNaN(numbers[i].value)) && (numbers[i].value != "") && (numbers[i].value>=1)){
+      numbers[i].style.border = "solid 2px #00FF00";
+      document.getElementById("labelNumber"+(i+1)).innerHTML = "";
+      unlockButt();
+    }else{
+      numbers[i].style.border = "solid 2px red";
+      if (numbers[i].value<1){
+        document.getElementById("labelNumber"+(i+1)).innerHTML = "Negative or bad number! -> ";
+      }
+      if (isNaN(numbers[i].value)){
+        document.getElementById("labelNumber"+(i+1)).innerHTML = "It's not a number! -> ";
+      }
+      if (numbers[i].value == ""){
+        document.getElementById("labelNumber"+(i+1)).innerHTML = "";
+      }
+      sumbit.disabled = 1;
+    }
+  };
+}
+
+image.onchange = function() {
+  if (image.value != ""){
+    unlockButt();
+  }else{
+    sumbit.disabled = 1;
+  }
+};
+
+unlockButt = function(){
+  var counter = 0;
+  for (let i=0; i<(7+4); i++){
+    if (textarea[i].value != ''){
+      counter++;
+    }
+  }
+  for (let i=0; i<2; i++){
+    if ((!isNaN(numbers[i].value)) && (numbers[i].value != "") && (numbers[i].value >= 1)){
+      counter++;
+    }
+  }
+  if (counter == (7+4+2) && image.value != ""){
+    sumbit.disabled = 0;
+  }
+}
+</script>
+
+<div id="bottomOfSite">
+  <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+</div>
+</body>
+</html>

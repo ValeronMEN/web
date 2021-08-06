@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/signup.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <script type="text/javascript" src="/scripts/cookies.js"></script>
+  <script type="text/javascript" src="/scripts/onload.js"></script>
+  <title>vApteka</title>
+</head>
+<body>
+  <div class="home">
+    <div id="pharmacyName">
+      <a href="/"><img class="baseImg" alt='pharmacyName' src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+    </div>
+    <div id="basket">
+      <a href="/basket">
+        <div id="basketBackground"></div>
+        <div id="basketName">
+          <label>Basket</label>
+          <div id="circle">
+            <div id="basketSize"></div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div id="logInField">
+        <div id="logregField">
+          <a href="/users/login" id="loginLink"><div>Log in</div></a>
+          <a href="/users/register" id="loginLink"><div>Register</div></a>
+        </div>
+    </div>
+  </div>
+  <div class="regContent">
+    <form method="post" accept-charset="UTF-8">
+      <div id="regInsideContent">
+      <div class="regField">
+        <label>First name:</label>
+        <input required type="text" name="firstname">
+      </div>
+      <div class="regField">
+        <label>Last name:</label>
+        <input required type="text" name="lastname">
+      </div>
+      <div class="regField">
+        <label>E-mail:</label>
+        <input required type="text" name="email">
+      </div>
+      <div class="regField">
+        <label>Username:</label>
+        <input required type="text" name="username">
+      </div>
+      <div class="regField">
+        <label>Password:</label>
+        <input required type="password" name="password">
+      </div>
+      <div class="regField">
+        <label>Confirm password:</label>
+        <input required type="password" name="confirmPassword">
+      </div>
+        </div>
+      <div class="regField">
+        <label id="sexLabel">Choose your sex:</label>
+        <input type="radio" name="sex" value="male" checked>Male
+        <input type="radio" name="sex" value="female">Female
+      </div>
+      <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+      <div class="regField">
+        <input id="submitButt" class="signupBtn" type="submit" value="Sign Me Up!">
+      </div>
+    </form>
+    <p>
+    </p>
+    <% if(typeof errors != 'undefined'){ %>
+    <% errors.forEach(function(elements){ %>
+    <div class="alert alert-danger">
+      <%= elements.msg %>
+    </div>
+    <%}); %>
+    <%} %>
+    <% if(error_msg != '') {%>
+    <div class="alert alert-danger">
+      <%= error_msg %>
+    </div>
+    <%} %>
+  </div>
+  <div id="bottomOfSite">
+    <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+  </div>
+</body>
+</html>

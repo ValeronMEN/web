@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/adminorders.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <script type="text/javascript" src="/scripts/cookies.js"></script>
+  <script type="text/javascript" src="/scripts/onload.js"></script>
+  <title>Administration</title>
+ </head>
+ <body>
+   <div class="home">
+     <div id="pharmacyName">
+       <a href="/"><img class="baseImg" alt='pharmacyName' src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+     </div>
+     <div id="basket">
+       <a href="/basket">
+         <div id="basketBackground"></div>
+         <div id="basketName">
+           <label>Basket</label>
+           <div id="circle">
+             <div id="basketSize"></div>
+           </div>
+         </div>
+       </a>
+     </div>
+     <div id="logInField">
+       <div id="profileField">
+         <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
+         <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="data:image/jpg;base64, <%= user.avatar %>" width="66px" lenght="66px"></a></div>
+         <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
+       </div>
+     </div>
+   </div>
+   <!-- Special part start -->
+   <div class="orderContent">
+     <div id="orderSubContent">
+       <%if(0 != arr.length){%>
+         <h3>There are orders:</h3>
+         <% for (let i = arr.length-1; i >= 0; i--) {  %>
+           <div class="orders">
+             <div id="orderLeftSide">
+               <label>
+                 Id: <%= arr[i].id %><br>
+                 Customer: <%= arr[i].owner_firstname %> <%= arr[i].owner_lastname %><br>
+                 Email: <%= arr[i].owner_email %><br>
+                 Creation date: <%= arr[i].date %><br>
+                 Address: <%= arr[i].address %><br>
+                 Phone number: <%= arr[i].phonenumber %>
+               </label>
+             </div>
+             <div id="orderRightSide">
+               <label>Products:</label><br>
+               <ul type="square">
+                 <% for (let j = 0; j < arr[i].drugs.length; j++) {  %>
+                   <li>
+                     Name: <%= arr[i].drugs[j].name %>,
+                     Size: <%= arr[i].drugs[j].size %>,
+                     <%=arr[i].drugs[j].volumemass%> <%=arr[i].drugs[j].unit%>, <%=arr[i].drugs[j].type%>,
+                     Price: <%=arr[i].drugs[j].price%> <%= bills %>
+                   </li>
+                 <%}%>
+               </ul>
+               <label>
+                 Sum price: <%= arr[i].price %> <%= bills %>
+               </label>
+             </div>
+             <div id="orderBottomSide">
+               <%if(arr[i].status.localeCompare("inprocess") == 0){%>
+                 <div class="orderBottomLeft">
+                   <label id="inprocessStatus">Status: processing</label>
+                 </div>
+               <%}else if(arr[i].status.localeCompare("expect") == 0){%>
+                 <div class="orderBottomLeft">
+                   <label id="expectStatus">Status: expects</label>
+                 </div>
+               <%}else{%>
+                 <div class="orderBottomLeft">
+                   <label id="completedStatus">Status: <%= arr[i].status %></label>
+                 </div>
+               <%}%>
+             </div>
+             <div style="clear:both;"></div>
+           </div>
+           <p> <!-- space for css --> </p>
+         <%}%>
+       <%}else{%>
+         <h3>There's no orders</h3>
+       <%}%>
+     </div>
+   </div>
+   <!-- Special part ends -->
+   <div id="bottomOfSite">
+     <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+   </div>
+</body>
+</html>

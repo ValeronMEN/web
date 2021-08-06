@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/search.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <script type="text/javascript" src="/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/scripts/ajax_search.js"></script>
+  <script type="text/javascript" src="/scripts/cookies.js"></script>
+  <script type="text/javascript" src="/scripts/onload.js"></script>
+  <title>vApteka</title>
+ </head>
+ <body>
+<div class="home">
+  <div id="pharmacyName">
+    <a href="/"><img class="baseImg" alt="pharmacyName" src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+  </div>
+  <div id="basket">
+    <a href="/basket">
+      <div id="basketBackground"></div>
+      <div id="basketName">
+        <label>Basket</label>
+        <div id="circle">
+          <div id="basketSize"></div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div id="logInField">
+    <% if(null == user) {%>
+      <div id="logregField">
+        <a href="/users/login" id="loginLink"><div>Log in</div></a>
+        <a href="/users/register" id="loginLink"><div>Register</div></a>
+      </div>
+    <%}else {%>
+      <div id="profileField">
+        <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
+        <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="data:image/jpg;base64, <%= user.avatar %>" width="66px" lenght="66px"></a></div>
+        <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
+      </div>
+    <%} %>
+  </div>
+  </form>
+</div>
+</div>
+<div class="content">
+  <div id="backIndex">
+    <p><a href="/" id="goBack"><<< Go Back</a><a href="/search/special/ajax" id="goSpecial">Go Special Search >>></a></p>
+  </div>
+  <div id="products">
+    <div class="search_area">
+      <form class="searchSearch" action="/search" method="get">
+        <input type="search" name="q" placeholder="i want to search..." class="inputSearch" id="search_box" autocomplete="off">
+        <input type="submit" value="" class="submitSearch" id="searchSubButt">
+      </form>
+      <div id="search_advice_wrapper"></div>
+    </div>
+    <% if (null != query){%>
+      <% if (arrN.length == 0 && arrS.length == 0 && arrC.length == 0){%>
+        <h1>There's no results for query: "<%= query %>"</h1>
+      <%}else{%>
+        <h1>Results for query: "<%= query %>"</h1>
+        <%if (arrN.length != 0){ %>
+          <h2>There're drugs:</h2>
+        <%}%>
+        <% for (let i = 0; i < arrN.length; i++) {  %>
+          <div class="product">
+            <a href="<%= arrN[i].link %>" class="productLink">
+              <img class="imgLink" alt="<%= arrN[i].name %>" src="data:image/jpg;base64, <%= arrN[i].image %>">
+              <br><label id="productName"><%= arrN[i].name %></label>
+              <br><label class="productInfo">type: <%= arrN[i].volumemass %> <%= arrN[i].unit %>, <%= arrN[i].type %></label>
+              <br><label>price: <%= arrN[i].price %> UAH</label>
+            </a>
+          </div>
+        <%}%>
+        <%if (arrC.length != 0){ %>
+          <h2>Companies with same name:</h2>
+        <%}%>
+        <% for (let i = 0; i < arrC.length; i++) {  %>
+          <div class="product">
+            <a href="<%= arrC[i].link %>" class="productLink">
+              <img class="imgLink" alt="<%= arrC[i].name %>" src="data:image/jpg;base64, <%= arrC[i].image %>">
+              <br><label id="productName"><%= arrC[i].name %></label>
+              <br><label class="productInfo">type: <%= arrC[i].volumemass %> <%= arrC[i].unit %>, <%= arrC[i].type %></label>
+              <br><label>price: <%= arrC[i].price %> UAH</label>
+            </a>
+          </div>
+        <%}%>
+        <%if (arrS.length != 0){ %>
+          <h2>Symptoms or properties:</h2>
+        <%}%>
+        <% for (let i = 0; i < arrS.length; i++) {  %>
+          <div class="product">
+            <a href="<%= arrS[i].link %>" class="productLink">
+              <img class="imgLink" alt="<%= arrS[i].name %>"src="data:image/jpg;base64, <%= arrS[i].image %>">
+              <br><label id="productName"><%= arrS[i].name %></label>
+              <br><label class="productInfo">type: <%= arrS[i].volumemass %> <%= arrS[i].unit %>, <%= arrS[i].type %></label>
+              <br><label>price: <%= arrS[i].price %> UAH</label>
+            </a>
+          </div>
+        <%}%>
+      <%}%>
+    <%}%>
+  </div>
+</div>
+<div id="bottomOfSite">
+  <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+
+
+<html>
+	<head>
+		<title>Коммуникационная сеть Дом</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<script src="assets/js/jquery.min.js"></script>
+		<link rel="stylesheet" href="assets/css/remodal.css">
+		<link rel="stylesheet" href="assets/css/remodal-default-theme.css">
+		<script src="assets/js/remodal.js"></script>
+		<link rel="stylesheet" href="assets/css/index.css" />
+
+	</head>
+	<body class="landing">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="/">Коседо</a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="/">Головна сторінка</a></li>
+							<!--<li>
+								<a href="#">Layouts</a>
+								<ul>
+									<li><a href="left-sidebar.html">Left Sidebar</a></li>
+									<li><a href="right-sidebar.html">Right Sidebar</a></li>
+									<li><a href="no-sidebar.html">No Sidebar</a></li>
+									<li>
+										<a href="#">Submenu</a>
+										<ul>
+											<li><a href="#">Option 1</a></li>
+											<li><a href="#">Option 2</a></li>
+											<li><a href="#">Option 3</a></li>
+											<li><a href="#">Option 4</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>-->
+							<li><a href="#">Про нас</a></li>
+							<li><a href="#">Партнерство</a></li>
+							<li><a href="#">Послуги</a></li>
+							<%  if(!user){%>
+								<li><a class="btn-login" href="#login">Вхід</a></li>
+								<li><a href="#register" class="button special">Реєстрація</a></li>
+								<%}
+								else if(user.admin == 1) {%>
+									<li>
+									<a href="/dashboard" class="user-profile dropdown-toggle button special" data-toggle="dropdown" aria-expanded="false">
+                    Увійдіть в особистий кабінет
+                  </a>
+								</li>
+								<li>
+								<a href="/logout">
+									Вийти
+								</a>
+							</li>
+									<%}
+									else if(user.admin == 0) {%>
+										<li>
+										<a href="/profile" class="user-profile dropdown-toggle button special" data-toggle="dropdown" aria-expanded="false">
+	                    Увійдіть в особистий кабінет
+	                  </a>
+									</li>
+									<li>
+									<a href="/logout">
+										Вийти
+									</a>
+								</li>
+										<%}
+							%>
+
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+					<div class="content">
+						<header>
+							<h2>Коседо</h2>
+							<p>Коммуникационная сеть Дом
+							</p>
+						</header>
+						<span class="image"><img src="images/cityscape (1).png" alt="" /></span>
+					</div>
+					<a href="#one" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- One -->
+				<section id="one" class="spotlight style1 bottom">
+					<span class="image fit main"><img src="images/pic02.jpg" alt="" /></span>
+					<div class="content">
+						<div class="container contactUs">
+							<div class="row">
+								<div class="4u 12u$(medium)">
+									<header>
+										<h2>Идея</h2>
+										<p>Коседо – это веб-сервис, благодаря которому упрощается коммуникация между жителями и управляющей организацией дома.</p>
+									</header>
+								</div>
+								<div class="4u 12u$(medium)">
+									<p>  Наши потребители это Жители многоквартирных домов и Управляющие организации, которые готовы использовать наш сервис для организации сотрудничества. Благодаря простоте интерфейса использовать сервис могут пользователи не очень разбирающиеся в технике (пожилые люди).
+
+
+
+
+</p>
+								</div>
+								<div class="4u$ 12u$(medium)">
+									<p>Рынок систем управления взаимоотношениями с клиентами и партнерами.
+</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a href="#two" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- Two -->
+				<section id="two" class="spotlight style2 right">
+					<span class="image fit main"><img src="images/pic03.jpg" alt="" /></span>
+					<div class="content">
+						<header>
+							<h2>Проблемы Потребителей</h2>
+							<p>Отсутствие стандартизированных шаблонов для удобного решения поступающих проблем и предложений</p>
+						</header>
+						<p>
+Существующие решения – мессенджеры, не удовлетворяют потребителей, потому что беседы засоряются.<br/>
+Оповещения управляющей организации о проблемах занимает много времени.<br/>
+
+					</div>
+					<a href="#three" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- Three -->
+				<section id="three" class="spotlight style3 left">
+					<span class="image fit main bottom"><img src="images/pic04.jpg" alt="" /></span>
+					<div class="content">
+						<header>
+							<p>Оповещения управляющей организации о проблемах занимает много времени.
+</p>
+						</header>
+						<p>Устарелые методы донесения информации.<br/>
+
+Нет возможности классифицировать проблемы жителей.
+</p>
+					</div>
+				</section>
+
+			<!-- Four -->
+				<section id="four" class="wrapper style1 special fade-up" style="display:none;">
+					<div class="container">
+						<header class="major">
+							<h2>Accumsan sed tempus adipiscing blandit</h2>
+							<p>Iaculis ac volutpat vis non enim gravida nisi faucibus posuere arcu consequat</p>
+						</header>
+						<div class="box alt">
+							<div class="row uniform">
+								<section class="4u 6u(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-area-chart"></span>
+									<h3>Ipsum sed commodo</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+								<section class="4u 6u$(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-comment"></span>
+									<h3>Eleifend lorem ornare</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+								<section class="4u$ 6u(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-flask"></span>
+									<h3>Cubilia cep lobortis</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+								<section class="4u 6u$(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-paper-plane"></span>
+									<h3>Non semper interdum</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+								<section class="4u 6u(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-file"></span>
+									<h3>Odio laoreet accumsan</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+								<section class="4u$ 6u$(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-lock"></span>
+									<h3>Massa arcu accumsan</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+							</div>
+						</div>
+						<footer class="major">
+							<ul class="actions">
+								<li><a href="#" class="button">Magna sed feugiat</a></li>
+							</ul>
+						</footer>
+					</div>
+				</section>
+
+			<!-- Five -->
+				<section id="five" class="wrapper style2 special fade" style="display:none;">
+					<div class="container">
+						<header>
+							<h2>Magna faucibus lorem diam</h2>
+							<p>Ante metus praesent faucibus ante integer id accumsan eleifend</p>
+						</header>
+						<form method="post" action="#" class="container 50%">
+							<div class="row uniform 50%">
+								<div class="8u 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="Your Email Address" /></div>
+								<div class="4u$ 12u$(xsmall)"><input type="submit" value="Get Started" class="fit special" /></div>
+							</div>
+						</form>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Коседо. All rights reserved.</li>
+					</ul>
+				</footer>
+
+		</div>
+		<!-- modals -->
+	<div class="remodal" data-remodal-id="login">
+	  <button data-remodal-action="close" class="remodal-close"></button>
+		<header class="major my-form-header">
+			<h2>Вхід</h2>
+		</header>
+	  <form method="post" action="/login">
+			<div class="row uniform 100%">
+				<div class="12u$">
+					<label class="my-label" for="username">ім'я користувача</label>
+					<input class="my-text-inputs"type="text" name="username" id="username" value="" placeholder="ім'я користувача">
+					<label class="my-label" for="password">пароль</label>
+					<input class="my-text-inputs"type="password" name="password" id="password" value="" placeholder="пароль">
+					 <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+				</div>
+				<div class="12u$">
+					<button class="button special fit my-btn">Вхід</button>
+				</div>
+			</div>
+		</form>
+	  <!--<button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+	  <button data-remodal-action="confirm" class="remodal-confirm">OK</button>-->
+
+		<a class="my-form-links" href="#register">На маєте аккаунта? Реструйтеся тут!</a>
+	</div>
+
+	<div class="remodal" data-remodal-id="register" style="width:60%">
+	  <button data-remodal-action="close" class="remodal-close"></button>
+		<header class="major my-form-header">
+			<h2>Реєстрація</h2>
+		</header>
+	  <form method="post" action="/register" accept-charset="UTF-8">
+			<div class="row uniform 100%">
+				<div class="6u$ network-create-form">
+					<label class="my-label" for="firstname">Ім'я</label>
+					<input class="my-text-inputs"type="text" name="firstname" id="firstname" value="" placeholder="Ім'я">
+				</div>
+				<div class="6u$ network-create-form">
+					<label class="my-label" for="patronymic">по батькові</label>
+					<input class="my-text-inputs"type="text" name="patronymic" id="patronymic" value="" placeholder="по батькові">
+				</div>
+				<div class="6u$ network-create-form">
+					<label class="my-label" for="lastname">Прізвище</label>
+					<input class="my-text-inputs"type="text" name="lastname" id="lastname" value="" placeholder="Прізвище">
+				</div>
+				<div class="6u$ network-create-form">
+					<label class="my-label" for="email">Ел. пошта</label>
+					<input class="my-text-inputs"type="text" name="email" id="email" value="" placeholder="Ел. пошта">
+				</div>
+				<div class="6u$ network-create-form">
+					<label class="my-label" for="phonenumber">телефон</label>
+					<input class="my-text-inputs"type="text" name="phonenumber" id="phonenumber" value="" placeholder="телефон">
+				</div>
+				<div class="12u$ network-create-form">
+					<label class="my-label" for="username">ім'я користувача</label>
+					<input class="my-text-inputs"type="text" name="username" id="username" value="" placeholder="ім'я користувача">
+				</div>
+				<div class="6u$ network-create-form">
+					<label class="my-label" for="password">пароль</label>
+					<input class="my-text-inputs"type="password" name="password" id="password" value="" placeholder="пароль">
+				</div>
+				<div class="6u$ network-create-form">
+					<label class="my-label" for="confirmPassword">підтвердити пароль</label>
+					<input class="my-text-inputs"type="password" name="confirmPassword" id="confirmPassword" value="" placeholder="підтвердити пароль">
+				</div>
+				<div class="12u$ network-create-form">
+				<button class="button special fit my-btn">Зареєструватися</button>
+			</div>
+					<input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+
+				</div>
+			</div>
+		</form>
+	  <!--<button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+	  <button data-remodal-action="confirm" class="remodal-confirm">OK</button>-->
+	</div>
+
+
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+			<!-- jQuery -->
+	    <script src="../assets/vendors/jquery/dist/jquery.min.js"></script>
+	    <!-- Bootstrap -->
+
+
+	    <!-- Custom Theme Scripts -->
+	    <script src="../assets/build/js/custom.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,357 @@
+@font-face {
+  font-family: Adonais;
+  src: url(fonts/Adonais.ttf);
+}
+body {
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  background-image: url(/pics/pills.jpg);
+  background-color: #c7b39b; /* Цвет фона */
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  color: #3A3;
+}
+
+div.home {
+  width: 100%;
+  border: solid 1px black;
+  height: 150px;
+  overflow: hidden;
+}
+div#pharmacyName {
+  width: 70%;
+  background: #00590E;
+  float: left;
+  height: 150px;
+}
+div#basketBackground {
+  margin-left: 10%;
+  width: 75%;
+  height: 75%;
+  background-image: url(/pics/basket.png);
+  background-size: 100%;
+}
+div#basket {
+  width: 10%;
+  text-align: center;
+  background: #228B22;
+  float: left;
+  height: 150px;
+}
+div#basket a {
+  font-size: 20px;
+}
+div#basket a:hover{
+  color: #98FB98;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+div#basket a:hover div#basketBackground{
+  background-image: url(/pics/basketHover.png);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+div#basketName {
+  font-family: Adonais;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+div#basket a:hover div#basketName label {
+  text-shadow: 1px 1px 2px black;
+  cursor: pointer;
+}
+div#circle {
+  position: relative;
+  top: -55px;
+  left: 70px;
+  -moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  text-align: center;
+  visibility: hidden;
+  border: solid 1px black;
+}
+div#circle div {
+  padding-top: 5px;
+}
+div#logInField {
+  width: 20%;
+  background: #008000;
+  float: left;
+  height: 150px;
+}
+div#logInField img{
+  float: left;
+}
+/* log reg buttons */
+a#loginLink div {
+  border: 1px solid black;
+  padding: 5px;
+  text-align: center;
+  width: 140px;
+  background-color: #32CD32;
+  float: left;
+}
+a#loginLink {
+  text-decoration: none;
+  color: #3A3;
+}
+a#loginLink :hover {
+  color: black;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  box-shadow: black 0 0 2px 0px;
+  background: linear-gradient(to top, #00FA9A 0%, #98FB98 100%);
+}
+/* profile and log in fields*/
+#logregField {
+  height: 50%;
+  margin-left: 25%;
+  margin-top: 20px;
+}
+#logregField div {
+  margin-top: 16px;
+}
+#profileField {
+  height: 50%;
+  margin-left: 13%;
+  margin-top: 40px;
+}
+#profileField label {
+  margin-left: 5px;
+  cursor: pointer;
+}
+div#logoutF {
+  margin-top: 19px;
+  margin-left: 5px;
+}
+#profileField a {
+  text-decoration: none;
+}
+div#avatarImg {
+  overflow: hidden;
+  height: 66px;
+  width: 66px;
+  float: left;
+  border: solid 1px black;
+}
+
+div.content {
+   width: 80%;
+   margin-left: 10%;
+   margin-right: 10%;
+}
+div#advertisement {
+  background: #FFF;
+  width: 100%;
+  border: solid 1px black;
+  float: left;
+  height: 204px;
+  clear: both;
+  overflow: hidden;
+}
+
+div.toolbar {
+   background-color: #FFF;
+   width: 100%;
+   float: left;
+   clear: both;
+   border: solid 1px black;
+   height: 40px;
+}
+div#search {
+   width: 33%;
+   float: left;
+   height: 40px;
+   clear: both;
+   margin-left: 4px;
+   margin-top: 4px;
+}
+div#drugs {
+   width: 33%;
+   float: left;
+   height: 40px;
+   background-color: #00FF00;
+}
+div#drugsId {
+   text-align: center;
+}
+div#drugsId a {
+  font-size: 20px;
+}
+a#drugsLink div {
+  text-align: center;
+  padding: 9px;
+  width: 96%;
+  background-color: #32CD32;
+  float: left;
+}
+a#drugsLink {
+  text-decoration: none;
+  color: #3A3;
+}
+a#drugsLink :hover {
+  color: black;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  box-shadow: black 0 0 2px 0px;
+  background: linear-gradient(to top, #00FA9A 0%, #98FB98 100%);
+}
+
+label#productName{
+  cursor: pointer;
+  font-size: 20px;
+}
+label.productInfo{
+  cursor: pointer;
+}
+
+div#contacts {
+   width: 33%;
+   float: left;
+   height: 40px;
+}
+div#contactsId {
+   width: 50%;
+   height: 20px;
+   margin-top: 5px;
+   margin-left: 10px;
+}
+
+div#categories {
+   background: #FFF;
+   width: 100%;
+   border: solid 1px black;
+   float: left;
+   clear: both;
+}
+div#categoriesField {
+   margin-bottom: 5px;
+   text-align: center;
+}
+button.categoriesButtons {
+   margin-top: 5px;
+   margin-left: 5px;
+}
+
+div#products {
+   width: 100%;
+   background: #F5FFFA;
+   border: solid 1px black;
+   float: left;
+   clear: both;
+   min-height: 400px;
+   text-align: center;
+   padding-top: 2px;
+}
+div.product {
+  width: 19.6%;
+  height: 275px;
+  display: inline-block;
+  border: solid 1px #008000;
+  text-align: center;
+  overflow: hidden;
+}
+img.imgLink {
+  border: solid 1px #008000;
+  margin-top: 4px;
+  margin-left: 4px;
+  width: 85%;
+  height: 74%;
+  overflow: hidden;
+}
+a.productLink {
+  color: black;
+}
+a.productLink:hover {
+  color: #3A3;
+}
+
+div#bottomOfSite{
+  border: solid 1px black;
+  float: left;
+  width: 100%;
+  background-color: #008000;
+}
+p#rights {
+  text-align: center;
+}
+
+.search {
+  width: 99%;
+  position: relative;
+}
+.search input {
+  border: none;
+}
+.search .input {
+  width: 100%;
+  padding: 8px 37px 9px 15px;
+  -moz-box-sizing: border-box; /* чтобы ширина поля ввода (100%) включала в себя внутренние отступы */
+  box-sizing: border-box;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1), inset 0 1px 2px rgba(0,0,0,0.3);
+  background: #F5FFFA;
+  font: 13px Tahoma, Arial, sans-serif;
+  outline: none;
+}
+.search .input:focus {
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2), inset 0 1px 2px rgba(0,0,0,0.4);
+  background: #00FA9A;
+  color: black;
+}
+.search .submit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 37px;
+  height: 100%;
+  cursor: pointer;
+  background: url(../pics/search.png) 50% no-repeat;
+  opacity: 0.5; /* prozrachnost */
+}
+.search .submit:hover {
+  opacity: 0.8;
+}
+
+.search_area{
+  position: relative;
+}
+
+#search_advice_wrapper{
+  width: 99%;
+  display: none;
+  background-color: #66CDAA;
+  color: black;
+  -moz-opacity: 0.95;
+  opacity: 0.95;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha"(Opacity=95);
+  filter: progid: DXImageTransform.Microsoft.Alpha(opacity=95);
+  filter: alpha(opacity=95);
+  z-index:999;
+  position: absolute;
+  top: 35px;
+}
+
+#search_advice_wrapper .advice_variant{
+  cursor: pointer;
+  padding: 8px 37px 9px 15px;
+  text-align: left;
+}
+#search_advice_wrapper .advice_variant:hover{
+  color: white;
+  background-color: #8A2BE2;
+}
+#search_advice_wrapper .active{
+  cursor: pointer;
+  padding: 8px 37px 9px 15px;
+  color: white;
+  background-color: #8A2BE2;
+}

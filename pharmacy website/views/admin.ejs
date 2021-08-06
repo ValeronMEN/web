@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <script type="text/javascript" src="/scripts/cookies.js"></script>
+  <script type="text/javascript" src="/scripts/onload.js"></script>
+  <title>Administration</title>
+ </head>
+ <body>
+   <div class="home">
+     <div id="pharmacyName">
+       <a href="/"><img class="baseImg" alt='pharmacyName' src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+     </div>
+     <div id="basket">
+       <a href="/basket">
+         <div id="basketBackground"></div>
+         <div id="basketName">
+           <label>Basket</label>
+           <div id="circle">
+             <div id="basketSize"></div>
+           </div>
+         </div>
+       </a>
+     </div>
+     <div id="logInField">
+       <div id="profileField">
+         <a href="/users/profile">
+           <label><%= user.firstname %> <%= user.lastname %></label>
+         </a>
+         <div id="avatarImg">
+           <a href="/users/profile">
+             <img alt='profileImg' src="data:image/jpg;base64, <%= user.avatar %>" width="66px" lenght="66px">
+           </a>
+         </div>
+         <a href="/users/logout" id="loginLink">
+           <div id="logoutF">Log out</div>
+         </a>
+       </div>
+     </div>
+   </div>
+   <!-- Special part start -->
+   <div class="userContent">
+     <div id="currentUser">
+       <p>Administration capabilities:</p>
+       <ul>
+         <li>
+           <a href="/admins/users">To edit users</a>
+         </li>
+         <li>
+           <a href="/admins/newdrug">To add new drug in the store</a>
+         </li>
+         <li>
+           <a href="/admins/orders">To check orders</a>
+         </li>
+       </ul>
+     </div>
+   </div>
+   <!-- Special part ends -->
+   <div id="bottomOfSite">
+     <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+   </div>
+</body>
+</html>

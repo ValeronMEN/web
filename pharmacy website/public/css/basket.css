@@ -1,0 +1,101 @@
+div#basketProducts {
+  min-height: 700px;
+  border: solid 1px black;
+  background-color: white;
+  padding: 13px;
+}
+
+div.drugToOrder {
+  border: solid 1px green;
+}
+div.drugToOrder div {
+  height: 120px;
+  width: 120px;
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+div.drugToOrder img {
+  height: 100%;
+  width: 100%;
+}
+div#drugToOrderInfo {
+  width: 30%;
+  margin-left: 10px;
+}
+
+div#basketButtonField {
+  float: right;
+  width: 170px;
+}
+div#basketButtonField button{
+  margin-top: 15px;
+  padding: 10px;
+}
+div#removeAllButt {
+  float: right;
+  margin-right: 30px;
+}
+
+button.basketButton {
+  border: 1px solid black;
+  padding: 5px;
+  text-align: center;
+  width: 140px;
+  background-color: #F08080;
+  float: left;
+  text-decoration: none;
+  color: #CD5C5C;
+}
+button.basketButton:hover {
+  color: black;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  box-shadow: black 0 0 2px 0px;
+  background: linear-gradient(to top, #DC143C 0%, #FF0000 100%);
+  cursor: pointer;
+}
+a#toConfirm div {
+  border: 1px solid black;
+  padding: 20px;
+  text-align: center;
+  width: 140px;
+  background-color: #32CD32;
+  float: left;
+  font-size: 20px;
+}
+a#toConfirm {
+  text-decoration: none;
+  color: #3A3;
+}
+a#toConfirm div:hover {
+  color: black;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  box-shadow: black 0 0 2px 0px;
+  background: linear-gradient(to top, #00FA9A 0%, #98FB98 100%);
+  cursor: pointer;
+}
+a#basketGoToDrugs div {
+  border: 1px solid black;
+  padding: 15px;
+  text-align: center;
+  width: 90px;
+  background-color: #32CD32;
+  float: left;
+  font-size: 15px;
+}
+a#basketGoToDrugs {
+  text-decoration: none;
+  color: #3A3;
+}
+a#basketGoToDrugs div:hover {
+  color: black;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  box-shadow: black 0 0 2px 0px;
+  background: linear-gradient(to top, #00FA9A 0%, #98FB98 100%);
+  cursor: pointer;
+}

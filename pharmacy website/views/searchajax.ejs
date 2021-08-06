@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/search.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <script type="text/javascript" src="/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/scripts/ajax_search_special.js"></script>
+  <script type="text/javascript" src="/scripts/cookies.js"></script>
+  <script type="text/javascript" src="/scripts/onload.js"></script>
+  <script type="text/javascript" src="/scripts/mustache.js"></script>
+  <script id="my-list-template" type="x-tmpl-mustache">
+{{#drugs}}
+  <div class="product" style="height: 100px; background-color: #ADFF2F">
+    <a href="/drugs/drug/{{_id}}" class="productLink">
+      <br><label id="productName">{{name}}</label>
+      <br><label class="productInfo">type: {{volumemass}} {{unit}}, {{type}}</label>
+      <br><label class="productInfo">price: {{price}} UAH</label>
+    </a>
+  </div>
+{{/drugs}}
+  </script>
+  <title>vApteka</title>
+ </head>
+ <body>
+<div class="home">
+  <div id="pharmacyName">
+    <a href="/"><img class="baseImg" alt="pharmacyName" src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+  </div>
+  <div id="basket">
+    <a href="/basket">
+      <div id="basketBackground"></div>
+      <div id="basketName">
+        <label>Basket</label>
+        <div id="circle">
+          <div id="basketSize"></div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div id="logInField">
+    <% if(null == user) {%>
+      <div id="logregField">
+        <a href="/users/login" id="loginLink"><div>Log in</div></a>
+        <a href="/users/register" id="loginLink"><div>Register</div></a>
+      </div>
+    <%}else {%>
+      <div id="profileField">
+        <a href="/users/profile"><label><%= user.firstname %> <%= user.lastname %></label></a>
+        <div id="avatarImg"><a href="/users/profile"><img alt='profileImg' src="data:image/jpg;base64, <%= user.avatar %>" width="66px" lenght="66px"></a></div>
+        <a href="/users/logout" id="loginLink"><div id="logoutF">Log out</div></a>
+      </div>
+    <%} %>
+  </div>
+  </form>
+</div>
+</div>
+<div class="content">
+  <div id="backIndex">
+    <p><a href="/" id="goBack"><<< Go Back</a><a href="/search" id="goSpecial">Go Basic Search >>></a></p>
+  </div>
+  <div id="products">
+    <div class="search_area">
+      <form class="searchSearch" action="/search" method="get">
+        <input type="search" name="q" placeholder="i want to search..." class="inputSearch" id="search_box" autocomplete="off" style="padding: 8px 8px 9px 15px;">
+        <input type="text" name="sample1" style="display:none" />
+      </form>
+      <div id="search_advice_wrapper"></div>
+    </div>
+    <h2 id="ajaxResults"></h2>
+    <div id="template-output"></div>
+  </div>
+</div>
+<div id="bottomOfSite">
+  <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+</div>
+</body>
+</html>

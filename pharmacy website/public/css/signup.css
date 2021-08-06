@@ -1,0 +1,64 @@
+/*register*/
+div.regContent {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  background: #FFF;
+  height: 550px;
+  border: solid 1px black;
+}
+div#regInsideContent {
+  padding-top: 8px;
+  width: 28%;
+  height: 100%;
+  text-align: right;
+}
+.regField {
+  padding: 7px;
+}
+#sexLabel {
+  margin-left: 15px;
+}
+#submitButt {
+  margin-left: 15px;
+}
+
+div.successContent {
+   font-size: 25px;
+   margin-left: 5px;
+   padding: 7px;
+ }
+div.successContent a {
+  font-size: 20px;
+}
+
+div.alert-danger {
+  margin-left: 20px;
+  color: red;
+  margin-top: 5px;
+}
+div.alert-success {
+  margin-left: 20px;
+  color: #3A3;
+  margin-top: 5px;
+}
+
+input.signupBtn {
+   background: -moz-linear-gradient(#ADFF2F, #00FF00, #ADFF2F);
+   background: -webkit-gradient(linear, 0 0, 0  100%, from(#ADFF2F), to(#ADFF2F), color-stop(0.5, #00FF00));
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+   padding: 12px;
+   color: #333;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 5px;
+   border: 1px solid #666;
+   cursor: pointer;
+}
+input.signupBtn:hover{
+  transition: all 0.5s;
+  background: -moz-linear-gradient(#00FA9A, #00FF7F, #00FA9A);
+  background: -webkit-gradient(linear, 0 0, 0  100%, from(#00FA9A), to(#00FA9A), color-stop(0.5, #00FF7F));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+  color: #2F4F4F;
+}

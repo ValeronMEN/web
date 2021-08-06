@@ -1,0 +1,21 @@
+<% layout('panel/layout') -%>
+<% if(notification && typeof(notification) != 'undefined') {%>
+<div class="row requestContainer">
+    <div class="col-md-12 col-sm-12 col-xs-12 report-item">
+      <div class="col-md-12 col-sm-12 report-item-title">
+        <h3><%= notification.title %></h3>
+      </div>
+      <div class="col-md-12 col-sm-12 report-item-author-date">
+        <div class="col-md-6 col-ms-12 report-item-date" style="text-align:left">
+          <h4><%= notification.creationdate.toUTCString() %></h4>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 report-item-shortDesc request-full">
+        <p>
+          <%= notification.text %>
+        </p>
+      </div>
+    </div>
+</div>
+<%}
+%>

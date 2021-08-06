@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/login.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+  <script type="text/javascript" src="/scripts/cookies.js"></script>
+  <script type="text/javascript" src="/scripts/onload.js"></script>
+  <title>vApteka</title>
+</head>
+<body>
+  <div class="home">
+    <div id="pharmacyName">
+      <a href="/"><img class="baseImg" alt='pharmacyName' src="/pics/pharmacyName.jpg" width="1616px" lenght="150px"></a>
+    </div>
+    <div id="basket">
+      <a href="/basket">
+        <div id="basketBackground"></div>
+        <div id="basketName">
+          <label>Basket</label>
+          <div id="circle">
+            <div id="basketSize"></div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div id="logInField">
+        <div id="logregField">
+          <a href="/users/login" id="loginLink"><div>Log in</div></a>
+          <a href="/users/register" id="loginLink"><div>Register</div></a>
+        </div>
+    </div>
+  </div>
+  <div class="regContent">
+    <form method="post" accept-charset="UTF-8">
+      <div id="regInsideContent">
+        <div class="regField">
+          <label>Login:</label>
+          <input required type="text" name="username">
+        </div>
+        <div class="regField">
+          <label>Password:</label>
+          <input required type="password" name="password">
+        </div>
+        <input type="hidden" name="_csrf" value='<%=csrfToken%>'>
+        <div class="regField">
+          <input id="submitButt" class="signinBtn" type="submit" value="Sign In!">
+        </div>
+      </div>
+    </form>
+
+    <div class="row">
+      <% if(success_msg != '') {%>
+          <div class="alert alert-success"><%=success_msg%></div>
+      <%} %>
+      <% if(error_msg != '') {%>
+          <div class="alert alert-danger"><%=error_msg%></div>
+      <%} %>
+      <% if(error != '') {%>
+          <div class="alert alert-danger"><%=error%></div>
+      <%} %>
+    </div>
+
+  </div>
+  <div id="bottomOfSite">
+    <p id="rights">(c) 2016 Vapteka, all rights reserved</p>
+  </div>
+</body>
+</html>
