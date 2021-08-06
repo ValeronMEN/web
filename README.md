@@ -1,6 +1,6 @@
 This repository was created for studying.
 
-It concerns the web applications I've developed.
+It concerns the web applications in JavaScript I've developed.
 
 The folder called "apartment buildings management website" contains a backend and a frontend for the apartment buildings management website.
 This application allows residents of the same building to send statements to administrators (managers of the building), to poll, to receive notifications, to pay for services, to check the problems statuses.
